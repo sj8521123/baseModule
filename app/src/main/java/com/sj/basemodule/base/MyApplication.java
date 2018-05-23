@@ -65,16 +65,25 @@ public class MyApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        mAppContext = this;
+        packageName = this.getPackageName();
+        currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
+
         //本地配置
         initLocalConfiguration();
         //第三方配置
         initExternalConfiguration();
+
         //比BaseActivity更优雅的封装类。统一管理所有Activity
         registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(final Activity activity, Bundle bundle) {
                 if (activity instanceof BaseActivity) {
-                    activity.setContentView(((BaseActivity) activity).initLayout());
+                    try {
+                        activity.setContentView(((BaseActivity) activity).initLayout());
+                    } catch (Exception e) {
+                        ToastUtil.fail("请现在activity中添加布局");
+                    }
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
                     initToolBar(activity);
@@ -134,11 +143,10 @@ public class MyApplication extends MultiDexApplication {
     }
 
     private void initLocalConfiguration() {
+
+
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();
-        mAppContext = this;
-        packageName = this.getPackageName();
-        currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
         //创建目录
         try {
             STGFileUtil.createAllDirs();
