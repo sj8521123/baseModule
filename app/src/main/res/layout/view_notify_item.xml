@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:padding="5dp" >
+    <ImageView
+        android:id="@+id/notify_icon_iv"
+        android:layout_marginLeft="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/notify_updata_values_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/notify_icon_iv"
+        android:gravity="center_vertical"
+        android:text="0%"
+        android:textSize="12sp" />
+    <ProgressBar
+        android:id="@+id/notify_updata_progress"
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notify_icon_iv"
+        android:layout_marginTop="4dp"
+        android:max="100" />
+</RelativeLayout>
