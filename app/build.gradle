@@ -131,4 +131,6 @@ dependencies {
 
     //图片框架
     compile 'com.zhihu.android:matisse:0.4.3'
+    //下拉
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
 }
