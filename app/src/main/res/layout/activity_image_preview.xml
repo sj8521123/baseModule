@@ -7,7 +7,7 @@
     android:background="#000"
     android:fitsSystemWindows="true">
 
-    <com.sj.basemodule.weight.ViewPagerFixed
+    <com.sj.basemodule.weight.CustomViewPager
         android:id="@+id/imageNote_vp_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

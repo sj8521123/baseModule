@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.weight.CommonDoubleButtonDialog;
-import com.sj.basemodule.weight.ViewPagerFixed;
+import com.sj.basemodule.weight.CustomViewPager;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class ImagePreviewActivity extends BaseActivity {
     @BindView(R.id.delete)
     ImageView delete;
     @BindView(R.id.imageNote_vp_pager)
-    ViewPagerFixed viewPager;
+    CustomViewPager viewPager;
     @BindView(R.id.content)
     TextView content;
     ImagePreviewAdapter mAdapter;

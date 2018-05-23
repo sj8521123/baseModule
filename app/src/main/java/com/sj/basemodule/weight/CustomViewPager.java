@@ -19,6 +19,7 @@ public class CustomViewPager extends ViewPager {
     private boolean isPagingEnabled = true;
     //是否显示滑动的过度效果
     private boolean isPagingAnimal = false;
+
     public CustomViewPager(Context context) {
         super(context);
     }
@@ -36,14 +37,31 @@ public class CustomViewPager extends ViewPager {
         isPagingAnimal = pagingAnimal;
     }
 
+    //去除页面切换时的滑动翻页效果
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return this.isPagingEnabled && super.onTouchEvent(event);
+    public void setCurrentItem(int item) {
+        // TODO Auto-generated method stub
+        super.setCurrentItem(item, isPagingAnimal);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        return this.isPagingEnabled && super.onInterceptTouchEvent(event);
+        try {
+            return this.isPagingEnabled && super.onInterceptTouchEvent(event);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        try {
+            return this.isPagingEnabled && super.onTouchEvent(event);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -57,13 +75,6 @@ public class CustomViewPager extends ViewPager {
             return true;
         }*/
         return super.canScroll(v, checkV, dx, x, y);
-    }
-
-    //去除页面切换时的滑动翻页效果
-    @Override
-    public void setCurrentItem(int item) {
-        // TODO Auto-generated method stub
-        super.setCurrentItem(item, isPagingAnimal);
     }
 
 }

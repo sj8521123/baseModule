@@ -12,6 +12,7 @@ import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.config.KeyAndValueUserPrefs;
 import com.sj.basemodule.config.SPUtils;
 import com.sj.basemodule.net.response.base.ResponseBaseModel;
+import com.sj.basemodule.util.CommonDialogUtils;
 import com.sj.basemodule.util.CookieUtil;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.weight.CustomProgressDialog;
@@ -24,7 +25,6 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 
 import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by sj on 2017/12/4.
@@ -51,18 +51,13 @@ public abstract class DefaultObserver<T extends ResponseBaseModel> implements Ob
 
     private Activity activity;
 
-    private CustomProgressDialog dialogUtils;
-
-    //不要进度框
-   /* public DefaultObserver() {
-
-    }*/
+    private CommonDialogUtils dialogUtils;
 
     //弹出进度框 不带文字
     public DefaultObserver(Activity activity, boolean isShowDialog) {
         this.activity = activity;
         if (isShowDialog) {
-            dialogUtils = new CustomProgressDialog();
+            dialogUtils = new CommonDialogUtils();
             dialogUtils.showProgress(activity);
         }
     }
@@ -70,13 +65,8 @@ public abstract class DefaultObserver<T extends ResponseBaseModel> implements Ob
     //弹出进度框 带文字
     public DefaultObserver(Activity activity, String message) {
         this.activity = activity;
-        dialogUtils = new CustomProgressDialog();
+        dialogUtils = new CommonDialogUtils();
         dialogUtils.showProgress(activity, message);
-    }
-
-    @Override
-    public void onSubscribe(Disposable d) {
-
     }
 
     @Override
