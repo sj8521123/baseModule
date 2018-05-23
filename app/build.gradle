@@ -7,14 +7,62 @@ android {
         applicationId "com.sj.basemodule"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // 打包渠道List 如果需要一个手机安装多个app 则打开applicationId
+    productFlavors {
+        one {
+            buildConfigField "String", "STG_COMMON_API", "\"http://smart-demo.ybveg.com/api/\""
+            /*applicationId "com.shundian.smart.smartdemo"*/
+            manifestPlaceholders = [
+                    APP_NAME         : "one",
+                    APP_CHANNEL_VALUE: "one"]
+        }
+        two {
+            buildConfigField "String", "STG_COMMON_API", "\"http://tog-dev.ybveg.com/api/\""
+            /*applicationId "com.shundian.smart.dev"*/
+            manifestPlaceholders = [
+                    APP_NAME         : "two",
+                    APP_CHANNEL_VALUE: "two"]
+        }
+        three {
+            buildConfigField "String", "STG_COMMON_API", "\"http://tog-test.ybveg.com/api/\""
+            /*   applicationId "com.shundian.smart.test"*/
+            manifestPlaceholders = [
+                    APP_NAME         : "three",
+                    APP_CHANNEL_VALUE: "three"]
+        }
+        four {
+            buildConfigField "String", "STG_COMMON_API", "\"http://172.16.2.95:8080/\""
+            /*   applicationId "com.shundian.smart.test"*/
+            manifestPlaceholders = [
+                    APP_NAME         : "four",
+                    APP_CHANNEL_VALUE: "four"]
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
+        release {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
         }
     }
 }
@@ -51,7 +99,7 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
 
-   //picasso
+    //picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     //glide
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
