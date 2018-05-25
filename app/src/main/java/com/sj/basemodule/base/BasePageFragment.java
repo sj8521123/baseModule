@@ -37,9 +37,20 @@ public abstract class BasePageFragment extends RxFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBus.getDefault().unregister(this);
         isDataInitiated = false;
         unbinder.unbind();
         if (rootView != null) {
@@ -68,7 +79,6 @@ public abstract class BasePageFragment extends RxFragment {
                 parent.removeView(rootView);
             }
         }
-        EventBus.getDefault().register(this);
         return rootView;
     }
 

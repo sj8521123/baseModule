@@ -8,6 +8,9 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 /**
  * content:规范Activity统一界面、逻辑处理
  * author：sj

@@ -25,6 +25,7 @@ import com.sj.basemodule.util.file.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
