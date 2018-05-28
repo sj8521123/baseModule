@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.sj.basemodule.R;
 import com.sj.basemodule.config.KeyAndValueAppPrefs;
 import com.sj.basemodule.config.SPUtils;
@@ -25,7 +26,6 @@ import com.sj.basemodule.util.file.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,13 +87,17 @@ public class MyApplication extends MultiDexApplication {
                     }
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
+                    //针对toolBar统一处理
                     initToolBar(activity);
+                    //刷新统一处理
+                  /*  initRefreshLayout(activity);*/
                     //初始化来源数据
                     ((BaseActivity) activity).initFromData();
                     //在初始化布局
                     ((BaseActivity) activity).initLayoutView();
                     //初始化本地数据
                     ((BaseActivity) activity).initLocalData();
+
                 } else {
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
@@ -264,5 +268,12 @@ public class MyApplication extends MultiDexApplication {
             res.updateConfiguration(newConfig, res.getDisplayMetrics());
         }
         return res;
+    }
+
+    private void initRefreshLayout(Activity activity) {
+        SmartRefreshLayout refreshLayout = activity.findViewById(R.id.refreshLayout);
+        refreshLayout.setEnablePureScrollMode(true);
+        refreshLayout.setEnableOverScrollDrag(true);
+
     }
 }

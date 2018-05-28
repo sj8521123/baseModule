@@ -3,6 +3,8 @@ package com.sj.basemodule.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.sj.basemodule.R;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,10 +22,12 @@ import java.net.URISyntaxException;
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity {
-
+    SmartRefreshLayout refreshLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refreshLayout = findViewById(R.id.refreshLayout);
+
 
     }
 

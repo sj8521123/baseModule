@@ -4,7 +4,7 @@
           package="com.sj.basemodule"
           android:versionCode="1"
           android:versionName="1.0.0">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-
         <meta-data
             android:name="APP_CHANNEL"
             android:value="${APP_CHANNEL_VALUE}"/>
@@ -29,7 +28,6 @@
                 android:resource="@xml/file_paths_public"/>
         </provider>
 
-
         <activity
             android:name=".MainActivity"
             android:label="首页">
@@ -39,6 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Other"
+            android:label="其他"/>
     </application>
 
 </manifest>
