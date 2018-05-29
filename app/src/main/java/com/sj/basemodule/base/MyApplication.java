@@ -83,7 +83,7 @@ public class MyApplication extends MultiDexApplication {
                     try {
                         activity.setContentView(((BaseActivity) activity).initLayout());
                     } catch (Exception e) {
-                        ToastUtil.fail("请现在activity中添加布局");
+                        ToastUtil.fail("activity的layout为空，请在activity中先添加布局");
                     }
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
@@ -270,10 +270,11 @@ public class MyApplication extends MultiDexApplication {
         return res;
     }
 
+    //具有ios越界弹性滑动
     private void initRefreshLayout(Activity activity) {
         SmartRefreshLayout refreshLayout = activity.findViewById(R.id.refreshLayout);
         refreshLayout.setEnablePureScrollMode(true);
         refreshLayout.setEnableOverScrollDrag(true);
-
     }
+
 }

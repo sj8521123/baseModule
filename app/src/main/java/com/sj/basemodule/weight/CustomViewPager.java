@@ -33,6 +33,7 @@ public class CustomViewPager extends ViewPager {
         this.isPagingEnabled = b;
     }
 
+    //是否显示滑动的过度效果
     public void setPagingAnimal(boolean pagingAnimal) {
         isPagingAnimal = pagingAnimal;
     }
