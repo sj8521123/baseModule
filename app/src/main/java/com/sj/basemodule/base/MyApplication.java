@@ -24,6 +24,7 @@ import com.sj.basemodule.config.SPUtils;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zhihu.matisse.ui.MatisseActivity;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -105,8 +106,10 @@ public class MyApplication extends MultiDexApplication {
                 }
                 //统一添加到list集合中
                 mList.add(activity);
-                //统一沉浸式颜色
-                initSystemBar(activity, Color.parseColor("#ff373E47"));
+                //统一沉浸式颜色 排除MatisseActivity图片选择activity
+                if (!(activity instanceof MatisseActivity)) {
+                    initSystemBar(activity, Color.parseColor("#ff373E47"));
+                }
             }
 
             @Override

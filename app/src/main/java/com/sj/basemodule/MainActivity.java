@@ -112,27 +112,6 @@ public class MainActivity extends BaseActivity {
             datas.add(i + "");
         }
         mAdapter.notifyDataSetChanged();
-       /* new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final HproseClient client;
-                try {
-                    client = HproseClient.create("tcp://172.16.9.254:8888");
-                    client.subscribe("push", "ididididididid", new Action<Object>() {
-
-                        @Override
-                        public void call(Object value) throws Throwable {
-                            Log.i(TAG, "call: " + value);
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).start();*/
     }
 
     @Override
