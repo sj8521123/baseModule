@@ -1,0 +1,91 @@
+package com.sj.basemodule.util;
+
+import android.content.Context;
+import android.net.Uri;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.sj.basemodule.R;
+import com.sj.basemodule.weight.transform.GlideRoundTransform;
+
+import java.io.File;
+
+/**
+ * content:Glide图片加载库
+ * author：sj
+ * time: 2017/12/22 17:33
+ * email：13658029734@163.com
+ * phone:13658029734
+ */
+
+public class GlideUtil {
+    //设置图片变化tag
+    public static final int CenterCrop = 1;
+    public static final int CenterCropAndRound = 2;
+
+    public void load(Context context,
+                     Uri uri,
+                     ImageView imageView,
+                     int transFormTag) {
+        Glide.with(context)
+                .load(uri)
+                .apply(setRequestOptions(context, transFormTag))
+                .into(imageView);
+    }
+
+    private RequestOptions setRequestOptions(Context context, int transFormTag) {
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.default_image)
+                .error(R.drawable.default_image);
+        switch (transFormTag) {
+            case CenterCrop:
+                options.centerCrop();
+                break;
+            case CenterCropAndRound:
+                options.transform(new GlideRoundTransform(context, 10));
+                break;
+        }
+        return options;
+    }
+
+    public void load(Context context,
+                     File file,
+                     ImageView imageView,
+                     int transFormTag) {
+        Glide.with(context)
+                .load(file)
+                .apply(setRequestOptions(context, transFormTag))
+                .into(imageView);
+    }
+
+    public void load(Context context,
+                     int resource,
+                     ImageView imageView,
+                     int transFormTag) {
+        Glide.with(context)
+                .load(resource)
+                .apply(setRequestOptions(context, transFormTag))
+                .into(imageView);
+    }
+
+    public void load(Context context,
+                     byte[] imageBytes,
+                     ImageView imageView,
+                     int transFormTag) {
+        Glide.with(context)
+                .load(imageBytes)
+                .apply(setRequestOptions(context, transFormTag))
+                .into(imageView);
+    }
+
+    public void load(Context context,
+                     String url,
+                     ImageView imageView,
+                     int transFormTag) {
+        Glide.with(context)
+                .load(url)
+                .apply(setRequestOptions(context, transFormTag))
+                .into(imageView);
+    }
+}
