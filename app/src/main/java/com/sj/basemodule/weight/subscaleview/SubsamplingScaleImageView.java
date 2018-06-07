@@ -47,7 +47,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.util.LogUtils;
+import com.sj.basemodule.util.LogUtil;
 import com.sj.basemodule.weight.subscaleview.decoder.CompatDecoderFactory;
 import com.sj.basemodule.weight.subscaleview.decoder.DecoderFactory;
 import com.sj.basemodule.weight.subscaleview.decoder.ImageDecoder;
@@ -1729,7 +1729,7 @@ public class SubsamplingScaleImageView extends View {
                     cursor.close();
                 }
             } catch (Exception e) {
-                LogUtils.w(TAG, "Could not get orientation of image from media store");
+                LogUtil.w(TAG, "Could not get orientation of image from media store");
             }
         } else if (sourceUri.startsWith(ImageSource.FILE_SCHEME) && !sourceUri.startsWith(ImageSource.ASSET_SCHEME)) {
             try {
@@ -1744,10 +1744,10 @@ public class SubsamplingScaleImageView extends View {
                 } else if (orientationAttr == ExifInterface.ORIENTATION_ROTATE_270) {
                     exifOrientation = ORIENTATION_270;
                 } else {
-                    LogUtils.w(TAG, "Unsupported EXIF orientation: " + orientationAttr);
+                    LogUtil.w(TAG, "Unsupported EXIF orientation: " + orientationAttr);
                 }
             } catch (Exception e) {
-                LogUtils.w(TAG, "Could not get EXIF orientation of image");
+                LogUtil.w(TAG, "Could not get EXIF orientation of image");
             }
         }
         return exifOrientation;
@@ -1762,7 +1762,7 @@ public class SubsamplingScaleImageView extends View {
                 executeMethod.invoke(asyncTask, executor, null);
                 return;
             } catch (Exception e) {
-                LogUtils.i("Failed to execute AsyncTask on thread pool executor, falling back to single threaded executor " + e.toString());
+                LogUtil.i("Failed to execute AsyncTask on thread pool executor, falling back to single threaded executor " + e.toString());
             }
         }
         asyncTask.execute();

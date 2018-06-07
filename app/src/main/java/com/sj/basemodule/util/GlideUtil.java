@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.sj.basemodule.R;
 import com.sj.basemodule.weight.transform.GlideRoundTransform;
 
@@ -21,8 +22,12 @@ import java.io.File;
 
 public class GlideUtil {
     //设置图片变化tag
-    public static final int CenterCrop = 1;
-    public static final int CenterCropAndRound = 2;
+    //中心裁剪
+    public static final int TRANS_CENTER_CROP = 1;
+    //裁剪加圆角
+    public static final int TRANS_CENTER_CROP_AND_ROUND = 2;
+    //不变换(针对没有Imageview大的图片，使用时需要将ImageView scaleStyle设置为center)
+    public static final int NOT_TRANSFORM = 3;
 
     public void load(Context context,
                      Uri uri,
@@ -39,10 +44,13 @@ public class GlideUtil {
         options.placeholder(R.drawable.default_image)
                 .error(R.drawable.default_image);
         switch (transFormTag) {
-            case CenterCrop:
+            case NOT_TRANSFORM:
+                options.override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
+                break;
+            case TRANS_CENTER_CROP:
                 options.centerCrop();
                 break;
-            case CenterCropAndRound:
+            case TRANS_CENTER_CROP_AND_ROUND:
                 options.transform(new GlideRoundTransform(context, 10));
                 break;
         }

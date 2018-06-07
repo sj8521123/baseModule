@@ -25,7 +25,7 @@ import com.sj.basemodule.BuildConfig;
  *
  * @author Weiss
  */
-public class LogUtils {
+public class LogUtil {
     //规定每段显示的长度
     private static int LOG_MAXLENGTH = 2000;
 

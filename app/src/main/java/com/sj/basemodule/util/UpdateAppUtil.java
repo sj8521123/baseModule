@@ -237,11 +237,11 @@ public class UpdateAppUtil {
 
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
-            LogUtils.i("SDCard", "挂载的.." + Environment.getExternalStorageState() + Environment.getExternalStorageDirectory().getAbsolutePath());
+            LogUtil.i("SDCard", "挂载的.." + Environment.getExternalStorageState() + Environment.getExternalStorageDirectory().getAbsolutePath());
             File sdCardFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
             return sdCardFile.getPath();
         } else {
-            LogUtils.i("SDCard", "没挂在.." + Environment.getExternalStorageState());
+            LogUtil.i("SDCard", "没挂在.." + Environment.getExternalStorageState());
         }
 
         String path = null;

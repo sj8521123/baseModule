@@ -9,7 +9,7 @@ import android.telephony.TelephonyManager;
 
 
 import com.sj.basemodule.base.MyApplication;
-import com.sj.basemodule.util.LogUtils;
+import com.sj.basemodule.util.LogUtil;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -31,9 +31,9 @@ import java.util.concurrent.Future;
  *     desc  : 网络相关工具类
  * </pre>
  */
-public class NetWorkUtils {
+public class NetWorkUtil {
 
-    private NetWorkUtils() {
+    private NetWorkUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -91,10 +91,10 @@ public class NetWorkUtils {
         ShellUtils.CommandResult result = ShellUtils.execCmd("ping -c 1 -w 1 223.5.5.5", false);
         boolean ret = result.result == 0;
         if (result.errorMsg != null) {
-            LogUtils.d("isAvailableByPing errorMsg", result.errorMsg);
+            LogUtil.d("isAvailableByPing errorMsg", result.errorMsg);
         }
         if (result.successMsg != null) {
-            LogUtils.d("isAvailableByPing successMsg", result.successMsg);
+            LogUtil.d("isAvailableByPing successMsg", result.successMsg);
         }
         return ret;
     }

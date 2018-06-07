@@ -6,8 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.util.CookieUtil;
-import com.sj.basemodule.util.LogUtils;
-import com.sj.basemodule.util.network.NetWorkUtils;
+import com.sj.basemodule.util.LogUtil;
+import com.sj.basemodule.util.network.NetWorkUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,12 +79,12 @@ public class STGApi {
             //这个chain里面包含了request和response，所以你要什么都可以从这里拿
             Request request = chain.request();
             long t1 = System.nanoTime();//请求发起的时间
-            LogUtils.i("okhttp", String.format("发送请求 %s on %s%n%s",
+            LogUtil.i("okhttp", String.format("发送请求 %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();//收到响应的时间
             ResponseBody responseBody = response.peekBody(1024 * 1024);
-            LogUtils.i("okhttp", String.format(Locale.ENGLISH, "接收响应: [%s] %n返回json:【%s】 %.1fms%n%s",
+            LogUtil.i("okhttp", String.format(Locale.ENGLISH, "接收响应: [%s] %n返回json:【%s】 %.1fms%n%s",
                     response.request().url(),
                     responseBody.string(),
                     (t2 - t1) / 1e6d,
@@ -120,14 +120,14 @@ public class STGApi {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (!NetWorkUtils.isConnected()) {  //没网强制从缓存读取
+            if (!NetWorkUtil.isConnected()) {  //没网强制从缓存读取
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
-                LogUtils.d("Okhttp", "no network");
+                LogUtil.d("Okhttp", "no network");
             }
             Response originalResponse = chain.proceed(request);
-            if (NetWorkUtils.isConnected()) {
+            if (NetWorkUtil.isConnected()) {
                 // TODO: 2017/12/12  有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 //写入到配置中去
                 String cacheControl = request.cacheControl().toString();

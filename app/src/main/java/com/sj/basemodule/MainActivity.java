@@ -13,8 +13,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sj.basemodule.base.BaseActivity;
+import com.sj.basemodule.util.file.STGFileUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,21 +46,9 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         Log.i(TAG, "onStop: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy: ");
     }
 
     @Override
@@ -66,7 +58,27 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
+        User user = new User(0, "jake", true);
+        ObjectOutputStream out = null;
+        try {
+            File f = new File(STGFileUtil.fileUtil.getAppIndependentStorage() + "cache.txt");
+            if (f.isFile() && !f.exists()) {
+                STGFileUtil.fileUtil.createFile(f);
+            }
+            out = new ObjectOutputStream(new FileOutputStream(f));
+            out.writeObject(user);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -112,6 +124,18 @@ public class MainActivity extends BaseActivity {
             datas.add(i + "");
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: ");
     }
 
     @Override

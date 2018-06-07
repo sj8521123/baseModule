@@ -1,9 +1,11 @@
 package com.sj.basemodule.util.file;
 
 import android.os.Environment;
+import android.text.TextUtils;
 
 
 import com.sj.basemodule.base.MyApplication;
+import com.sj.basemodule.util.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,11 +23,6 @@ import java.io.InputStreamReader;
  */
 
 public class FileUtil {
-    //判断SD卡是否存在
-    private boolean hasSdcard() {
-        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-    }
-
     /**
      * 单纯判断文件或目录是否存在返回true false
      */
@@ -82,6 +79,11 @@ public class FileUtil {
             sdcardPath = MyApplication.mAppContext.getFilesDir() + File.separator;
         }
         return sdcardPath;
+    }
+
+    //判断SD卡是否存在
+    private boolean hasSdcard() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     /**
@@ -170,5 +172,24 @@ public class FileUtil {
             }
         }
         return fileContent;
+    }
+
+    /***
+     * 获取文件类型 .ppt .jpg
+     *
+     * @param paramString
+     * @return
+     */
+    public String getFileType(String paramString) {
+        String str = "";
+        if (TextUtils.isEmpty(paramString)) {
+            return str;
+        }
+        int i = paramString.lastIndexOf('.');
+        if (i <= -1) {
+            return str;
+        }
+        str = paramString.substring(i + 1);
+        return str;
     }
 }
