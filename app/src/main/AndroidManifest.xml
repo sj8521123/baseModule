@@ -4,6 +4,7 @@
           package="com.sj.basemodule"
           android:versionCode="1"
           android:versionName="1.0.0">
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".base.MyApplication"
@@ -39,7 +40,8 @@
         </activity>
         <activity
             android:name=".Other"
-            android:label="其他"/>
+            android:label="其他"
+            android:process=":remote"/>
     </application>
 
 </manifest>

@@ -1,42 +1,139 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.util.file.STGFileUtil;
+import com.sj.basemodule.database.Book;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.URISyntaxException;
+import org.litepal.LitePal;
+import org.litepal.LitePalDB;
+import org.litepal.tablemanager.Connector;
+
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hprose.client.HproseClient;
-import hprose.util.concurrent.Action;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
+    @BindView(R.id.database)
+    Button database;
+    @BindView(R.id.add)
+    Button add;
+    @BindView(R.id.delete)
+    Button delete;
+    @BindView(R.id.update)
+    Button update;
+    @BindView(R.id.find)
+    Button find;
+    @BindView(R.id.mRecycle)
+    RecyclerView mRecycle;
+    List<Book> books;
     DataAdapter mAdapter;
-    List<String> datas;
+    private int count;
+    private Handler mhandler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 10:
+                    Bundle bundle = msg.getData();
+                    int count = bundle.getInt("data");
+                    database.setText(String.valueOf(count));
+                    break;
+            }
+        }
+    };
+
+    private void initRecycle() {
+        books = new ArrayList<>();
+        mRecycle.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        mAdapter = new DataAdapter(R.layout.activity_data_item, books);
+        mRecycle.setAdapter(mAdapter);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Message message = new Message();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("data", count++);
+                        message.setData(bundle);
+                        message.what = 10;
+                        mhandler.sendMessage(message);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    @OnClick({R.id.database, R.id.add, R.id.delete, R.id.update, R.id.find, R.id.databaseDefault, R.id.database0})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.database:
+                //创建数据库
+                Connector.getDatabase();
+                /*LitePalDB litePalDB = new LitePalDB("newdb", 1);
+                litePalDB.addClassName(Book.class.getName());
+                litePalDB.setExternalStorage(true);
+                LitePal.use(litePalDB);*/
+
+              /*  LitePalDB litePalDB = LitePalDB.fromDefault("newdb" + (count++));
+                LitePal.use(litePalDB);*/
+                break;
+            case R.id.add:
+                Book book = new Book("sj", 15.36, 400, "Hello World!");
+                book.save();
+                initData();
+                break;
+            case R.id.delete:
+                LitePal.deleteAll(Book.class, "id > ?", "4");
+                initData();
+                break;
+            case R.id.update:
+                Book book1 = LitePal.findFirst(Book.class);
+                book1.setAuthor("张三");
+                book1.save();
+                initData();
+                break;
+            case R.id.find:
+                initData();
+                break;
+            case R.id.databaseDefault:
+                //检查本地有重复的库则直接引用，不会添加表以及storage，否则会创建
+                LitePalDB litePalDB2 = new LitePalDB("newdb", 1);
+                litePalDB2.addClassName(Book.class.getName());
+                litePalDB2.setStorage("external");
+                LitePal.use(litePalDB2);
+                /*LitePal.useDefault();*/
+                break;
+            case R.id.database0:
+                //检查本地有重复的库则直接引用，不会添加表以及storage，否则会创建
+                LitePalDB litePalDB0 = LitePalDB.fromDefault("newdb0");
+                LitePal.use(litePalDB0);
+                break;
+        }
+    }
+
+    private void initData() {
+        mAdapter.getData().clear();
+        mAdapter.getData().addAll(LitePal.findAll(Book.class));
+        mAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,101 +143,21 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop: ");
-    }
-
-    @Override
     public int initLayout() {
         return R.layout.activity_main;
     }
 
     @Override
     public void initFromData() {
-        User user = new User(0, "jake", true);
-        ObjectOutputStream out = null;
-        try {
-            File f = new File(STGFileUtil.fileUtil.getAppIndependentStorage() + "cache.txt");
-            if (f.isFile() && !f.exists()) {
-                STGFileUtil.fileUtil.createFile(f);
-            }
-            out = new ObjectOutputStream(new FileOutputStream(f));
-            out.writeObject(user);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     @Override
     public void initLayoutView() {
-        datas = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        mAdapter = new DataAdapter(R.layout.activity_data_item, datas);
-        mAdapter.openLoadAnimation();
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent i = new Intent(MainActivity.this, Other.class);
-                startActivity(i);
-            }
-        });
-        refreshLayout.setDragRate(0.5f);
-       /* refreshLayout.setEnablePureScrollMode(true);
-        refreshLayout.setEnableOverScrollDrag(true);*/
-        refreshLayout.setEnableFooterFollowWhenLoadFinished(true);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mAdapter.notifyDataSetChanged();
-                refreshlayout.finishRefresh(2000);//传入false表示刷新失败
-                refreshLayout.setNoMoreData(false);
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(2000);//传入false表示加载失败
-                refreshLayout.finishLoadMoreWithNoMoreData();
-
-            }
-        });
-        refreshLayout.autoRefresh();
+        initRecycle();
     }
 
     @Override
     public void initLocalData() {
-        for (int i = 0; i < 20; i++) {
-            datas.add(i + "");
-        }
-        mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy: ");
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(TAG, "onSaveInstanceState: ");
-    }
 }

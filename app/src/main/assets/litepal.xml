@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<litepal>
+    <dbname value="bookStore"/>
+    <version value="1"/>
+    <list>
+        <mapping class="com.sj.basemodule.database.Book"/>
+    </list>
+    <storage value="external"/>
+</litepal>

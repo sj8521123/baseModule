@@ -22,11 +22,9 @@ import java.net.URISyntaxException;
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity {
-    SmartRefreshLayout refreshLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        refreshLayout = findViewById(R.id.refreshLayout);
 
 
     }

@@ -26,6 +26,8 @@ import com.sj.basemodule.util.file.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhihu.matisse.ui.MatisseActivity;
 
+import org.litepal.LitePal;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,6 +64,30 @@ public class MyApplication extends MultiDexApplication {
             activity.finish();
         }
         mList.clear();
+    }
+
+    public static void initSystemBar(Activity activity, int colorRes) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(activity, true);
+        }
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        //开启StatusBar的沉浸式
+        tintManager.setStatusBarTintEnabled(true);
+        // 使用颜色资源
+        tintManager.setStatusBarTintColor(colorRes);
+    }
+
+    @TargetApi(19)
+    private static void setTranslucentStatus(Activity activity, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 
     @Override
@@ -150,8 +176,16 @@ public class MyApplication extends MultiDexApplication {
         });
     }
 
-    private void initLocalConfiguration() {
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if (newConfig.fontScale != 1)//非默认值
+            getResources();
+        super.onConfigurationChanged(newConfig);
+    }
 
+    private void initLocalConfiguration() {
+        //数据库操作初始化
+        LitePal.initialize(this);
 
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();
@@ -205,17 +239,6 @@ public class MyApplication extends MultiDexApplication {
         }
     }
 
-    public static void initSystemBar(Activity activity, int colorRes) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(activity, true);
-        }
-        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-        //开启StatusBar的沉浸式
-        tintManager.setStatusBarTintEnabled(true);
-        // 使用颜色资源
-        tintManager.setStatusBarTintColor(colorRes);
-    }
-
     /**
      * 获得屏幕宽度
      *
@@ -242,26 +265,6 @@ public class MyApplication extends MultiDexApplication {
         return outMetrics.heightPixels;
     }
 
-    @TargetApi(19)
-    private static void setTranslucentStatus(Activity activity, boolean on) {
-        Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        if (newConfig.fontScale != 1)//非默认值
-            getResources();
-        super.onConfigurationChanged(newConfig);
-    }
-
     @Override
     public Resources getResources() {
         Resources res = super.getResources();
@@ -275,9 +278,9 @@ public class MyApplication extends MultiDexApplication {
 
     //具有ios越界弹性滑动
     private void initRefreshLayout(Activity activity) {
-        SmartRefreshLayout refreshLayout = activity.findViewById(R.id.refreshLayout);
+   /*     SmartRefreshLayout refreshLayout = activity.findViewById(R.id.refreshLayout);
         refreshLayout.setEnablePureScrollMode(true);
-        refreshLayout.setEnableOverScrollDrag(true);
+        refreshLayout.setEnableOverScrollDrag(true);*/
     }
 
 }

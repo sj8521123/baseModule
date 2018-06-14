@@ -1,43 +1,63 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    >
 
-    <include layout="@layout/common_title_bar"/>
-
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlHeaderHeight="200dp"
-        >
+        android:layout_height="wrap_content"
 
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/gif_header_repast"
-            app:layout_srlBackgroundColor="@android:color/transparent"
-            app:layout_srlSpinnerStyle="Scale"/>
+        android:orientation="vertical">
+
+        <include layout="@layout/common_title_bar"/>
+
+        <Button
+            android:id="@+id/database"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建数据库"/>
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="增加"/>
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"/>
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改"/>
+
+        <Button
+            android:id="@+id/find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询"/>
+
+        <Button
+            android:id="@+id/databaseDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="调用默认"/>
+
+        <Button
+            android:id="@+id/database0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="调用0"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/mRecycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:overScrollMode="never"/>
-
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@android:color/white"
-            app:srlPrimaryColor="#444444"
-            />
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</LinearLayout>
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>

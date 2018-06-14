@@ -9,19 +9,8 @@ import java.io.Serializable;
  * Created by 13658 on 2018/6/5.
  */
 
-public class User implements Parcelable {
+public class User implements Serializable {
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
     private int id;
     private String name;
     private boolean isMale;
@@ -32,24 +21,6 @@ public class User implements Parcelable {
         this.isMale = isMale;
     }
 
-    protected User(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.isMale = in.readByte() != 0;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeByte(this.isMale ? (byte) 1 : (byte) 0);
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -57,5 +28,29 @@ public class User implements Parcelable {
                 ", name='" + name + '\'' +
                 ", isMale=" + isMale +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name == null ? "" : name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isMale() {
+        return isMale;
+    }
+
+    public void setMale(boolean male) {
+        isMale = male;
     }
 }
