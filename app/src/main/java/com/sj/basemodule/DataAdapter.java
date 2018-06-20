@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.sj.basemodule.database.Book;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public class DataAdapter extends BaseQuickAdapter<Book, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, Book item) {
-        helper.setText(R.id.id, String.valueOf(item.getId()))
+    /*    helper.setText(R.id.id, String.valueOf(item.getId()))
                 .setText(R.id.author, item.getAuthor())
                 .setText(R.id.price, String.valueOf(item.getPrice()))
                 .setText(R.id.pages, String.valueOf(item.getPages()))
-                .setText(R.id.name, item.getName());
+                .setText(R.id.name, item.getName());*/
     }
 }

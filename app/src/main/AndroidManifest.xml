@@ -44,10 +44,10 @@
         <activity
             android:name=".Other"
             android:label="其他"/>
-
-        <service
-            android:name=".service.MessengerService"
+        <service android:name=".service.MessengerService"
             android:process=":remote"/>
+        <service android:name=".service.BookManagerService"
+            android:process=":remote2"/>
     </application>
 
 </manifest>

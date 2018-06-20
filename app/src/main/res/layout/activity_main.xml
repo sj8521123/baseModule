@@ -1,63 +1,20 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <include layout="@layout/common_title_bar"/>
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="发送消息"/>
 
-        android:orientation="vertical">
-
-        <include layout="@layout/common_title_bar"/>
-
-        <Button
-            android:id="@+id/database"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="创建数据库"/>
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="增加"/>
-
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="删除"/>
-
-        <Button
-            android:id="@+id/update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="修改"/>
-
-        <Button
-            android:id="@+id/find"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查询"/>
-
-        <Button
-            android:id="@+id/databaseDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="调用默认"/>
-
-        <Button
-            android:id="@+id/database0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="调用0"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/aidl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aidl"/>
+</LinearLayout>

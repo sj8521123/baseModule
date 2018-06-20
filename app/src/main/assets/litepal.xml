@@ -3,7 +3,7 @@
     <dbname value="bookStore"/>
     <version value="1"/>
     <list>
-        <mapping class="com.sj.basemodule.database.Book"/>
+        <mapping class="com.sj.basemodule.Book"/>
     </list>
     <storage value="external"/>
 </litepal>
