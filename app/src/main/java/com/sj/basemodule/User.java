@@ -3,13 +3,15 @@ package com.sj.basemodule;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.crud.LitePalSupport;
+
 import java.io.Serializable;
 
 /**
  * Created by 13658 on 2018/6/5.
  */
 
-public class User implements Serializable {
+public class User  extends LitePalSupport{
 
     private int id;
     private String name;
@@ -21,14 +23,6 @@ public class User implements Serializable {
         this.isMale = isMale;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isMale=" + isMale +
-                '}';
-    }
 
     public int getId() {
         return id;

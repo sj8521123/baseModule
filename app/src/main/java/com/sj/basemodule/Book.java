@@ -3,22 +3,14 @@ package com.sj.basemodule;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
+
 /**
  * Created by 13658 on 2018/6/21.
  */
 
-public class Book implements Parcelable {
-    public static final Creator<Book> CREATOR = new Creator<Book>() {
-        @Override
-        public Book createFromParcel(Parcel source) {
-            return new Book(source);
-        }
-
-        @Override
-        public Book[] newArray(int size) {
-            return new Book[size];
-        }
-    };
+public class Book extends LitePalSupport {
     private int bookId;
     private String bookName;
 
@@ -27,33 +19,19 @@ public class Book implements Parcelable {
         this.bookName = bookName;
     }
 
-    public Book() {
+    public int getBookId() {
+        return bookId;
     }
 
-    protected Book(Parcel in) {
-        this.bookId = in.readInt();
-        this.bookName = in.readString();
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getBookName() {
+        return bookName == null ? "" : bookName;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.bookId);
-        dest.writeString(this.bookName);
-    }
-
-    public void readFromParcel(){
-
-    }
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookId=" + bookId +
-                ", bookName='" + bookName + '\'' +
-                '}';
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 }
