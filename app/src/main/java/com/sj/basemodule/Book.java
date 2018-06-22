@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by 13658 on 2018/6/11.
+ * Created by 13658 on 2018/6/21.
  */
 
 public class Book implements Parcelable {
@@ -19,8 +19,8 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
-    public int bookId;
-    public String bookName;
+    private int bookId;
+    private String bookName;
 
     public Book(int bookId, String bookName) {
         this.bookId = bookId;
@@ -46,9 +46,14 @@ public class Book implements Parcelable {
         dest.writeString(this.bookName);
     }
 
-    public void readFromParcel(Parcel reply) {
-        bookId = reply.readInt();
-        bookName = reply.readString();
+    public void readFromParcel(){
 
+    }
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                '}';
     }
 }

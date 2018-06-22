@@ -8,7 +8,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
+    <!--自定义访问权限（权限的声明，不是使用）-->
+    <permission
+        android:name="com.sj.basemodule.permission.ACCEESS_BOOK_SERVICE"
+        android:protectionLevel="normal"/>
+    <!--使用权限-->
+    <uses-permission android:name="com.sj.basemodule.permission.ACCEESS_BOOK_SERVICE"/>
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -44,10 +49,18 @@
         <activity
             android:name=".Other"
             android:label="其他"/>
-        <service android:name=".service.MessengerService"
+
+        <service
+            android:name=".service.MessengerService"
             android:process=":remote"/>
-        <service android:name=".service.BookManagerService"
-            android:process=":remote2"/>
+        <service
+            android:name=".service.BookManagerService"
+            android:process="com.sj.other"/>
+        <provider
+            android:authorities="com.sj.basemodule.provider"
+            android:name=".BookProvider"
+            android:process=":provider"
+            android:permission="com.sj.PROVIDER"/>
     </application>
 
 </manifest>

@@ -32,9 +32,9 @@ public class MessengerService extends Service {
                 case MyConstants.MSG_FROM_CLIENT:
                     Log.i(TAG, "handleMessage: " + "hi 服务端接收消息，客户端发消息" + msg.getData().getString("clientData"));
                     Messenger messenger = msg.replyTo;
-                    Message mess = Message.obtain(null,MyConstants.MSG_FROM_SERVICE);
+                    Message mess = Message.obtain(null, MyConstants.MSG_FROM_SERVICE);
                     Bundle bundle = new Bundle();
-                    bundle.putString("serviceData","hi Client!");
+                    bundle.putString("serviceData", "hi Client!");
                     mess.setData(bundle);
                     try {
                         messenger.send(mess);

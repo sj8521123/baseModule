@@ -1,5 +1,5 @@
 // Book.aidl
-package com.sj.basemodule;
+package com.sj.myapplication;
 
 // Declare any non-default types here with import statements
 
