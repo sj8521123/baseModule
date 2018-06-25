@@ -1,16 +1,19 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.service.BookManagerService;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +38,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
-        Uri uri = Uri.parse("content://com.sj.basemodule.provider");
-        getContentResolver().query(uri,null,null,null,null);
-        getContentResolver().query(uri,null,null,null,null);
-        getContentResolver().query(uri,null,null,null,null);
+        //  Uri uri = Uri.parse("content://com.sj.basemodule.provider/book");
+        Cursor cursor = getContentResolver().query(BookProvider.BOOK_CONTENT_URI, null, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                Book book = new Book(cursor.getInt(0), cursor.getString(1));
+                Log.i(TAG, "initLocalData: " + book);
+            }
+            cursor.close();
+        }
     }
 
     @OnClick({R.id.send, R.id.aidl})

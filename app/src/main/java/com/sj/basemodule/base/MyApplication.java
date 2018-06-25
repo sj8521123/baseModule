@@ -27,6 +27,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.zhihu.matisse.ui.MatisseActivity;
 
 import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -39,7 +40,7 @@ import es.dmoral.toasty.Toasty;
 /**
  * 自定义Application用来做一些初始化配置
  */
-public class MyApplication extends MultiDexApplication {
+public class MyApplication extends LitePalApplication {
     //创建的activity容器
     public static List<Activity> mList = new LinkedList<>();
     //全局上下文
@@ -185,7 +186,7 @@ public class MyApplication extends MultiDexApplication {
 
     private void initLocalConfiguration() {
         //数据库操作初始化
-        LitePal.initialize(this);
+        /*LitePal.initialize(this);*/
 
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();

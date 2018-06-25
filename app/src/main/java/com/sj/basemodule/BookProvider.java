@@ -12,8 +12,11 @@ import android.util.Log;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalDB;
+import org.litepal.tablemanager.Connector;
 
 import java.security.Provider;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 13658 on 2018/6/22.
@@ -36,6 +39,12 @@ public class BookProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         Log.i(TAG, "onCreate,current thread: " + Thread.currentThread().getName());
+        Connector.getWritableDatabase();
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1, "Android"));
+        books.add(new Book(2, "IOS"));
+        books.add(new Book(3, "开发艺术探索"));
+        LitePal.saveAll(books);
         return false;
     }
 
@@ -48,7 +57,7 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Unsupported Uri:" + uri);
         }
 
-        return null;
+        return LitePal.findBySQL("select * from " + table);
     }
 
     @Nullable

@@ -6,5 +6,5 @@
         <mapping class="com.sj.basemodule.Book"/>
         <mapping class="com.sj.basemodule.User"/>
     </list>
-    <storage value="external"/>
+    <storage value="internal"/>
 </litepal>

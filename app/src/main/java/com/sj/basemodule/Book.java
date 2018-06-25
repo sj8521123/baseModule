@@ -34,4 +34,12 @@ public class Book extends LitePalSupport {
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                '}';
+    }
 }

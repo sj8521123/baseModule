@@ -50,12 +50,6 @@
             android:name=".Other"
             android:label="其他"/>
 
-        <service
-            android:name=".service.MessengerService"
-            android:process=":remote"/>
-        <service
-            android:name=".service.BookManagerService"
-            android:process="com.sj.other"/>
         <provider
             android:authorities="com.sj.basemodule.provider"
             android:name=".BookProvider"
