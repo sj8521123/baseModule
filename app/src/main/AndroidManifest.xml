@@ -51,10 +51,13 @@
             android:label="其他"/>
 
         <provider
-            android:authorities="com.sj.basemodule.provider"
             android:name=".BookProvider"
-            android:process=":provider"
-            android:permission="com.sj.PROVIDER"/>
+            android:authorities="com.sj.basemodule.provider"
+            android:permission="com.sj.PROVIDER"
+            android:process=":provider"/>
+
+        <service android:name=".service.TcpServer"
+            android:process=":other"/>
     </application>
 
 </manifest>
