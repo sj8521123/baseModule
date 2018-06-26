@@ -1,27 +1,22 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
+import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.service.TcpServer;
+import com.sj.basemodule.service.BinderPool;
+import com.sj.basemodule.service.ComputerImpl;
+import com.sj.basemodule.service.SecurityCenterImpl;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,28 +26,14 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static final int MESSAGE_RECEIVE_NEW_MSG = 1;
     private static final int MESSAGE_SOCKET_CONNECTED = 2;
+    Socket mClientSocket;
+    PrintWriter mPrintWriter;
     @BindView(R.id.mMessageTextView)
     TextView mMessageTextView;
     @BindView(R.id.mMessageEditText)
     EditText mMessageEditText;
     @BindView(R.id.mSendButton)
     Button mSendButton;
-    Socket mClientSocket;
-    PrintWriter mPrintWriter;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_RECEIVE_NEW_MSG:
-                    mMessageTextView.setText(mMessageTextView.getText().toString() + (String) msg.obj);
-                    break;
-                case MESSAGE_SOCKET_CONNECTED:
-                    Log.i(TAG, "socket Connected");
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,64 +54,46 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-
+        ViewConfiguration.get(MainActivity.this).getScaledTouchSlop();
     }
 
     @Override
     public void initLocalData() {
-        Intent intent = new Intent(MainActivity.this, TcpServer.class);
-        startService(intent);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Socket socket = null;
-                    while (socket == null) {
-                        try {
-                            socket = new Socket("localhost", 8668);
-                            mClientSocket = socket;
-                            mPrintWriter = new PrintWriter(new OutputStreamWriter(mClientSocket.getOutputStream()), true);
-                            mHandler.sendEmptyMessage(MESSAGE_SOCKET_CONNECTED);
-                        } catch (IOException e) {
-                            SystemClock.sleep(1000);
-                            Log.i(TAG, "socket: connect fail ,retry...");
-                        }
-                    }
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    while (!MainActivity.this.isFinishing()) {
-                        String msg = in.readLine();
-                        String msgs = "server " + new SimpleDateFormat("HH:mm:ss").format(new Date()) + " :" + msg + "\n";
-                        mHandler.obtainMessage(MESSAGE_RECEIVE_NEW_MSG,msgs).sendToTarget();
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                doWork();
             }
         }).start();
     }
 
+    private void doWork() {
+        BinderPool binderPool = BinderPool.getInstance(MainActivity.this);
+        IBinder securityBinder = binderPool.queryBinder(BinderPool.BINDER_SECURITY_CENTER);
 
-    //客户端发送消息
-    @OnClick(R.id.mSendButton)
-    public void onViewClicked() {
-        String msg = mMessageEditText.getText().toString();
-        String msgs = "client " + new SimpleDateFormat("HH:mm:ss").format(new Date()) + " :" + msg + "\n";
-        mMessageTextView.setText(mMessageTextView.getText().toString() + msgs);
-        mPrintWriter.println(msg);
+        ISecurityCenter mSecurityCenter = SecurityCenterImpl.asInterface(securityBinder);
+        Log.i(TAG, "visit ISecurityCenter");
+        String msg = "helloWorld-Android";
+        Log.i(TAG, "content:" + msg);
+        try {
+            String password = mSecurityCenter.encrypt(msg);
+            Log.i(TAG, "encrypt:" + password);
+            Log.i(TAG, "decrypt: " + mSecurityCenter.decrypt(password));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        IBinder computeBinder = binderPool.queryBinder(BinderPool.BINDER_COMPUTE);
+        ICompute computer = ComputerImpl.asInterface(computeBinder);
+        Log.i(TAG, "visit ICompute");
+        try {
+            Log.i(TAG, "3 + 5 =" + computer.add(3, 5));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    @Override
-    protected void onDestroy() {
-        if(mClientSocket != null){
-            try {
-                mClientSocket.shutdownInput();
-                mClientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        super.onDestroy();
+    @OnClick(R.id.mSendButton)
+    public void onViewClicked() {
     }
 }

@@ -55,8 +55,9 @@
             android:authorities="com.sj.basemodule.provider"
             android:permission="com.sj.PROVIDER"
             android:process=":provider"/>
-
-        <service android:name=".service.TcpServer"
+        <service android:name=".service.SocketTcpService"
+            android:process=":tcp"/>
+        <service android:name=".service.BinderPoolService"
             android:process=":other"/>
     </application>
 

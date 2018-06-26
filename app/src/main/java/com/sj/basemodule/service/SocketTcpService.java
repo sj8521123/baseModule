@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,29 +16,30 @@ import java.net.Socket;
 import java.util.Random;
 
 /**
- * Created by 13658 on 2018/6/25.
+ * Created by 13658 on 2018/6/26.
  */
 
-public class TcpServer extends Service {
-    private boolean isServerDestory;
-    private String[] reviewMsg = new String[]{
+public class SocketTcpService extends Service {
+    private static final String TAG = "SocketTcpService";
+    private boolean isServiceDestory;
+    private String[] mReviewMessage = new String[]{
             "哈哈",
             "呵呵",
             "哦",
-            "马蛋"
+            "hello world！"
     };
 
     @Override
     public void onCreate() {
         super.onCreate();
-        new Thread(new tcpTask()).start();
+        new Thread(new SocketTcpTask()).start();
 
     }
 
     @Override
     public void onDestroy() {
+        isServiceDestory = true;
         super.onDestroy();
-        isServerDestory = true;
     }
 
     @Nullable
@@ -46,16 +48,17 @@ public class TcpServer extends Service {
         return null;
     }
 
-    //与客户端简历连接
-    private class tcpTask implements Runnable {
+    private class SocketTcpTask implements Runnable {
         @Override
         public void run() {
+            //监听本地端口为8000socket
             ServerSocket serverSocket = null;
             try {
-                //监听客户端8668端口
-                serverSocket = new ServerSocket(8668);
-                while (!isServerDestory) {
+                serverSocket = new ServerSocket(8000);
+                while (!isServiceDestory) {
+                    //接收客户端的socket
                     final Socket clientSocket = serverSocket.accept();
+
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -63,16 +66,15 @@ public class TcpServer extends Service {
                                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                                 PrintWriter out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
                                 out.println("欢迎");
-                                while (true) {
+                                while (!isServiceDestory) {
                                     String msg = in.readLine();
-                                    System.out.println("收到客户端消息:" + msg);
                                     if (msg == null) {
                                         break;
-                                    } else {
-                                        String review = reviewMsg[new Random().nextInt(reviewMsg.length)];
-                                        out.println(review);
                                     }
-
+                                    Log.i(TAG, "client :" + msg);
+                                    String reviewMsg = mReviewMessage[new Random().nextInt(mReviewMessage.length)];
+                                    out.println(reviewMsg);
+                                    Log.i(TAG, "service :" + reviewMsg);
                                 }
                                 in.close();
                                 out.close();
@@ -80,9 +82,13 @@ public class TcpServer extends Service {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     }).start();
+
                 }
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
