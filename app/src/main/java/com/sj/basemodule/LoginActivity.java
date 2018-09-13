@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends BaseActivity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
     private static final String TAG = "LoginActivity";
     Button btn;
-
+    private int a = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class LoginActivity extends BaseActivity implements GestureDetector.OnGes
     @Override
     protected void reConnect() {
         initLocalData();
+         a = 5;
     }
 
     @Override
