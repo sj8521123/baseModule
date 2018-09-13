@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity implements GestureDetector.OnGes
     private static final String TAG = "LoginActivity";
     Button btn;
     private int a = 10;
+    private int c = 7;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
