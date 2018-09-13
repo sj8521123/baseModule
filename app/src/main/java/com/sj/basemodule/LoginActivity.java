@@ -28,7 +28,6 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class LoginActivity extends BaseActivity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
-    private static final String TAG = "LoginActivity";
     Button btn;
 
     @Override
