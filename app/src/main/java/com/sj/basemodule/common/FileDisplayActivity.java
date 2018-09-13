@@ -49,6 +49,11 @@ public class FileDisplayActivity extends BaseActivity {
     }
 
     @Override
+    protected void reConnect() {
+
+    }
+
+    @Override
     public int initLayout() {
         return R.layout.activity_file_display;
     }

@@ -40,6 +40,11 @@ public class ImagePreviewActivity extends BaseActivity {
     private ArrayList<Uri> imageUris;
 
     @Override
+    protected void reConnect() {
+
+    }
+
+    @Override
     public int initLayout() {
         return R.layout.activity_image_preview;
     }

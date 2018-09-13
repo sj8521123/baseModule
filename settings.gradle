@@ -1,1 +1,1 @@
-include ':app', ':other'
+include ':app', ':other', ':cleareditview', ':zxinglib'

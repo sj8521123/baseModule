@@ -2,6 +2,8 @@ package com.sj.basemodule;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.util.file.STGFileUtil;
@@ -10,18 +12,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 public class Other extends BaseActivity {
     private static final String TAG = "Other";
-
+    EditText editText;
+    TextView textView;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void reConnect() {
+
     }
 
     @Override

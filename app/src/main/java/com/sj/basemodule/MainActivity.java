@@ -16,7 +16,6 @@ import com.sj.basemodule.service.SecurityCenterImpl;
 
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.CountDownLatch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +23,18 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
+    IC i = new IC() {
+        @Override
+        public void run() {
+
+        }
+
+        @Override
+        public void eat() {
+
+        }
+    };
+    TextView textView;
     private static final int MESSAGE_RECEIVE_NEW_MSG = 1;
     private static final int MESSAGE_SOCKET_CONNECTED = 2;
     Socket mClientSocket;
@@ -34,12 +45,16 @@ public class MainActivity extends BaseActivity {
     EditText mMessageEditText;
     @BindView(R.id.mSendButton)
     Button mSendButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void reConnect() {
+
     }
 
     @Override
