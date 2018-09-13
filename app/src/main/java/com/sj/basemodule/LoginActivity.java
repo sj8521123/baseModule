@@ -80,38 +80,6 @@ public class LoginActivity extends BaseActivity implements GestureDetector.OnGes
                         });
             }
         }).start();
-        /*Observable.create(new ObservableOnSubscribe<Object>() {
-
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                //准备工作
-                Log.i(TAG, "flatMap: " + Thread.currentThread().getId());
-            }
-        })
-                .flatMap(new Function<Object, ObservableSource<Integer>>() {
-
-                    @Override
-                    public ObservableSource<Integer> apply(@NonNull Object o) throws Exception {
-                        Log.i(TAG, "flatMap: " + Thread.currentThread().getId());
-                        return Observable.just(1, 2, 3);
-                    }
-                }).map(new Function<Integer, Integer>() {
-
-            @Override
-            public Integer apply(@NonNull Integer integer) throws Exception {
-                Log.i(TAG, "flatMap: " + Thread.currentThread().getId());
-                return integer + 2;
-            }
-
-        }).subscribeOn(Schedulers.io())
-
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(@NonNull Integer integer) throws Exception {
-                        Log.i(TAG, "flatMap: " + Thread.currentThread().getId());
-                        Log.i(TAG, "Consumer: " + integer);
-                    }
-                });*/
     }
 
     @Override
