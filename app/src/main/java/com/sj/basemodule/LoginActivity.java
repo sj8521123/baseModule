@@ -39,6 +39,7 @@ public class LoginActivity extends BaseActivity implements GestureDetector.OnGes
     @Override
     protected void reConnect() {
         initLocalData();
+         a = 5;
     }
 
     @Override
