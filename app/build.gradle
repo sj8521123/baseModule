@@ -109,7 +109,7 @@ dependencies {
     compile 'com.android.support:design:27.+'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'org.litepal.android:core:2.0.0'
+    compile 'com.hjq:toast:1.5'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile project(':zxinglib')
 }
