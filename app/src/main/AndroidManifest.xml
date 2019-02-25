@@ -91,15 +91,6 @@
             </intent-filter>
             -->
         </activity>
-        <activity
-            android:name=".Other"
-            android:label="其他"/>
-
-        <provider
-            android:name=".BookProvider"
-            android:authorities="com.sj.basemodule.provider"
-            android:permission="com.sj.PROVIDER"
-            android:process=":provider"/>
 
         <service
             android:name=".service.SocketTcpService"
@@ -107,13 +98,6 @@
         <service
             android:name=".service.BinderPoolService"
             android:process=":other"/>
-
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
         <receiver android:name=".common.NetworkConnectChangedReceiver">
             <intent-filter>
@@ -123,8 +107,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".TestActivity">
-        </activity>
     </application>
 
 </manifest>

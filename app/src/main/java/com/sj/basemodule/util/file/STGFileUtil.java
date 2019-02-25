@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * content:只涉及溯源宝对文件的操作
+ * content:
  * author：sj
  * time: 2017/6/27 14:32
  * email：13658029734@163.com
