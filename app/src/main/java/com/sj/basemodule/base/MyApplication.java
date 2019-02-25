@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -113,6 +114,7 @@ public class MyApplication extends LitePalApplication {
                     } catch (Exception e) {
                         ToastUtil.fail("activity的layout为空，请在activity中先添加布局");
                     }
+
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
                     //针对toolBar统一处理
@@ -125,6 +127,10 @@ public class MyApplication extends LitePalApplication {
                     ((BaseActivity) activity).initLayoutView();
                     //初始化本地数据
                     ((BaseActivity) activity).initLocalData();
+
+                    //设置xml所有viewGroup的fitsSystemWindows="true" 沉浸式
+                    ViewGroup content = (ViewGroup) activity.getWindow().getDecorView().findViewById(android.R.id.content);
+                    content.getChildAt(0).setFitsSystemWindows(true);
 
                 } else {
                     //统一ButterKnife绑定Activity

@@ -31,7 +31,7 @@ import java.util.Date;
 
 
 /**
- * Created by ls on 2016/4/20.
+ * Created by sj on 2016/4/20.
  */
 public class UpdateAppUtil {
     //apk保存路径以及名称

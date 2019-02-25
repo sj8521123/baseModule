@@ -26,7 +26,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
+/**
+ * 文件浏览器
+ */
 public class FileDisplayActivity extends BaseActivity {
     SuperFileView2 mSuperFileView;
     String filePath;

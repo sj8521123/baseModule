@@ -13,7 +13,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
- * The type Xc round image view.
+ * 加载圆形ImageView
  */
 public class XCRoundImageView extends AppCompatImageView {
 

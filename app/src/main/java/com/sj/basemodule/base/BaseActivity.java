@@ -20,9 +20,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 /**
  * content:规范Activity统一界面、逻辑处理
  * author：sj
@@ -80,6 +77,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     public void onNetworkChangeEvent(NetWorkChangeEvent event) {
         hasNetWork(event.isConnected);
     }
+
     private void hasNetWork(boolean has) {
         if (isCheckNetWork()) {
             if (has) {
@@ -125,6 +123,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(BaseEvent event) {
     }
+
+    /**
+     * 无网的界面提示
+     */
     private void initTipView() {
         LayoutInflater inflater = getLayoutInflater();
         mTipView = inflater.inflate(R.layout.layout_network_tip, null); //提示View布局
