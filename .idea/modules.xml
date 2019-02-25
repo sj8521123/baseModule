@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseModule.iml" filepath="$PROJECT_DIR$/baseModule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cleareditview/cleareditview.iml" filepath="$PROJECT_DIR$/cleareditview/cleareditview.iml" />
-      <module fileurl="file://$PROJECT_DIR$/other/other.iml" filepath="$PROJECT_DIR$/other/other.iml" />
     </modules>
   </component>
 </project>

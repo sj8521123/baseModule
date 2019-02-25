@@ -1,6 +1,7 @@
 package com.sj.basemodule.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -11,6 +12,8 @@ import com.sj.basemodule.R;
 import com.sj.basemodule.weight.transform.GlideRoundTransform;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 /**
  * content:Glide图片加载库
@@ -28,6 +31,16 @@ public class GlideUtil {
     public static final int TRANS_CENTER_CROP_AND_ROUND = 2;
     //不变换(针对没有Imageview大的图片，使用时需要将ImageView scaleStyle设置为center)
     public static final int NOT_TRANSFORM = 3;
+    //默认圆角10
+    private int radio = 10;
+    private int errorImgSourceId = R.drawable.default_image;
+    public void setRadio(int radio) {
+        this.radio = radio;
+    }
+
+    public void setErrorImgSourceId(int errorImgSourceId) {
+        this.errorImgSourceId = errorImgSourceId;
+    }
 
     public void load(Context context,
                      Uri uri,
@@ -42,7 +55,7 @@ public class GlideUtil {
     private RequestOptions setRequestOptions(Context context, int transFormTag) {
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.default_image)
-                .error(R.drawable.default_image);
+                .error(errorImgSourceId);
         switch (transFormTag) {
             case NOT_TRANSFORM:
                 options.override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
@@ -51,7 +64,7 @@ public class GlideUtil {
                 options.centerCrop();
                 break;
             case TRANS_CENTER_CROP_AND_ROUND:
-                options.transform(new GlideRoundTransform(context, 10));
+                options.transform(new GlideRoundTransform(context, radio));
                 break;
         }
         return options;
