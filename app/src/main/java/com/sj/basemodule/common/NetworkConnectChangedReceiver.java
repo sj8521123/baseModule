@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.sj.basemodule.util.network.NetWorkUtil;
+
+import com.sj.basemodule.util.NetWorkUtil;
 
 import org.greenrobot.eventbus.EventBus;
 

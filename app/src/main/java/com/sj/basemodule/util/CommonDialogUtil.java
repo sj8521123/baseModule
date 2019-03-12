@@ -11,7 +11,7 @@ import com.sj.basemodule.weight.CustomProgressDialog;
  * Description:
  */
 
-public class CommonDialogUtils {
+public class CommonDialogUtil {
     //  加载进度的dialog
     private CustomProgressDialog mProgressDialog;
 

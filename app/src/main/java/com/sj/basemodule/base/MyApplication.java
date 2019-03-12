@@ -129,7 +129,7 @@ public class MyApplication extends LitePalApplication {
                     ((BaseActivity) activity).initLocalData();
 
                     //设置xml所有viewGroup的fitsSystemWindows="true" 沉浸式
-                    ViewGroup content = (ViewGroup) activity.getWindow().getDecorView().findViewById(android.R.id.content);
+                    ViewGroup content = activity.getWindow().getDecorView().findViewById(android.R.id.content);
                     content.getChildAt(0).setFitsSystemWindows(true);
 
                 } else {

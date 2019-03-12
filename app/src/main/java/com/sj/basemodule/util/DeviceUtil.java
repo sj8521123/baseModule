@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
  * phone:13658029734
  */
 
-public class DeviceUtils {
+public class DeviceUtil {
     public static String getUniqueId(){
         @SuppressLint("HardwareIds")
         String androidID = Settings.Secure.getString(MyApplication.mAppContext.getContentResolver(), Settings.Secure.ANDROID_ID);
