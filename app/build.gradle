@@ -13,12 +13,11 @@ android {
         versionCode config.versionCode
         versionName config.versionName
         flavorDimensions "default"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //X5兼容64位手机
-        ndk {
+       /* ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
-        }
+        }*/
     }
     lintOptions {
         checkReleaseBuilds false

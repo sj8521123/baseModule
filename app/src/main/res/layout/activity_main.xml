@@ -5,6 +5,4 @@
     android:orientation="vertical">
 
     <include layout="@layout/common_title_bar"/>
-    <include layout="@layout/common_title_bar_image"/>
-    <include layout="@layout/common_title_bar_text"/>
 </LinearLayout>
