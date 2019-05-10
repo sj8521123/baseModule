@@ -7,7 +7,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.util.CookieUtil;
 import com.sj.basemodule.util.LogUtil;
-import com.sj.basemodule.util.network.NetWorkUtil;
+import com.sj.basemodule.util.NetWorkUtil;
 
 import java.io.File;
 import java.io.IOException;

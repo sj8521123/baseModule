@@ -209,10 +209,10 @@ public class MyApplication extends LitePalApplication {
         //bugly集成
         CrashReport.initCrashReport(getApplicationContext(), "c97fd3e3e2", false);
         //toast设置
-        Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
+       /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))
                 .setInfoColor(Color.parseColor("#c84C5460"))
-                .apply();
+                .apply();*/
 
         /*//ZXing初始化
         ZXingLibrary.initDisplayOpinion(this);

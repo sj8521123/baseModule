@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.sj.basemodule.R;
 import com.sj.basemodule.common.NetWorkChangeEvent;
-import com.sj.basemodule.util.network.NetWorkUtil;
+import com.sj.basemodule.util.NetWorkUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;

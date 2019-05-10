@@ -11,7 +11,7 @@ import com.sj.basemodule.net.STGApiService;
 import com.sj.basemodule.util.Md5ToolUtil;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
-import com.sj.basemodule.util.network.NetWorkUtil;
+import com.sj.basemodule.util.NetWorkUtil;
 import com.sj.basemodule.weight.SuperFileView2;
 
 import java.io.File;
