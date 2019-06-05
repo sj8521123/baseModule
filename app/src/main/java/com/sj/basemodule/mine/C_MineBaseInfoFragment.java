@@ -8,10 +8,10 @@ import com.sj.basemodule.base.BasePageFragment;
 /**
  * create by shijun@lixin360.com on 2019/5/23.
  */
-public class MineBaseInfoFragment2 extends BasePageFragment {
+public class C_MineBaseInfoFragment extends BasePageFragment {
 
-    public static MineBaseInfoFragment2 newInstance() {
-        MineBaseInfoFragment2 mineBaseInfoFragment = new MineBaseInfoFragment2();
+    public static C_MineBaseInfoFragment newInstance() {
+        C_MineBaseInfoFragment mineBaseInfoFragment = new C_MineBaseInfoFragment();
         Bundle bundle = new Bundle();
         mineBaseInfoFragment.setArguments(bundle);
         return mineBaseInfoFragment;

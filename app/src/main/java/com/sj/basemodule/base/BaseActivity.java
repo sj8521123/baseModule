@@ -40,13 +40,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         initTipView();//初始化提示View
         initErrorView();//初始化错误信息的View
+        EventBus.getDefault().register(this); //注册eventBus
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
-
     }
 
     @Override
@@ -59,13 +58,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        //取消eventBus
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -75,8 +75,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (mTipView != null && mTipView.getParent() != null) {
             mWindowManager.removeView(mTipView);
         }
-
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -134,7 +132,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     }
 
     /**
-     * 无网的界面提示(自动)
+     * 无网的界面提示(广播触发自动)
      */
     private void initTipView() {
         LayoutInflater inflater = getLayoutInflater();
@@ -153,7 +151,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     }
 
     /**
-     * 显示网络状态异常的界面（手动）
+     * 显示网络状态异常的界面（界面手动调用）
      */
     private void initErrorView() {
         LayoutInflater inflater = getLayoutInflater();

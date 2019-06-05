@@ -34,6 +34,7 @@ import com.tmall.wireless.tangram.TangramBuilder;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
 
@@ -139,6 +140,7 @@ public class MyApplication extends LitePalApplication {
                     ViewGroup content = activity.getWindow().getDecorView().findViewById(android.R.id.content);
                     content.getChildAt(0).setFitsSystemWindows(true);
 
+
                 } else {
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
@@ -179,6 +181,7 @@ public class MyApplication extends LitePalApplication {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
+
                 //统一移除
                 mList.remove(activity);
 

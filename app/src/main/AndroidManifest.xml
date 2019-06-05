@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.sj.basemodule"
-          android:versionCode="1"
-          android:versionName="1.0.0">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sj.basemodule"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -20,7 +21,7 @@
         tools:replace="android:label">
         <meta-data
             android:name="APP_CHANNEL"
-            android:value="${APP_CHANNEL_VALUE}"/>
+            android:value="${APP_CHANNEL_VALUE}" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -29,28 +30,28 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public"/>
+                android:resource="@xml/file_paths_public" />
         </provider>
 
         <activity
             android:name=".MainActivity"
             android:label="首页">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <receiver android:name=".common.NetworkConnectChangedReceiver">
             <intent-filter>
-                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED"/>
-                <action android:name="android.net.wifi.STATE_CHANGE"/>
+                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
 
+        <activity android:name=".OtherActivity"></activity>
     </application>
 
 </manifest>

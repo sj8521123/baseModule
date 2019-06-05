@@ -1,21 +1,27 @@
 package com.sj.basemodule;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.sj.basemodule.base.BaseActivity;
+import com.sj.basemodule.base.BaseEvent;
 import com.sj.basemodule.common.HomePagerAdapter;
-import com.sj.basemodule.mine.MineBaseInfoFragment;
-import com.sj.basemodule.mine.MineBaseInfoFragment2;
-import com.sj.basemodule.mine.MineBaseInfoFragment3;
-import com.sj.basemodule.mine.MineBaseInfoFragment4;
+import com.sj.basemodule.mine.A_MineBaseInfoFragment;
+import com.sj.basemodule.mine.B_MineBaseInfoFragment;
+import com.sj.basemodule.mine.C_MineBaseInfoFragment;
+import com.sj.basemodule.mine.D_MineBaseInfoFragment;
+import com.sj.basemodule.model.Student;
 import com.sj.basemodule.util.ToastUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,19 +63,20 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
+
     }
 
     private void initViewPage() {
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
 
         //基础信息
-        mPagerAdapter.addFragment(MineBaseInfoFragment.newInstance());
+        mPagerAdapter.addFragment(A_MineBaseInfoFragment.newInstance());
         //居住信息
-        mPagerAdapter.addFragment(MineBaseInfoFragment2.newInstance());
+        mPagerAdapter.addFragment(B_MineBaseInfoFragment.newInstance());
         //工作信息
-        mPagerAdapter.addFragment(MineBaseInfoFragment3.newInstance());
+        mPagerAdapter.addFragment(C_MineBaseInfoFragment.newInstance());
         //联系人
-        mPagerAdapter.addFragment(MineBaseInfoFragment4.newInstance());
+        mPagerAdapter.addFragment(D_MineBaseInfoFragment.newInstance());
 
         mViewPager.setAdapter(mPagerAdapter);
     }
@@ -89,14 +96,7 @@ public class MainActivity extends BaseActivity {
         ViewPagerHelper.bind(magicIndicator, mViewPager);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3,R.id.btn4, R.id.btn5, R.id.btn6})
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn1:
@@ -112,11 +112,21 @@ public class MainActivity extends BaseActivity {
                 hideErrorView();
                 break;
             case R.id.btn5:
-                hideErrorView();
+                Student student = new Student("张三", "12");
+                EventBus.getDefault().post(student);
                 break;
             case R.id.btn6:
-                hideErrorView();
+                startActivity(new Intent(MainActivity.this, OtherActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    public void onEventMainThread(BaseEvent event) {
+        super.onEventMainThread(event);
+        if (event instanceof Student) {
+            Student student = (Student) event;
+            Log.i(TAG, "onEventMainThread: " + student.getName() + "," + student.getAge());
         }
     }
 }
