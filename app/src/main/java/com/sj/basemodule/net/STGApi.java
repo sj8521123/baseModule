@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.sj.basemodule.base.MyApplication;
+import com.sj.basemodule.net.interceptor.HttpHeaderInterceptor;
+import com.sj.basemodule.net.interceptor.LoggerInterceptor;
 import com.sj.basemodule.util.CookieUtil;
 import com.sj.basemodule.util.LogUtil;
 import com.sj.basemodule.util.NetWorkUtil;
@@ -43,7 +45,7 @@ public class STGApi {
                 .connectTimeout(STGApiService.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .cache(cache)
                 .cookieJar(CookieUtil.getCookieJar())
-                .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(new LoggerInterceptor("baseModule"))
                 .addInterceptor(new HttpHeaderInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 .build();
@@ -73,7 +75,7 @@ public class STGApi {
     }
 
     //日志拦截器
-    private class LoggingInterceptor implements Interceptor {
+/*    private class LoggingInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             //这个chain里面包含了request和response，所以你要什么都可以从这里拿
@@ -92,10 +94,10 @@ public class STGApi {
 
             return response;
         }
-    }
+    }*/
 
     //  添加请求头的拦截器
-    private class HttpHeaderInterceptor implements Interceptor {
+   /* private class HttpHeaderInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             //  也可以统一配置用户名
@@ -105,14 +107,14 @@ public class STGApi {
                     .header("Accept", "application/json");
             if (isRefreshToken) {
                 isRefreshToken = false;
-                /*String token = SPUtils.getInstance(MyApplication.currentUserPrefsName).getString(KeyAndValueUserPrefs.Key.ACCESS_TOKEN);
-                builder.addHeader("token", token);*/
+                *//*String token = SPUtils.getInstance(MyApplication.currentUserPrefsName).getString(KeyAndValueUserPrefs.Key.ACCESS_TOKEN);
+                builder.addHeader("token", token);*//*
             } else {
                 builder.removeHeader("token");
             }
             return chain.proceed(builder.build());
         }
-    }
+    }*/
 
     //  配置缓存的拦截器
     private class HttpCacheInterceptor implements Interceptor {
