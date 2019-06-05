@@ -3,7 +3,6 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimensToolbarHeight45dp"
-    android:background="#000000"
     android:orientation="horizontal">
 
     <ImageView

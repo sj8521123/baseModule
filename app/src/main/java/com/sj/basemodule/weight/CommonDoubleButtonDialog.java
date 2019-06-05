@@ -100,7 +100,7 @@ public class CommonDoubleButtonDialog {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final Dialog dialog = new Dialog(context, R.style.baseDialog);
-            View layout = inflater.inflate(R.layout.common_duble_button_dialog, null);
+            View layout = inflater.inflate(R.layout.dialog_common_duble_button, null);
             //初始化布局文件
             initView(layout, viewHolder);
             //绑定数据到布局文件对应的控件

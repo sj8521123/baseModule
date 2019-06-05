@@ -86,7 +86,7 @@ public class CommonSingleButtonDialog extends Dialog {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final Dialog dialog = new Dialog(context, R.style.baseDialog);
-            View layout = inflater.inflate(R.layout.common_sigle_button_dialog, null);
+            View layout = inflater.inflate(R.layout.dialog_common_sigle_button, null);
             //初始化布局文件
             initView(layout, viewHoder);
             //为对话框添加布局

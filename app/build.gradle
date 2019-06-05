@@ -15,9 +15,9 @@ android {
         flavorDimensions "default"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //X5兼容64位手机
-       /* ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
-        }*/
+        /* ndk {
+             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+         }*/
     }
     lintOptions {
         checkReleaseBuilds false
@@ -115,5 +115,16 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'org.litepal.android:core:2.0.0'
     implementation 'com.hjq:toast:1.5'
+    implementation 'com.fyales.android:library:1.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.github.donkingliang:LabelsView:1.5.0'
+
+    implementation 'com.alibaba.android:tangram:3.3.6@aar'
+
+    implementation('com.alibaba.android:virtualview:1.4.6@aar') {
+        transitive = true
+    }
+    implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
 }

@@ -3,7 +3,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimensToolbarHeight45dp"
-                android:background="#000000"
                 android:orientation="horizontal">
 
     <ImageView
@@ -11,7 +10,6 @@
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:padding="5dp"
         android:scaleType="center"
         android:src="@drawable/back"/>
 
@@ -20,24 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/common_third"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:paddingRight="15dp"
         android:textColor="@color/colorFFFFFF"
         android:textSize="17sp"/>
 
     <View
-        android:id="@+id/line"
         style="@style/split_noMargin"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
