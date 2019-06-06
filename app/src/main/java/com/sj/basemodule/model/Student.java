@@ -2,9 +2,6 @@ package com.sj.basemodule.model;
 
 import com.sj.basemodule.base.BaseEvent;
 
-/**
- * create by shijun@lixin360.com on 2019/6/5.
- */
 public class Student extends BaseEvent {
     String name;
     String age;

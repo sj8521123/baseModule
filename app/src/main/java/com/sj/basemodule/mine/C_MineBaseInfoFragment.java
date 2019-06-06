@@ -5,9 +5,6 @@ import android.os.Bundle;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.BasePageFragment;
 
-/**
- * create by shijun@lixin360.com on 2019/5/23.
- */
 public class C_MineBaseInfoFragment extends BasePageFragment {
 
     public static C_MineBaseInfoFragment newInstance() {

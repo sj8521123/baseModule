@@ -11,9 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sj.basemodule.util.ScreenUtil;
 
-/**
- * create by shijun@lixin360.com on 2019/5/31.
- */
+
 public class CustomCellView extends LinearLayout {
     private ImageView mImageView;
     private TextView mTextView;

@@ -7,7 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * create by shijun@lixin360.com on 2019/6/5.
+ * header添加
  */
 public class HttpHeaderInterceptor implements Interceptor {
     @Override

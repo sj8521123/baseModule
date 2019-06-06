@@ -15,9 +15,6 @@ import com.tmall.wireless.tangram.structure.view.ITangramViewLifeCycle;
 
 import java.util.Locale;
 
-/**
- * create by shijun@lixin360.com on 2019/5/31.
- */
 public class CustomInterfaceView extends LinearLayout implements ITangramViewLifeCycle {
     private ImageView mImageView;
     private TextView mTextView;

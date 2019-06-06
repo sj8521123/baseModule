@@ -8,10 +8,6 @@ import com.tmall.wireless.tangram.structure.BaseCell;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-/**
- * create by shijun@lixin360.com on 2019/5/31.
- */
 public class CustomCell extends BaseCell<CustomCellView> {
     private String imageUrl;
     private String text;

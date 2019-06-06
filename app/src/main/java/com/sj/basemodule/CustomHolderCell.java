@@ -8,9 +8,6 @@ import com.tmall.wireless.tangram.structure.BaseCell;
 
 import java.util.Locale;
 
-/**
- * create by shijun@lixin360.com on 2019/5/31.
- */
 public class CustomHolderCell extends BaseCell<TextView> {
 
     @Override
