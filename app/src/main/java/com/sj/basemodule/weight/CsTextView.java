@@ -2,20 +2,17 @@ package com.sj.basemodule.weight;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Scroller;
-
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * 弹性滑动
  * Created by 13658 on 2018/7/20.
  */
 
-public class CsTextView extends android.support.v7.widget.AppCompatTextView {
+public class CsTextView extends androidx.appcompat.widget.AppCompatTextView {
     private static final String TAG = "CsTextView";
     Scroller scroller ;
     float mLastX;

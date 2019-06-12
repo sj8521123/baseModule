@@ -2,8 +2,8 @@ package com.sj.basemodule;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.View;
 
@@ -14,7 +14,6 @@ import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
 import com.sj.basemodule.mine.D_MineBaseInfoFragment;
-import com.sj.basemodule.model.Student;
 import com.sj.basemodule.util.ToastUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -27,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -112,8 +110,10 @@ public class MainActivity extends BaseActivity {
                 hideErrorView();
                 break;
             case R.id.btn5:
-                Student student = new Student("张三", "12");
-                EventBus.getDefault().post(student);
+                BaseEvent baseEvent = new BaseEvent();
+                baseEvent.setMsg("hello");
+                /*Student student = new Student("张三", "12");*/
+                EventBus.getDefault().post(baseEvent);
                 break;
             case R.id.btn6:
                 startActivity(new Intent(MainActivity.this, OtherActivity.class));
@@ -124,9 +124,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onEventMainThread(BaseEvent event) {
         super.onEventMainThread(event);
-        if (event instanceof Student) {
-            Student student = (Student) event;
-            Log.i(TAG, "onEventMainThread: " + student.getName() + "," + student.getAge());
-        }
+        Log.i(TAG, "onEventMainThread: " + "A");
     }
 }

@@ -28,7 +28,7 @@ public class CommonDialogUtil {
                     .setMessage(msg)
                     .build();
         }
-        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
+        if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
@@ -45,7 +45,7 @@ public class CommonDialogUtil {
                     .setTheme(R.style.ProgressDialogStyle)
                     .build();
         }
-        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
+        if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }

@@ -1,6 +1,6 @@
 package com.sj.basemodule.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.sj.basemodule.weight.CustomCellView;
 import com.tmall.wireless.tangram.MVHelper;

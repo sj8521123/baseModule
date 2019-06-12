@@ -9,9 +9,9 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.multidex.MultiDexApplication;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,20 +22,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.sj.basemodule.R;
 import com.sj.basemodule.config.KeyAndValueAppPrefs;
 import com.sj.basemodule.config.SPUtils;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
-import com.squareup.picasso.Picasso;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tmall.wireless.tangram.TangramBuilder;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
 
-import org.greenrobot.eventbus.EventBus;
-import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
 
 import java.io.IOException;
@@ -44,7 +40,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import es.dmoral.toasty.Toasty;
 
 /**
  * 自定义Application用来做一些初始化配置

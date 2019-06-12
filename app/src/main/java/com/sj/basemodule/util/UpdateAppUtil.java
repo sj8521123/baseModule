@@ -11,7 +11,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.widget.RemoteViews;
 
 

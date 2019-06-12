@@ -1,6 +1,6 @@
 package com.sj.basemodule;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.TextView;
 
 
