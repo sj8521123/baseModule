@@ -109,6 +109,15 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     public void onSuccess(List<MeiZi> response) {
+
+                    }
+                });
+        RetrofitHelper.getApiService()
+                .getMezi()
+                .compose(RxUtil.rxSchedulerHelper(this))
+                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                    @Override
+                    public void onSuccess(List<MeiZi> response) {
                         ToastUtil.show("请求成功，妹子个数为" + response.size());
                     }
                 });
