@@ -7,9 +7,9 @@ import android.text.TextUtils;
 
 import com.app.idea.utils.KeyTools;
 import com.app.idea.utils.NetWorkUtil;
+import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
 import com.sj.basemodule.weight.SuperFileView2;
 
@@ -104,10 +104,10 @@ public class FileDisplayActivity extends BaseActivity {
                 if (filePath.contains("http")) {
                     /*downLoadFromNet(filePath, mSuperFileView2);*/
                 } else {
-                    ToastUtil.fail("未知的Url");
+                    ToastUtil.show("未知的Url");
                 }
             } else {
-                ToastUtil.info("请先打开网络!");
+                ToastUtil.show("请先打开网络!");
             }
         }
     }

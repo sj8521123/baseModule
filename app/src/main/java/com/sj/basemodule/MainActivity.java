@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.View;
 
+import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.base.BaseEvent;
 import com.sj.basemodule.common.HomePagerAdapter;
@@ -14,7 +15,6 @@ import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
 import com.sj.basemodule.mine.D_MineBaseInfoFragment;
-import com.sj.basemodule.util.ToastUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void reConnect() {
-        ToastUtil.info("reConnect");
+        ToastUtil.show("reConnect");
     }
 
     @Override

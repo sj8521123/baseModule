@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.app.idea.utils.LogUtil;
-import com.sj.basemodule.util.ToastUtil;
+import com.app.idea.utils.ToastUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import java.io.File;
@@ -54,7 +54,7 @@ public class SuperFileView2 extends FrameLayout implements TbsReaderView.ReaderC
             if (!bsReaderTempFile.exists()) {
                 boolean mkdir = bsReaderTempFile.mkdir();
                 if (!mkdir) {
-                    ToastUtil.fail("创建/storage/emulated/0/TbsReaderTemp失败！！！！！");
+                    ToastUtil.show("创建/storage/emulated/0/TbsReaderTemp失败！！！！！");
                 }
             }
 
@@ -70,7 +70,7 @@ public class SuperFileView2 extends FrameLayout implements TbsReaderView.ReaderC
                 this.mTbsReaderView.openFile(localBundle);
             }
         } else {
-            ToastUtil.fail("文件路径无效！");
+            ToastUtil.show("文件路径无效！");
         }
 
     }

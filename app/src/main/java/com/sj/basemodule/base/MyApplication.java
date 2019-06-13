@@ -21,12 +21,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.idea.utils.ToastUtil;
 import com.bumptech.glide.Glide;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sj.basemodule.R;
 import com.sj.basemodule.config.KeyAndValueAppPrefs;
 import com.sj.basemodule.config.SPUtils;
-import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tmall.wireless.tangram.TangramBuilder;
@@ -117,7 +117,7 @@ public class MyApplication extends LitePalApplication {
                     try {
                         activity.setContentView(((BaseActivity) activity).initLayout());
                     } catch (Exception e) {
-                        ToastUtil.fail("activity的layout为空，请在activity中先添加布局");
+                        ToastUtil.show("activity的layout为空，请在activity中先添加布局");
                     }
 
                     //统一ButterKnife绑定Activity
@@ -208,7 +208,7 @@ public class MyApplication extends LitePalApplication {
             STGFileUtil.createAllDirs();
         } catch (IOException e) {
             e.printStackTrace();
-            ToastUtil.fail("创建项目目录出错!");
+            ToastUtil.show("创建项目目录出错!");
         }
     }
 

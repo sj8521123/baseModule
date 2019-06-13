@@ -16,6 +16,7 @@ import android.widget.RemoteViews;
 
 
 import com.app.idea.utils.LogUtil;
+import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.util.file.STGFileUtil;
@@ -78,7 +79,7 @@ public class UpdateAppUtil {
                         100, msg.what, false);
                 manager.notify(100, notify);
             } else if (msg.what == -2) {
-                ToastUtil.info("手机存储空间不足！");
+                ToastUtil.show("手机存储空间不足！");
             } else {
                 notify.contentView.setTextViewText(
                         R.id.notify_updata_values_tv, "下载完成");

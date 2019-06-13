@@ -109,7 +109,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     public void onSuccess(List<MeiZi> response) {
-                        com.sj.basemodule.util.ToastUtil.info("请求成功，妹子个数为" + response.size());
+                        ToastUtil.show("请求成功，妹子个数为" + response.size());
                     }
                 });
     }
