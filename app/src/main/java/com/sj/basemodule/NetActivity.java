@@ -55,7 +55,7 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public int initLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_net;
     }
 
     @Override

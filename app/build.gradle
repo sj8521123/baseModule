@@ -121,5 +121,5 @@ dependencies {
         transitive = true
     }
     api 'com.just.agentweb:agentweb:4.0.2'
-    implementation project(':idea')
+    implementation project(':net')
 }

@@ -44,7 +44,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".OtherActivity" />
+        <activity android:name=".OtherActivity" >
+        </activity>
+
         <activity android:name=".NetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
