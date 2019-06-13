@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider;
 import android.widget.RemoteViews;
 
 
+import com.app.idea.utils.LogUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.util.file.STGFileUtil;

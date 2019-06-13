@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.app.idea.utils.NetWorkUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.common.NetWorkChangeEvent;
-import com.sj.basemodule.util.NetWorkUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;

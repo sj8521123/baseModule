@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.sj.basemodule.util.LogUtil;
+import com.app.idea.utils.LogUtil;
 import com.sj.basemodule.util.ToastUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 

@@ -10,22 +10,21 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.model.reponse.LoginResponse;
 import com.sj.basemodule.model.reponse.MeiZi;
 import com.sj.basemodule.model.request.LoginRequest;
 import com.sj.basemodule.net.RetrofitHelper;
-import com.sj.basemodule.util.ToastUtil;
 import com.app.idea.net.common.BasicResponse;
 import com.app.idea.net.common.Constants;
 import com.app.idea.net.common.DefaultObserver;
 import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
-import com.app.idea.utils.FileUtils;
-import com.app.idea.utils.LogUtils;
+import com.app.idea.utils.FileUtil;
+import com.app.idea.utils.LogUtil;
 import com.app.idea.utils.RxUtil;
-import com.app.idea.utils.ToastUtils;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -93,7 +92,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<LoginResponse>() {
                     @Override
                     public void onSuccess(LoginResponse response) {
-                        ToastUtils.show("登录成功");
+                        ToastUtil.show("登录成功");
                     }
                 });
     }
@@ -110,7 +109,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
                     public void onSuccess(List<MeiZi> response) {
-                        ToastUtil.info("请求成功，妹子个数为" + response.size());
+                        com.sj.basemodule.util.ToastUtil.info("请求成功，妹子个数为" + response.size());
                     }
                 });
     }
@@ -137,7 +136,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<BasicResponse>() {
                     @Override
                     public void onSuccess(BasicResponse response) {
-                        ToastUtils.show("文件上传成功");
+                        ToastUtil.show("文件上传成功");
                     }
                 });
     }
@@ -164,7 +163,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<BasicResponse>() {
                     @Override
                     public void onSuccess(BasicResponse response) {
-                        ToastUtils.show("文件上传成功");
+                        ToastUtil.show("文件上传成功");
                     }
                 });
     }
@@ -179,7 +178,7 @@ public class NetActivity extends BaseActivity {
         downloadUtils.download(Constants.DOWNLOAD_URL, new DownloadListener() {
             @Override
             public void onProgress(int progress) {
-                LogUtils.e("--------下载进度：" + progress);
+                LogUtil.e("--------下载进度：" + progress);
                 Log.e("onProgress", "是否在主线程中运行:" + String.valueOf(Looper.getMainLooper() == Looper.myLooper()));
                 progressBar.setProgress(progress);
                 mTvPercent.setText(String.valueOf(progress) + "%");
@@ -194,13 +193,13 @@ public class NetActivity extends BaseActivity {
             @Override
             public void onFail(String message) {
                 btn.setClickable(true);
-                ToastUtils.show("文件下载失败,失败原因：" + message);
+                ToastUtil.show("文件下载失败,失败原因：" + message);
                 Log.e("onFail", "是否在主线程中运行:" + String.valueOf(Looper.getMainLooper() == Looper.myLooper()));
             }
 
             @Override
             public void onComplete() {  //  运行在主线程中
-                ToastUtils.show("文件下载成功");
+                ToastUtil.show("文件下载成功");
                 btn.setClickable(true);
             }
         });
@@ -252,7 +251,7 @@ public class NetActivity extends BaseActivity {
     private File getFile() {
         String fileStoreDir = Environment.getExternalStorageDirectory().getAbsolutePath();
         String filePath = fileStoreDir + "/test/test.txt";
-        FileUtils.createOrExistsFile(filePath);
+        FileUtil.createOrExistsFile(filePath);
         //文件路径
         return new File(filePath);
     }

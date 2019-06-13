@@ -24,9 +24,9 @@ import java.io.UnsupportedEncodingException;
  *     desc  : 转换相关工具类
  * </pre>
  */
-public class ConvertUtils {
+public class ConvertUtil {
 
-    private ConvertUtils() {
+    private ConvertUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -61,7 +61,7 @@ public class ConvertUtils {
      * @return 字节数组
      */
     public static byte[] hexString2Bytes(String hexString) {
-        if (StringUtils.isSpace(hexString)) return null;
+        if (StringUtil.isSpace(hexString)) return null;
         int len = hexString.length();
         if (len % 2 != 0) {
             hexString = "0" + hexString;
@@ -130,25 +130,25 @@ public class ConvertUtils {
      * @param memorySize 大小
      * @param unit       单位类型
      *                   <ul>
-     *                   <li>{@link ConstUtils.MemoryUnit#BYTE}: 字节</li>
-     *                   <li>{@link ConstUtils.MemoryUnit#KB}  : 千字节</li>
-     *                   <li>{@link ConstUtils.MemoryUnit#MB}  : 兆</li>
-     *                   <li>{@link ConstUtils.MemoryUnit#GB}  : GB</li>
+     *                   <li>{@link ConstUtil.MemoryUnit#BYTE}: 字节</li>
+     *                   <li>{@link ConstUtil.MemoryUnit#KB}  : 千字节</li>
+     *                   <li>{@link ConstUtil.MemoryUnit#MB}  : 兆</li>
+     *                   <li>{@link ConstUtil.MemoryUnit#GB}  : GB</li>
      *                   </ul>
      * @return 字节数
      */
-    public static long memorySize2Byte(long memorySize, ConstUtils.MemoryUnit unit) {
+    public static long memorySize2Byte(long memorySize, ConstUtil.MemoryUnit unit) {
         if (memorySize < 0) return -1;
         switch (unit) {
             default:
             case BYTE:
                 return memorySize;
             case KB:
-                return memorySize * ConstUtils.KB;
+                return memorySize * ConstUtil.KB;
             case MB:
-                return memorySize * ConstUtils.MB;
+                return memorySize * ConstUtil.MB;
             case GB:
-                return memorySize * ConstUtils.GB;
+                return memorySize * ConstUtil.GB;
         }
     }
 
@@ -158,25 +158,25 @@ public class ConvertUtils {
      * @param byteNum 字节数
      * @param unit    单位类型
      *                <ul>
-     *                <li>{@link ConstUtils.MemoryUnit#BYTE}: 字节</li>
-     *                <li>{@link ConstUtils.MemoryUnit#KB}  : 千字节</li>
-     *                <li>{@link ConstUtils.MemoryUnit#MB}  : 兆</li>
-     *                <li>{@link ConstUtils.MemoryUnit#GB}  : GB</li>
+     *                <li>{@link ConstUtil.MemoryUnit#BYTE}: 字节</li>
+     *                <li>{@link ConstUtil.MemoryUnit#KB}  : 千字节</li>
+     *                <li>{@link ConstUtil.MemoryUnit#MB}  : 兆</li>
+     *                <li>{@link ConstUtil.MemoryUnit#GB}  : GB</li>
      *                </ul>
      * @return 以unit为单位的size
      */
-    public static double byte2MemorySize(long byteNum, ConstUtils.MemoryUnit unit) {
+    public static double byte2MemorySize(long byteNum, ConstUtil.MemoryUnit unit) {
         if (byteNum < 0) return -1;
         switch (unit) {
             default:
             case BYTE:
                 return (double) byteNum;
             case KB:
-                return (double) byteNum / ConstUtils.KB;
+                return (double) byteNum / ConstUtil.KB;
             case MB:
-                return (double) byteNum / ConstUtils.MB;
+                return (double) byteNum / ConstUtil.MB;
             case GB:
-                return (double) byteNum / ConstUtils.GB;
+                return (double) byteNum / ConstUtil.GB;
         }
     }
 
@@ -191,14 +191,14 @@ public class ConvertUtils {
     public static String byte2FitMemorySize(long byteNum) {
         if (byteNum < 0) {
             return "shouldn't be less than zero!";
-        } else if (byteNum < ConstUtils.KB) {
+        } else if (byteNum < ConstUtil.KB) {
             return String.format("%.1fB", byteNum + 0.0005);
-        } else if (byteNum < ConstUtils.MB) {
-            return String.format("%.1fK", byteNum / ConstUtils.DKB + 0.0005);
-        } else if (byteNum < ConstUtils.GB) {
-            return String.format("%.1fM", byteNum / ConstUtils.DMB + 0.0005);
+        } else if (byteNum < ConstUtil.MB) {
+            return String.format("%.1fK", byteNum / ConstUtil.DKB + 0.0005);
+        } else if (byteNum < ConstUtil.GB) {
+            return String.format("%.1fM", byteNum / ConstUtil.DMB + 0.0005);
         } else {
-            return String.format("%.1fG", byteNum / ConstUtils.DGB + 0.0005);
+            return String.format("%.1fG", byteNum / ConstUtil.DGB + 0.0005);
         }
     }
 
@@ -208,27 +208,27 @@ public class ConvertUtils {
      * @param timeSpan 毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-     *                 <li>{@link ConstUtils.TimeUnit#MSEC}: 毫秒</li>
-     *                 <li>{@link ConstUtils.TimeUnit#SEC }: 秒</li>
-     *                 <li>{@link ConstUtils.TimeUnit#MIN }: 分</li>
-     *                 <li>{@link ConstUtils.TimeUnit#HOUR}: 小时</li>
-     *                 <li>{@link ConstUtils.TimeUnit#DAY }: 天</li>
+     *                 <li>{@link ConstUtil.TimeUnit#MSEC}: 毫秒</li>
+     *                 <li>{@link ConstUtil.TimeUnit#SEC }: 秒</li>
+     *                 <li>{@link ConstUtil.TimeUnit#MIN }: 分</li>
+     *                 <li>{@link ConstUtil.TimeUnit#HOUR}: 小时</li>
+     *                 <li>{@link ConstUtil.TimeUnit#DAY }: 天</li>
      *                 </ul>
      * @return 毫秒时间戳
      */
-    public static long timeSpan2Millis(long timeSpan, ConstUtils.TimeUnit unit) {
+    public static long timeSpan2Millis(long timeSpan, ConstUtil.TimeUnit unit) {
         switch (unit) {
             default:
             case MSEC:
                 return timeSpan;
             case SEC:
-                return timeSpan * ConstUtils.SEC;
+                return timeSpan * ConstUtil.SEC;
             case MIN:
-                return timeSpan * ConstUtils.MIN;
+                return timeSpan * ConstUtil.MIN;
             case HOUR:
-                return timeSpan * ConstUtils.HOUR;
+                return timeSpan * ConstUtil.HOUR;
             case DAY:
-                return timeSpan * ConstUtils.DAY;
+                return timeSpan * ConstUtil.DAY;
         }
     }
 
@@ -238,27 +238,27 @@ public class ConvertUtils {
      * @param millis 毫秒时间戳
      * @param unit   单位类型
      *               <ul>
-     *               <li>{@link ConstUtils.TimeUnit#MSEC}: 毫秒</li>
-     *               <li>{@link ConstUtils.TimeUnit#SEC }: 秒</li>
-     *               <li>{@link ConstUtils.TimeUnit#MIN }: 分</li>
-     *               <li>{@link ConstUtils.TimeUnit#HOUR}: 小时</li>
-     *               <li>{@link ConstUtils.TimeUnit#DAY }: 天</li>
+     *               <li>{@link ConstUtil.TimeUnit#MSEC}: 毫秒</li>
+     *               <li>{@link ConstUtil.TimeUnit#SEC }: 秒</li>
+     *               <li>{@link ConstUtil.TimeUnit#MIN }: 分</li>
+     *               <li>{@link ConstUtil.TimeUnit#HOUR}: 小时</li>
+     *               <li>{@link ConstUtil.TimeUnit#DAY }: 天</li>
      *               </ul>
      * @return 以unit为单位的时间长度
      */
-    public static long millis2TimeSpan(long millis, ConstUtils.TimeUnit unit) {
+    public static long millis2TimeSpan(long millis, ConstUtil.TimeUnit unit) {
         switch (unit) {
             default:
             case MSEC:
                 return millis;
             case SEC:
-                return millis / ConstUtils.SEC;
+                return millis / ConstUtil.SEC;
             case MIN:
-                return millis / ConstUtils.MIN;
+                return millis / ConstUtil.MIN;
             case HOUR:
-                return millis / ConstUtils.HOUR;
+                return millis / ConstUtil.HOUR;
             case DAY:
-                return millis / ConstUtils.DAY;
+                return millis / ConstUtil.DAY;
         }
     }
 
@@ -347,9 +347,9 @@ public class ConvertUtils {
         if (is == null) return null;
         try {
             ByteArrayOutputStream os = new ByteArrayOutputStream();
-            byte[] b = new byte[ConstUtils.KB];
+            byte[] b = new byte[ConstUtil.KB];
             int len;
-            while ((len = is.read(b, 0, ConstUtils.KB)) != -1) {
+            while ((len = is.read(b, 0, ConstUtil.KB)) != -1) {
                 os.write(b, 0, len);
             }
             return os;
@@ -357,7 +357,7 @@ public class ConvertUtils {
             e.printStackTrace();
             return null;
         } finally {
-            CloseUtils.closeIO(is);
+            CloseUtil.closeIO(is);
         }
     }
 
@@ -422,7 +422,7 @@ public class ConvertUtils {
             e.printStackTrace();
             return null;
         } finally {
-            CloseUtils.closeIO(os);
+            CloseUtil.closeIO(os);
         }
     }
 
@@ -434,7 +434,7 @@ public class ConvertUtils {
      * @return 字符串
      */
     public static String inputStream2String(InputStream is, String charsetName) {
-        if (is == null || StringUtils.isSpace(charsetName)) return null;
+        if (is == null || StringUtil.isSpace(charsetName)) return null;
         try {
             return new String(inputStream2Bytes(is), charsetName);
         } catch (UnsupportedEncodingException e) {
@@ -451,7 +451,7 @@ public class ConvertUtils {
      * @return 输入流
      */
     public static InputStream string2InputStream(String string, String charsetName) {
-        if (string == null || StringUtils.isSpace(charsetName)) return null;
+        if (string == null || StringUtil.isSpace(charsetName)) return null;
         try {
             return new ByteArrayInputStream(string.getBytes(charsetName));
         } catch (UnsupportedEncodingException e) {
@@ -468,7 +468,7 @@ public class ConvertUtils {
      * @return 字符串
      */
     public static String outputStream2String(OutputStream out, String charsetName) {
-        if (out == null || StringUtils.isSpace(charsetName)) return null;
+        if (out == null || StringUtil.isSpace(charsetName)) return null;
         try {
             return new String(outputStream2Bytes(out), charsetName);
         } catch (UnsupportedEncodingException e) {
@@ -485,7 +485,7 @@ public class ConvertUtils {
      * @return 输入流
      */
     public static OutputStream string2OutputStream(String string, String charsetName) {
-        if (string == null || StringUtils.isSpace(charsetName)) return null;
+        if (string == null || StringUtil.isSpace(charsetName)) return null;
         try {
             return bytes2OutputStream(string.getBytes(charsetName));
         } catch (UnsupportedEncodingException e) {
@@ -588,7 +588,7 @@ public class ConvertUtils {
      * @return px值
      */
     public static int dp2px(float dpValue) {
-        final float scale = Utils.getContext().getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -599,7 +599,7 @@ public class ConvertUtils {
      * @return dp值
      */
     public static int px2dp(float pxValue) {
-        final float scale = Utils.getContext().getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -610,7 +610,7 @@ public class ConvertUtils {
      * @return px值
      */
     public static int sp2px(float spValue) {
-        final float fontScale = Utils.getContext().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = Util.getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
@@ -621,7 +621,7 @@ public class ConvertUtils {
      * @return sp值
      */
     public static int px2sp(float pxValue) {
-        final float fontScale = Utils.getContext().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = Util.getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 }

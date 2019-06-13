@@ -8,9 +8,9 @@ package com.app.idea.utils;
  *     desc  : 字符串相关工具类
  * </pre>
  */
-public class StringUtils {
+public class StringUtil {
 
-    private StringUtils() {
+    private StringUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

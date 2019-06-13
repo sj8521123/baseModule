@@ -3,7 +3,7 @@ package com.app.idea.net.common;
 
 
 import com.app.idea.R;
-import com.app.idea.utils.Utils;
+import com.app.idea.utils.Util;
 
 import androidx.annotation.StringRes;
 
@@ -86,6 +86,6 @@ public class ErrorCode {
     }
 
     private static String getString(@StringRes int resId) {
-        return Utils.getContext().getString(resId);
+        return Util.getContext().getString(resId);
     }
 }

@@ -1,4 +1,4 @@
-package com.sj.basemodule.util;
+package com.app.idea.utils;
 
 import java.io.Closeable;
 import java.io.IOException;

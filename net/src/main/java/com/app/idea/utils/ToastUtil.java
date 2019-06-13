@@ -6,12 +6,12 @@ import android.widget.Toast;
 
 
 /**
- * ToastUtils
+ * ToastUtil
  */
 
-public class ToastUtils {
+public class ToastUtil {
 
-    private static Context context = Utils.getContext();
+    private static Context context = Util.getContext();
     private static Toast toast;
 
     public static void show(int resId) {

@@ -32,7 +32,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.tmall.wireless.tangram.TangramBuilder;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
-import com.app.idea.utils.Utils;
+import com.app.idea.utils.Util;
 
 import org.litepal.LitePalApplication;
 
@@ -103,7 +103,7 @@ public class MyApplication extends LitePalApplication {
         mAppContext = this;
         packageName = this.getPackageName();
         currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
-        Utils.init(this);
+        Util.init(this);
         //本地配置
         initLocalConfiguration();
         //第三方配置

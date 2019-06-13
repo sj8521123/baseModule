@@ -46,8 +46,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.app.idea.utils.LogUtil;
 import com.sj.basemodule.R;
-import com.sj.basemodule.util.LogUtil;
 import com.sj.basemodule.weight.subscaleview.decoder.CompatDecoderFactory;
 import com.sj.basemodule.weight.subscaleview.decoder.DecoderFactory;
 import com.sj.basemodule.weight.subscaleview.decoder.ImageDecoder;

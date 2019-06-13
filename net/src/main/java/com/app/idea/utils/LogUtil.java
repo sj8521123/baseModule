@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sj.basemodule.util;
+package com.app.idea.utils;
 
 import android.util.Log;
-
-import com.sj.basemodule.BuildConfig;
 
 
 /**
@@ -26,18 +24,11 @@ import com.sj.basemodule.BuildConfig;
  * @author Weiss
  */
 public class LogUtil {
-    //规定每段显示的长度
-    private static int LOG_MAXLENGTH = 2000;
 
-    public static void w(String logString) {
-        if (BuildConfig.DEBUG) {
-            Log.w(getClassName(), logString);
-        }
-    }
+    private static final boolean DEBUG = true;
 
     /**
      * 获取当前类名
-     *
      * @return
      */
     private static String getClassName() {
@@ -49,13 +40,20 @@ public class LogUtil {
         return result;
     }
 
+
+    public static void w(String logString) {
+        if (DEBUG) {
+            Log.w(getClassName(), logString);
+        }
+    }
+
     /**
      * debug log
      *
      * @param msg
      */
     public static void d(String tag, String msg) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.d(tag, msg);
         }
     }
@@ -66,7 +64,7 @@ public class LogUtil {
      * @param msg
      */
     public static void e(String tag, String msg) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.e(tag, msg);
         }
     }
@@ -77,7 +75,7 @@ public class LogUtil {
      * @param msg
      */
     public static void d(String msg) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.d(getClassName(), msg);
         }
     }
@@ -88,39 +86,31 @@ public class LogUtil {
      * @param msg
      */
     public static void i(String msg) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.i(getClassName(), msg);
         }
     }
-
     /**
      * error log
      *
      * @param msg
      */
     public static void e(String msg) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.e(getClassName(), msg);
         }
     }
 
     public static void i(String tag, String logString) {
-        //log 每条最大4*1024个字符长度 超过则采用分段输出
-        if (BuildConfig.DEBUG) {
-            if (logString.length() > 4000) {
-                for (int i = 0, count = 0; i < logString.length(); i += 4000, count++) {
-                    if (i + 4000 < logString.length())
-                        Log.i(tag + count, logString.substring(i, i + 4000));
-                    else
-                        Log.i(tag + count, logString.substring(i, logString.length()));
-                }
-            } else
-                Log.i(tag, logString);
+        if (DEBUG) {
+            Log.i(tag, logString);
         }
     }
 
+
+
     public static void w(String tag, String logString) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             Log.w(tag, logString);
         }
     }

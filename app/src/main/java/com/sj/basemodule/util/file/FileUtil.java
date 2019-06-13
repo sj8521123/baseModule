@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 
 import com.sj.basemodule.base.MyApplication;
-import com.sj.basemodule.util.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

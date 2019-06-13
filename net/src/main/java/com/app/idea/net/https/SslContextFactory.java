@@ -2,7 +2,7 @@ package com.app.idea.net.https;
 
 
 import com.app.idea.R;
-import com.app.idea.utils.Utils;
+import com.app.idea.utils.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,7 +69,7 @@ public class SslContextFactory {
      */
     public static SSLSocketFactory getSSLSocketFactoryForTwoWay() {
         try {
-            InputStream certificate = Utils.getContext().getResources().openRawResource(R.raw.capk);
+            InputStream certificate = Util.getContext().getResources().openRawResource(R.raw.capk);
             //  CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509", "BC");
             KeyStore keyStore = KeyStore.getInstance(CLIENT_TRUST_KEY);
             keyStore.load(certificate, SELF_CERT_PWD.toCharArray());
@@ -85,7 +85,7 @@ public class SslContextFactory {
 
             //初始化keystore
             KeyStore clientKeyStore = KeyStore.getInstance(CLIENT_TRUST_KEYSTORE);
-            clientKeyStore.load(Utils.getContext().getResources().openRawResource(R.raw.cabks), TRUST_CA_PWD.toCharArray());
+            clientKeyStore.load(Util.getContext().getResources().openRawResource(R.raw.cabks), TRUST_CA_PWD.toCharArray());
 
             SSLContext sslContext = SSLContext.getInstance(CLIENT_AGREEMENT);
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.

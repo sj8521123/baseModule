@@ -4,7 +4,7 @@ package com.app.idea.net.persistentcookiejar;
 import com.app.idea.net.persistentcookiejar.cache.SetCookieCache;
 import com.app.idea.net.persistentcookiejar.persistence.CookiePersistor;
 import com.app.idea.net.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.app.idea.utils.Utils;
+import com.app.idea.utils.Util;
 
 import java.util.List;
 
@@ -23,13 +23,13 @@ public class CookieUtil {
 
     //获取到Okhttp CookieJar 保存于请求的管理
     public static ClearableCookieJar getCookieJar() {
-        persistentCookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(Utils.getContext()));
+        persistentCookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(Util.getContext()));
         return persistentCookieJar;
     }
 
     //是否本地缓存过该Cookie
     public static boolean isExitCookie() {
-        CookiePersistor cookiePersistor = new SharedPrefsCookiePersistor(Utils.getContext());
+        CookiePersistor cookiePersistor = new SharedPrefsCookiePersistor(Util.getContext());
         List<Cookie> cookies = cookiePersistor.loadAll();
         if (cookies != null && cookies.size() > 0) {
             return true;

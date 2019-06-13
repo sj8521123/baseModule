@@ -2,13 +2,13 @@ package com.app.idea.net.common;
 
 import android.widget.Toast;
 
+import com.app.idea.utils.ToastUtil;
 import com.google.gson.JsonParseException;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.app.idea.R;
 import com.app.idea.net.exception.NoDataExceptionException;
 import com.app.idea.net.exception.ServerResponseException;
-import com.app.idea.utils.LogUtils;
-import com.app.idea.utils.ToastUtils;
+import com.app.idea.utils.LogUtil;
 
 import org.json.JSONException;
 
@@ -39,7 +39,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        LogUtils.e("Retrofit", e.getMessage());
+        LogUtil.e("Retrofit", e.getMessage());
         if (e instanceof HttpException) {     //   HTTP错误
             onException(ExceptionReason.BAD_NETWORK);
         } else if (e instanceof ConnectException
@@ -80,7 +80,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
      * 服务器返回数据，但响应码不为1000
      */
     public void onFail(String message) {
-        ToastUtils.show(message);
+        ToastUtil.show(message);
     }
 
     public void onFinish(){}
@@ -93,24 +93,24 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     public void onException(ExceptionReason reason) {
         switch (reason) {
             case CONNECT_ERROR:
-                ToastUtils.show(R.string.connect_error, Toast.LENGTH_SHORT);
+                ToastUtil.show(R.string.connect_error, Toast.LENGTH_SHORT);
                 break;
 
             case CONNECT_TIMEOUT:
-                ToastUtils.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
+                ToastUtil.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
                 break;
 
             case BAD_NETWORK:
-                ToastUtils.show(R.string.bad_network, Toast.LENGTH_SHORT);
+                ToastUtil.show(R.string.bad_network, Toast.LENGTH_SHORT);
                 break;
 
             case PARSE_ERROR:
-                ToastUtils.show(R.string.parse_error, Toast.LENGTH_SHORT);
+                ToastUtil.show(R.string.parse_error, Toast.LENGTH_SHORT);
                 break;
 
             case UNKNOWN_ERROR:
             default:
-                ToastUtils.show(R.string.unknown_error, Toast.LENGTH_SHORT);
+                ToastUtil.show(R.string.unknown_error, Toast.LENGTH_SHORT);
                 break;
         }
     }

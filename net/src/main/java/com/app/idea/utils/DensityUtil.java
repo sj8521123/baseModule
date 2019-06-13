@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 /**
  * dp px转换
  */
-public class DensityUtils {
+public class DensityUtil {
     private static int screenW;
     private static int screenH;
     private static float screenDensity;

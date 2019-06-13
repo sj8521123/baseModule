@@ -1,6 +1,6 @@
 package com.app.idea.net.interceptor;
 
-import com.app.idea.utils.LogUtils;
+import com.app.idea.utils.LogUtil;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class LoggingInterceptor implements Interceptor {
 
         long t1 = System.nanoTime();//请求发起的时间
 
-        LogUtils.e(String.format("请求URL------%s on %s%n请求头------%s",
+        LogUtil.e(String.format("请求URL------%s on %s%n请求头------%s",
                 request.url(), chain.connection(), request.headers()));
         Response response = chain.proceed(request);
 
@@ -32,7 +32,7 @@ public class LoggingInterceptor implements Interceptor {
         //个新的response给应用层处理
         ResponseBody responseBody = response.peekBody(1024 * 1024);
 
-        LogUtils.e(String.format("响应URL-------: %s %n响应数据------%s 请求用时--------%.1fms%n%s",
+        LogUtil.e(String.format("响应URL-------: %s %n响应数据------%s 请求用时--------%.1fms%n%s",
                 response.request().url(),
                 responseBody.string(),
                 (t2 - t1) / 1e6d,

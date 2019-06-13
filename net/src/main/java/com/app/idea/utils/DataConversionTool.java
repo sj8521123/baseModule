@@ -8,7 +8,7 @@ import java.util.Calendar;
  * 这是一个用于将不同数据类型转换为byte数组或者解码byte组为其它数据的工具类
  * Slc 设备基本采用高位在前的数据传输
  */
-public class DataConversionTools {
+public class DataConversionTool {
 
     public static byte[] intArrayToByteArray(int[] data){
         if( data == null ) return null;
@@ -222,7 +222,7 @@ public class DataConversionTools {
     public static byte[] getDeviceNameData(String name){
         //默认15bytes名字长度，不允许用户填写空格故而使用空格填充
         byte[] data = new byte[15];
-        byte[] temp = DataConversionTools.stringToBytes(name);
+        byte[] temp = DataConversionTool.stringToBytes(name);
         System.arraycopy(temp,0,data,0,temp.length > 15 ? 15 : temp.length);
         return data;
     }

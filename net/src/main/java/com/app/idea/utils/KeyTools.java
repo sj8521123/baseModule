@@ -26,7 +26,7 @@ public class KeyTools {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             md5.update(info.getBytes());
             byte[] encryption = md5.digest();
-            return DataConversionTools.bytesToHexString(encryption);
+            return DataConversionTool.bytesToHexString(encryption);
         } catch (NoSuchAlgorithmException e) {
             return "";
         }
@@ -52,7 +52,7 @@ public class KeyTools {
             // compute the hmac on input data bytes
             byte[] rawHmac = mac.doFinal(data.getBytes());
 
-            return DataConversionTools.bytesToHexString(rawHmac);
+            return DataConversionTool.bytesToHexString(rawHmac);
 
         } catch (Exception e) {
             throw new SignatureException("Failed to generate HMAC : "

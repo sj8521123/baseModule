@@ -5,23 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.app.idea.utils.KeyTools;
+import com.app.idea.utils.NetWorkUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.util.Md5ToolUtil;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
-import com.sj.basemodule.util.NetWorkUtil;
 import com.sj.basemodule.weight.SuperFileView2;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -205,7 +198,7 @@ public class FileDisplayActivity extends BaseActivity {
      * @return
      */
     private String getFileName(String url) {
-        return Md5ToolUtil.hashKey(url) + "." + STGFileUtil.fileUtil.getFileType(url);
+        return KeyTools.getMD5(url) + "." + STGFileUtil.fileUtil.getFileType(url);
     }
 
 }

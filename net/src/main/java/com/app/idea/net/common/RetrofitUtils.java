@@ -1,6 +1,5 @@
 package com.app.idea.net.common;
 
-import com.app.idea.net.persistentcookiejar.CookieUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -8,7 +7,7 @@ import com.app.idea.net.converter.GsonConverterFactory;
 import com.app.idea.net.interceptor.HttpCacheInterceptor;
 import com.app.idea.net.interceptor.HttpHeaderInterceptor;
 import com.app.idea.net.interceptor.LoggingInterceptor;
-import com.app.idea.utils.Utils;
+import com.app.idea.utils.Util;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +22,7 @@ import retrofit2.Retrofit;
 
 public class RetrofitUtils {
     public static OkHttpClient.Builder getOkHttpClientBuilder() {
-        File cacheFile = new File(Utils.getContext().getCacheDir(), "cache");
+        File cacheFile = new File(Util.getContext().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
 
         return new OkHttpClient.Builder()
