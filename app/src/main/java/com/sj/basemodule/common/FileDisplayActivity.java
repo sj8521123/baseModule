@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.net.STGApiService;
 import com.sj.basemodule.util.Md5ToolUtil;
 import com.sj.basemodule.util.ToastUtil;
 import com.sj.basemodule.util.file.STGFileUtil;
@@ -110,7 +109,7 @@ public class FileDisplayActivity extends BaseActivity {
         else {
             if (NetWorkUtil.isConnected()) {
                 if (filePath.contains("http")) {
-                    downLoadFromNet(filePath, mSuperFileView2);
+                    /*downLoadFromNet(filePath, mSuperFileView2);*/
                 } else {
                     ToastUtil.fail("未知的Url");
                 }
@@ -131,7 +130,7 @@ public class FileDisplayActivity extends BaseActivity {
                 + getFileName(url));
     }
 
-    private void downLoadFromNet(final String url, final SuperFileView2 mSuperFileView2) {
+   /* private void downLoadFromNet(final String url, final SuperFileView2 mSuperFileView2) {
         //1.网络下载、存储路径、
         File cacheFile = getCacheFile(url);
         if (cacheFile.exists()) {
@@ -152,7 +151,7 @@ public class FileDisplayActivity extends BaseActivity {
                 try {
                     ResponseBody responseBody = response.body();
                     is = responseBody.byteStream();
-                    /*long total = responseBody.contentLength();*/
+                    *//*long total = responseBody.contentLength();*//*
                     File fileN = getCacheFile(url);
                     if (!fileN.exists()) {
                         boolean mkFile = fileN.createNewFile();
@@ -162,11 +161,11 @@ public class FileDisplayActivity extends BaseActivity {
                         }
                     }
                     fos = new FileOutputStream(fileN);
-                    /*long sum = 0;*/
+                    *//*long sum = 0;*//*
                     while ((len = is.read(buf)) != -1) {
                         fos.write(buf, 0, len);
-                       /* sum += len;
-                        int progress = (int) (sum * 1.0f / total * 100);*/
+                       *//* sum += len;
+                        int progress = (int) (sum * 1.0f / total * 100);*//*
                     }
                     fos.flush();
                     //2.ACache记录文件的有效期
@@ -197,7 +196,7 @@ public class FileDisplayActivity extends BaseActivity {
                 }
             }
         });
-    }
+    }*/
 
     /***
      * 根据链接获取文件名（带类型的），具有唯一性

@@ -116,7 +116,7 @@ public class MainActivity extends BaseActivity {
                 EventBus.getDefault().post(baseEvent);
                 break;
             case R.id.btn6:
-                startActivity(new Intent(MainActivity.this, OtherActivity.class));
+                startActivity(new Intent(MainActivity.this, NetActivity.class));
                 break;
         }
     }

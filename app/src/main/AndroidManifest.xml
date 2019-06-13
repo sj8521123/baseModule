@@ -18,8 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:label"
-        >
+        tools:replace="android:label">
         <meta-data
             android:name="APP_CHANNEL"
             android:value="${APP_CHANNEL_VALUE}" />
@@ -36,14 +35,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="首页">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:label="首页"/>
         <receiver android:name=".common.NetworkConnectChangedReceiver">
             <intent-filter>
                 <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
@@ -52,7 +44,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".OtherActivity"></activity>
+        <activity android:name=".OtherActivity" />
+        <activity android:name=".NetActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

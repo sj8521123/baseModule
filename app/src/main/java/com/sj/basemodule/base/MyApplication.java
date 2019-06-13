@@ -9,9 +9,10 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.multidex.MultiDexApplication;
+
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.tmall.wireless.tangram.TangramBuilder;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
+import com.app.idea.utils.Utils;
 
 import org.litepal.LitePalApplication;
 
@@ -101,7 +103,7 @@ public class MyApplication extends LitePalApplication {
         mAppContext = this;
         packageName = this.getPackageName();
         currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
-
+        Utils.init(this);
         //本地配置
         initLocalConfiguration();
         //第三方配置
