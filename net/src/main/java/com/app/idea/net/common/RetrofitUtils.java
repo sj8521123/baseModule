@@ -1,5 +1,6 @@
 package com.app.idea.net.common;
 
+import com.app.idea.net.interceptor.LoggerInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -30,7 +31,7 @@ public class RetrofitUtils {
                 .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 //自动设置cookie
                 //.cookieJar(CookieUtil.getCookieJar())
-                .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(new LoggerInterceptor("sj APP"))
                 .addInterceptor(new HttpHeaderInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 // .sslSocketFactory(SslContextFactory.getSSLSocketFactoryForTwoWay())  // https认证 如果要使用https且为自定义证书 可以去掉这两行注释，并自行配制证书。

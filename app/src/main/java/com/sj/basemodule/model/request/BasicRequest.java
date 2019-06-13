@@ -1,7 +1,6 @@
 package com.sj.basemodule.model.request;
 
 
-import com.app.idea.utils.SharedPreferencesHelper;
 import com.app.idea.utils.Util;
 
 /**
@@ -10,7 +9,7 @@ import com.app.idea.utils.Util;
  */
 
 public class BasicRequest {
-    public String token = (String) SharedPreferencesHelper.get(Util.getContext(), "token", "");
+  /*  public String token = (String) SharedPreferencesHelper.get(Util.getContext(), "token", "");
 
     public String getToken() {
         return token;
@@ -18,5 +17,5 @@ public class BasicRequest {
 
     public void setToken(String token) {
         this.token = token;
-    }
+    }*/
 }
