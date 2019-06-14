@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import androidx.viewpager.widget.PagerAdapter;
+import basemodule.sj.com.basic.util.ImageUtil;
+import basemodule.sj.com.basic.util.UriUtil;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.MyApplication;
-import com.sj.basemodule.util.ImageUtil;
-import com.sj.basemodule.util.UriUtil;
 import com.sj.basemodule.weight.subscaleview.ImageSource;
 import com.sj.basemodule.weight.subscaleview.ImageViewState;
 import com.sj.basemodule.weight.subscaleview.SubsamplingScaleImageView;

@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.MyApplication;
-import com.sj.basemodule.util.file.STGFileUtil;
+import com.sj.basemodule.util.STGFileUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

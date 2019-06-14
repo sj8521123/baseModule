@@ -1,16 +1,15 @@
-package com.sj.basemodule.util.file;
+package basemodule.sj.com.basic.util.file;
 
 import android.os.Environment;
 import android.text.TextUtils;
-
-
-import com.sj.basemodule.base.MyApplication;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import basemodule.sj.com.basic.util.Util;
 
 
 /**
@@ -52,7 +51,7 @@ public class FileUtil {
      *
      * @param dirPath 目录路径
      */
-    void createDir(File dirPath) throws IOException {
+    public void createDir(File dirPath) throws IOException {
         if (!dirPath.exists()) {
             boolean isOk = dirPath.mkdirs();
             if (!isOk) {
@@ -72,10 +71,10 @@ public class FileUtil {
         //判断SD卡是否存在
         if (hasSdcard()) {
             //path : /mnt/sdcard/Android/data/com.shundian.smart/files/
-            sdcardPath = MyApplication.mAppContext.getExternalFilesDir(null) + File.separator;
+            sdcardPath = Util.getContext().getExternalFilesDir(null) + File.separator;
         } else {
             //path : data/data/com.shundian.smart/files/
-            sdcardPath = MyApplication.mAppContext.getFilesDir() + File.separator;
+            sdcardPath = Util.getContext().getFilesDir() + File.separator;
         }
         return sdcardPath;
     }

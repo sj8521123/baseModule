@@ -12,12 +12,8 @@ import android.widget.LinearLayout;
 
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.MiddlewareWebClientBase;
-import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.model.Student;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
+import basemodule.sj.com.basic.base.BaseActivity;
 import butterknife.OnClick;
 
 public class OtherActivity extends BaseActivity {
@@ -25,17 +21,6 @@ public class OtherActivity extends BaseActivity {
     private AgentWeb preAgentWeb;
     private MiddlewareWebClientBase mMiddleWareWebClient;
     private View view;
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void test(Student event) {
-        Log.i(TAG, "BACKGROUND: " + Thread.currentThread().getId());
-    }
-
-    @Override
-    public void onEventMainThread(BaseEvent event) {
-        super.onEventMainThread(event);
-        Log.i(TAG, "onEventMainThread: " + Thread.currentThread().getId());
-    }
 
     @Override
     protected void reConnect() {

@@ -2,13 +2,11 @@ package com.app.idea.net.common;
 
 import android.widget.Toast;
 
-import com.app.idea.utils.ToastUtil;
 import com.google.gson.JsonParseException;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.app.idea.R;
 import com.app.idea.net.exception.NoDataExceptionException;
 import com.app.idea.net.exception.ServerResponseException;
-import com.app.idea.utils.LogUtil;
 
 import org.json.JSONException;
 
@@ -18,6 +16,8 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.LogUtil;
+import basemodule.sj.com.basic.util.ToastUtil;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -25,8 +25,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class DefaultObserver<T> implements Observer<T> {
     private BaseActivity mActivity;
 
-    public DefaultObserver(BaseActivity activity) {
-        this.mActivity = activity;
+    public DefaultObserver() {
     }
 
     @Override

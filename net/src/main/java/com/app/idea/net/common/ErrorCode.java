@@ -3,9 +3,9 @@ package com.app.idea.net.common;
 
 
 import com.app.idea.R;
-import com.app.idea.utils.Util;
 
 import androidx.annotation.StringRes;
+import basemodule.sj.com.basic.util.Util;
 
 /**
  * 内部错误的code码集合

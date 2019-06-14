@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-import com.app.idea.utils.KeyTools;
+import basemodule.sj.com.basic.util.KeyTools;
 
 
 /**
@@ -52,8 +52,8 @@ public class LoginRequest extends BasicRequest {
      * @return
      */
     public static String generateAppKey(Context context) {
-        String deviceId = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        String timeStamp = System.currentTimeMillis() + "";
-        return KeyTools.getMD5(deviceId+timeStamp);
+     /*   String deviceId = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        String timeStamp = System.currentTimeMillis() + "";*/
+        return "";
     }
 }

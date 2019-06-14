@@ -38,6 +38,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
+import basemodule.sj.com.basic.util.LogUtil;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -46,7 +48,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.app.idea.utils.LogUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.weight.subscaleview.decoder.CompatDecoderFactory;
 import com.sj.basemodule.weight.subscaleview.decoder.DecoderFactory;

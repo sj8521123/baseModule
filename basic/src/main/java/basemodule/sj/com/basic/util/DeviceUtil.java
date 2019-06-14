@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.provider.Settings;
 
-import com.sj.basemodule.base.MyApplication;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +19,7 @@ import java.security.NoSuchAlgorithmException;
 public class DeviceUtil {
     public static String getUniqueId(){
         @SuppressLint("HardwareIds")
-        String androidID = Settings.Secure.getString(MyApplication.mAppContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String androidID = Settings.Secure.getString(Util.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         String id = androidID + Build.SERIAL;
         try {

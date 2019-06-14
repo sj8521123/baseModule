@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.app.idea.utils.KeyTools;
-import com.app.idea.utils.NetWorkUtil;
-import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.R;
-import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.util.file.STGFileUtil;
+import com.sj.basemodule.util.STGFileUtil;
 import com.sj.basemodule.weight.SuperFileView2;
 
 import java.io.File;
 
+import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.KeyTools;
+import basemodule.sj.com.basic.util.NetWorkUtil;
+import basemodule.sj.com.basic.util.ToastUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

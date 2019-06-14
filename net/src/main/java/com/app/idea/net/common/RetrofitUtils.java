@@ -1,17 +1,17 @@
 package com.app.idea.net.common;
 
-import com.app.idea.net.interceptor.LoggerInterceptor;
+import com.app.idea.net.interceptor.LoggingInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.app.idea.net.converter.GsonConverterFactory;
 import com.app.idea.net.interceptor.HttpCacheInterceptor;
 import com.app.idea.net.interceptor.HttpHeaderInterceptor;
-import com.app.idea.utils.Util;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import basemodule.sj.com.basic.util.Util;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -30,7 +30,7 @@ public class RetrofitUtils {
                 .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 //自动设置cookie
                 //.cookieJar(CookieUtil.getCookieJar())
-                .addInterceptor(new LoggerInterceptor(Constants.LOG_NAME))
+                .addInterceptor(new LoggingInterceptor(Constants.LOG_NAME))
                 .addInterceptor(new HttpHeaderInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 // https认证 如果要使用https且为自定义证书 可以去掉这两行注释，并自行配制证书。

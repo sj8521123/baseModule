@@ -4,10 +4,10 @@ package com.app.idea.net.persistentcookiejar;
 import com.app.idea.net.persistentcookiejar.cache.SetCookieCache;
 import com.app.idea.net.persistentcookiejar.persistence.CookiePersistor;
 import com.app.idea.net.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.app.idea.utils.Util;
 
 import java.util.List;
 
+import basemodule.sj.com.basic.util.Util;
 import okhttp3.Cookie;
 
 /**

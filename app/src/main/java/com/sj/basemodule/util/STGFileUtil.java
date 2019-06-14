@@ -1,7 +1,9 @@
-package com.sj.basemodule.util.file;
+package com.sj.basemodule.util;
 
 import java.io.File;
 import java.io.IOException;
+
+import basemodule.sj.com.basic.util.file.FileUtil;
 
 /**
  * content:

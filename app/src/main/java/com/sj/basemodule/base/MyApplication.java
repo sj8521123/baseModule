@@ -10,29 +10,21 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.idea.utils.ToastUtil;
-import com.bumptech.glide.Glide;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sj.basemodule.R;
 import com.sj.basemodule.config.KeyAndValueAppPrefs;
 import com.sj.basemodule.config.SPUtils;
-import com.sj.basemodule.util.file.STGFileUtil;
+import com.sj.basemodule.util.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.tmall.wireless.tangram.TangramBuilder;
-import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
-import com.app.idea.utils.Util;
 
 import org.litepal.LitePalApplication;
 
@@ -42,6 +34,8 @@ import java.util.List;
 
 import basemodule.sj.com.basic.base.ActivityBean;
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.ToastUtil;
+import basemodule.sj.com.basic.util.Util;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -106,6 +100,7 @@ public class MyApplication extends LitePalApplication {
         packageName = this.getPackageName();
         currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
         Util.init(this);
+        Util.setCurrentUserPrefsName(currentUserPrefsName);
         //本地配置
         initLocalConfiguration();
         //第三方配置
@@ -217,15 +212,6 @@ public class MyApplication extends LitePalApplication {
     private void initExternalConfiguration() {
         //bugly集成
         CrashReport.initCrashReport(getApplicationContext(), "c97fd3e3e2", false);
-
-        TangramBuilder.init(mAppContext, new IInnerImageSetter() {
-            @Override
-            public <IMAGE extends ImageView> void doLoadImageUrl(@NonNull IMAGE view,
-                                                                 @Nullable String url) {
-                //假设你使用 Picasso 加载图片
-                Glide.with(mAppContext).load(url).into(view);
-            }
-        }, ImageView.class);
         //toast设置
        /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))

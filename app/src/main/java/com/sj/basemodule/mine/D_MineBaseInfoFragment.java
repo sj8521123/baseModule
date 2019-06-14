@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.sj.basemodule.R;
 
+import basemodule.sj.com.basic.base.BasePageFragment;
+
 /**
  * on 2019/5/23.
  */

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
@@ -40,7 +41,7 @@ dependencies {
 
     api 'org.greenrobot:eventbus:3.1.1'
     api 'com.jakewharton:butterknife:10.1.0'
-    api 'com.jakewharton:butterknife-compiler:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     api 'com.tencent.bugly:crashreport:3.0.0'
     api 'com.tencent.bugly:nativecrashreport:3.6.0.1'
@@ -63,5 +64,5 @@ dependencies {
     api 'com.hjq:toast:1.5'
     api 'com.fyales.android:library:1.0.2'
     api 'com.github.donkingliang:LabelsView:1.5.0'
-
+    api 'com.just.agentweb:agentweb:4.0.2'
 }

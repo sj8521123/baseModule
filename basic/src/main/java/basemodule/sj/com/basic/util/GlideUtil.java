@@ -7,10 +7,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.sj.basemodule.R;
-import com.sj.basemodule.weight.transform.GlideRoundTransform;
 
 import java.io.File;
+
+import basemodule.sj.com.basic.R;
+import basemodule.sj.com.basic.weight.GlideRoundTransform;
 
 /**
  * content:Glide图片加载库

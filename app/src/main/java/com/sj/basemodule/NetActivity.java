@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.app.idea.utils.ToastUtil;
-import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.net.RetrofitHelper;
 import com.app.idea.net.common.BasicResponse;
 import com.app.idea.net.common.Constants;
@@ -19,8 +17,6 @@ import com.app.idea.net.common.DefaultObserver;
 import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
-import com.app.idea.utils.FileUtil;
-import com.app.idea.utils.LogUtil;
 import com.app.idea.utils.RxUtil;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
@@ -33,9 +29,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import io.reactivex.ObservableSource;
+import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.FileUtil;
+import basemodule.sj.com.basic.util.LogUtil;
+import basemodule.sj.com.basic.util.ToastUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -49,6 +47,7 @@ public class NetActivity extends BaseActivity {
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
     private static final String TAG = "NetActivity";
+
     @Override
     protected void reConnect() {
 

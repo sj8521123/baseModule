@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-import com.sj.basemodule.base.MyApplication;
 
 
 /**
@@ -12,22 +11,22 @@ import com.sj.basemodule.base.MyApplication;
  */
 public class ScreenUtil {
     public static int dip2px(float dpValue) {
-        final float scale = MyApplication.mAppContext.getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
     public static int px2dip(float pxValue) {
-        final float scale = MyApplication.mAppContext.getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
     public static int px2sp(float pxValue) {
-        final float scale = MyApplication.mAppContext.getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
     public static int sp2px(float spValue) {
-        final float scale = MyApplication.mAppContext.getResources().getDisplayMetrics().density;
+        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
         return (int) (spValue * scale + 0.5f);
     }
 

@@ -2,6 +2,8 @@ package com.sj.basemodule.weight;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
+import basemodule.sj.com.basic.util.ScreenUtil;
+
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
@@ -9,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.sj.basemodule.util.ScreenUtil;
 
 
 public class CustomCellView extends LinearLayout {

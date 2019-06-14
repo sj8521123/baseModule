@@ -8,11 +8,12 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.app.idea.utils.LogUtil;
-import com.app.idea.utils.ToastUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import java.io.File;
+
+import basemodule.sj.com.basic.util.LogUtil;
+import basemodule.sj.com.basic.util.ToastUtil;
 
 /**
  * Created by 12457 on 2017/8/29.

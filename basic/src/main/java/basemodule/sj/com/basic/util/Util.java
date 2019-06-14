@@ -1,6 +1,7 @@
-package com.app.idea.utils;
+package basemodule.sj.com.basic.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 /**
  * <pre>
@@ -13,7 +14,7 @@ import android.content.Context;
 public class Util {
 
     private static Context context;
-
+    private static String currentUserPrefsName;
     private Util() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
@@ -26,6 +27,10 @@ public class Util {
     public static void init(Context context) {
         Util.context = context.getApplicationContext();
     }
+    public static void setCurrentUserPrefsName(String currentUserPrefsName) {
+        Util.currentUserPrefsName = currentUserPrefsName;
+    }
+
 
     /**
      * 获取ApplicationContext
@@ -34,6 +39,10 @@ public class Util {
      */
     public static Context getContext() {
         if (context != null) return context;
+        throw new NullPointerException("u should init first");
+    }
+    public static String getCurrentUserPrefsName() {
+        if (!TextUtils.isEmpty(currentUserPrefsName)) return currentUserPrefsName;
         throw new NullPointerException("u should init first");
     }
 

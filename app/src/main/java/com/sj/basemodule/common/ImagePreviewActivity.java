@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.base.BaseActivity;
 import com.sj.basemodule.weight.CommonDoubleButtonDialog;
 import com.sj.basemodule.weight.CustomViewPager;
 
 import java.util.ArrayList;
 
+import basemodule.sj.com.basic.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnPageChange;

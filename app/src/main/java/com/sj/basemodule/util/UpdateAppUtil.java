@@ -12,14 +12,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
 import androidx.core.content.FileProvider;
+import basemodule.sj.com.basic.util.LogUtil;
+import basemodule.sj.com.basic.util.ToastUtil;
+
 import android.widget.RemoteViews;
 
 
-import com.app.idea.utils.LogUtil;
-import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.R;
 import com.sj.basemodule.base.MyApplication;
-import com.sj.basemodule.util.file.STGFileUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

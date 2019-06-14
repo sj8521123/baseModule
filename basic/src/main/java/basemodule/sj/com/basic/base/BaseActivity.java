@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.google.common.eventbus.Subscribe;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.annotation.Nullable;
 import basemodule.sj.com.basic.R;
+import basemodule.sj.com.basic.common.NetWorkChangeEvent;
 import basemodule.sj.com.basic.util.NetWorkUtil;
 
 /**

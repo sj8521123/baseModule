@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.sj.basemodule.R;
 
+import basemodule.sj.com.basic.base.BasePageFragment;
+
 public class A_MineBaseInfoFragment extends BasePageFragment {
 
     public static A_MineBaseInfoFragment newInstance() {

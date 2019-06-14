@@ -1,11 +1,10 @@
 package com.app.idea.net.interceptor;
 
 
-import com.app.idea.utils.LogUtil;
-import com.app.idea.utils.NetWorkUtil;
-
 import java.io.IOException;
 
+import basemodule.sj.com.basic.util.LogUtil;
+import basemodule.sj.com.basic.util.NetWorkUtil;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;

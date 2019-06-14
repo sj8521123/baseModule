@@ -2,7 +2,6 @@ package com.app.idea.net.https;
 
 
 import com.app.idea.R;
-import com.app.idea.utils.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +13,8 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
+
+import basemodule.sj.com.basic.util.Util;
 
 
 public class SslContextFactory {

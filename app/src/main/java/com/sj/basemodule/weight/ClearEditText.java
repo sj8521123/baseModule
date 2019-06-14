@@ -11,7 +11,8 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.util.ScreenUtil;
+
+import basemodule.sj.com.basic.util.ScreenUtil;
 
 
 public class ClearEditText extends EditText implements
