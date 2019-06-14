@@ -1,4 +1,4 @@
-package com.sj.basemodule.model.reponse;
+package com.sj.basemodule.net.reponse;
 
 /**
  * Created by sj on 2017/9/30.

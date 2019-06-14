@@ -36,22 +36,35 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     @Override
     public void onError(Throwable e) {
         LogUtil.e("Retrofit", e.getMessage());
-        if (e instanceof HttpException) {     //   HTTP错误
+        //   HTTP错误（外部条件非正常）
+        if (e instanceof HttpException) {
             onException(ExceptionReason.BAD_NETWORK);
-        } else if (e instanceof ConnectException
-                || e instanceof UnknownHostException) {   //   连接错误
+        }
+        //   连接错误（外部条件非正常）
+        else if (e instanceof ConnectException
+                || e instanceof UnknownHostException) {
             onException(ExceptionReason.CONNECT_ERROR);
-        } else if (e instanceof InterruptedIOException) {   //  连接超时
+        }
+        //  连接超时（外部条件非正常）
+        else if (e instanceof InterruptedIOException) {
             onException(ExceptionReason.CONNECT_TIMEOUT);
-        } else if (e instanceof JsonParseException
+        }
+        //  解析错误（外部条件非正常）
+        else if (e instanceof JsonParseException
                 || e instanceof JSONException
-                || e instanceof ParseException) {   //  解析错误
+                || e instanceof ParseException) {
             onException(ExceptionReason.PARSE_ERROR);
-        }else if(e instanceof ServerResponseException){
+        }
+        //服务产生的异常异常（外部条件正常）
+        else if (e instanceof ServerResponseException) {
             onFail(e.getMessage());
-        }else if (e instanceof NoDataExceptionException){
+        }
+        //没有数据错误（外部条件正常）
+        else if (e instanceof NoDataExceptionException) {
             onSuccess(null);
-        } else {
+        }
+        //未知错误（外部条件非正常）
+        else {
             onException(ExceptionReason.UNKNOWN_ERROR);
         }
         onFinish();
@@ -69,24 +82,25 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     abstract public void onSuccess(T response);
 
     /**
-     * 服务器返回数据，但响应码不为200
-     *
+     * 服务器返回数据，但响应码不为1000和200
      */
-    /**
-     * 服务器返回数据，但响应码不为1000
-     */
-    public void onFail(String message) {
+    private void onFail(String message) {
         ToastUtil.show(message);
     }
 
-    public void onFinish(){}
+    /**
+     * 结束情况的最后一个方法调用（正常结束、异常结束）
+     */
+    private void onFinish() {
+
+    }
 
     /**
      * 请求异常
      *
      * @param reason
      */
-    public void onException(ExceptionReason reason) {
+    private void onException(ExceptionReason reason) {
         switch (reason) {
             case CONNECT_ERROR:
                 ToastUtil.show(R.string.connect_error, Toast.LENGTH_SHORT);

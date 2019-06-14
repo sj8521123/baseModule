@@ -25,6 +25,9 @@ import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.FileUtil;
 import com.app.idea.utils.LogUtil;
 import com.app.idea.utils.RxUtil;
+import com.sj.basemodule.net.reponse.LoginResponse;
+import com.sj.basemodule.net.reponse.MeiZi;
+import com.sj.basemodule.net.request.LoginRequest;
 
 import java.io.BufferedInputStream;
 import java.io.File;

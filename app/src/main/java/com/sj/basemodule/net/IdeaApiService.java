@@ -1,9 +1,9 @@
 package com.sj.basemodule.net;
 
 
-import com.sj.basemodule.model.reponse.LoginResponse;
-import com.sj.basemodule.model.reponse.MeiZi;
-import com.sj.basemodule.model.request.LoginRequest;
+import com.sj.basemodule.net.reponse.LoginResponse;
+import com.sj.basemodule.net.reponse.MeiZi;
+import com.sj.basemodule.net.request.LoginRequest;
 import com.app.idea.net.common.BasicResponse;
 
 import java.util.List;

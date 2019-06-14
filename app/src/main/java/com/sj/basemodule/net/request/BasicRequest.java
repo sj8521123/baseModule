@@ -1,7 +1,5 @@
-package com.sj.basemodule.model.request;
+package com.sj.basemodule.net.request;
 
-
-import com.app.idea.utils.Util;
 
 /**
  * Created by sj on 2017/10/25.

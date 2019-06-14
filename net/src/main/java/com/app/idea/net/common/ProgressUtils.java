@@ -14,7 +14,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
-
+/**
+ * 请求时的加载进度框
+ * 请求时显示
+ * 终止时停止
+ */
 public class ProgressUtils {
     public static <T> ObservableTransformer<T, T> applyProgressBar(
             @NonNull final Activity activity, String msg) {

@@ -1,4 +1,4 @@
-package com.sj.basemodule.model.request;
+package com.sj.basemodule.net.request;
 
 import android.app.Activity;
 import android.content.Context;
