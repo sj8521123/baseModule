@@ -1,7 +1,7 @@
 package com.app.idea.net.common;
 
 /**
- *
+ * 统一的基础类
  */
 public class BasicResponse<T> {
 

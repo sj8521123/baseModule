@@ -1,4 +1,4 @@
-package com.sj.basemodule.model.reponse;
+package com.sj.basemodule.net.reponse;
 
 
 import com.app.idea.net.common.BasicResponse;

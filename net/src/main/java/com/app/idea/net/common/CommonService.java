@@ -1,7 +1,6 @@
 package com.app.idea.net.common;
 
 
-
 import com.app.idea.net.download.DwonloadRequest;
 
 import java.util.Map;
@@ -17,12 +16,13 @@ import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 /**
- * Created by dell on 2017/4/1.
+ * 下载文件的service
  */
 
 public interface CommonService {
     @Streaming
-    @GET//("download.do")
+    @GET
+        //("download.do")
     Observable<ResponseBody> download(@Url String url);//直接使用网址下载
 
     @POST("file/download")

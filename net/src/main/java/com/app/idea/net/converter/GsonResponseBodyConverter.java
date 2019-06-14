@@ -31,6 +31,12 @@ import retrofit2.Converter;
 import static com.app.idea.net.common.ErrorCode.REMOTE_LOGIN;
 import static com.app.idea.net.common.ErrorCode.SUCCESS;
 
+/**
+ * Response响应报文的统一处理
+ * DefaultObserver中的 onError 的方法中进行处理
+ *
+ * @param <T>
+ */
 final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Object> {
 
     private final TypeAdapter<T> adapter;
@@ -42,6 +48,9 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
     @Override
     public Object convert(ResponseBody value) throws IOException {
         try {
+
+            // 特定 API 的错误，在相应的 DefaultObserver 的 onError 的方法中进行处理
+
             BasicResponse response = (BasicResponse) adapter.fromJson(value.charStream());
             if (response.getCode() == ErrorCode.SUCCESS) {
                 if (response.getResults() != null) {
@@ -55,7 +64,6 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
                 throw new ServerResponseException(response.getCode(), response.getMessage());
             }
             /*if (response.isError()) {
-                // 特定 API 的错误，在相应的 DefaultObserver 的 onError 的方法中进行处理
                 throw new ServerResponseException(response.getCode(), response.getMessage());
             } else if (!response.isError()) {
                 if (response.getResults() != null)
