@@ -20,8 +20,6 @@ import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sj.basemodule.R;
-import com.sj.basemodule.config.KeyAndValueAppPrefs;
-import com.sj.basemodule.config.SPUtils;
 import com.sj.basemodule.util.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhihu.matisse.ui.MatisseActivity;
@@ -34,6 +32,8 @@ import java.util.List;
 
 import basemodule.sj.com.basic.base.ActivityBean;
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
+import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.Util;
 import butterknife.ButterKnife;

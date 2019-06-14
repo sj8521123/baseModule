@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 def config = rootProject.ext.android
-
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
@@ -24,10 +26,60 @@ android {
         abortOnError false
         disable 'GoogleAppIndexingWarning'
     }
+
+    signingConfigs {
+        debug {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
+        release {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
+    }
+
     buildTypes {
         release {
+            //签名
+            signingConfig signingConfigs.release
+            //混淆
             minifyEnabled false
+            // 移除无用的resource文件
+            //shrinkResources true
+            shrinkResources false
+            //Zipalign优化
+            zipAlignEnabled true
+            //是否打开真机调试
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为KL_v1.0.0_20171205_baidu.apk
+                        def fileName = "APP_${releaseTime()}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        outputFileName = fileName
+                    }
+                }
+            }
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-debug"
+            debuggable true
+            // 不开启混淆
+            minifyEnabled false
+            // 不需要ZIP优化
+            zipAlignEnabled false
+            // 不需要资源压缩
+            shrinkResources false
+
+
         }
     }
     // 打包渠道List 如果需要一个手机安装多个app 则打开applicationId
@@ -61,20 +113,7 @@ android {
                     APP_CHANNEL_VALUE: "four"]
         }
     }
-    signingConfigs {
-        debug {
-            storeFile file(KEY_PATH)
-            storePassword KEY_PASS
-            keyAlias ALIAS_NAME
-            keyPassword ALIAS_PASS
-        }
-        release {
-            storeFile file(KEY_PATH)
-            storePassword KEY_PASS
-            keyAlias ALIAS_NAME
-            keyPassword ALIAS_PASS
-        }
-    }
+
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
