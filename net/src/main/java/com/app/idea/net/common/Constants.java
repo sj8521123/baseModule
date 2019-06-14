@@ -18,7 +18,11 @@ public interface Constants {
     String DOWNLOAD_URL = "http://www.oitsme.com/download/oitsme.apk";
 
     //输出日志的name
+<<<<<<< HEAD
     String LOG_NAME = "sj-APP";
+=======
+    String LOG_NAME = "sj APP";
+>>>>>>> 40c600863affe41f5a28670cf8ebfeb64424e8e1
 
     /// String API_SERVER_URL = HOST + PORT+"iocm/app/";
     //  String API_SERVER_URL = "https://www.12306.cn/mormhweb/";
