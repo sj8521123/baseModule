@@ -15,9 +15,6 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 
 /**
- * Created by wuaomall@gmail.com on 2019/5/5.
- * <p>
- * <p>
  * log 日志拦截器
  */
 public class LoggingInterceptor implements Interceptor {
