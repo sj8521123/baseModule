@@ -9,9 +9,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-/**
- * Created by zhpan on 2018/4/20.
- */
 
 public class LoggingInterceptor implements Interceptor {
     @Override

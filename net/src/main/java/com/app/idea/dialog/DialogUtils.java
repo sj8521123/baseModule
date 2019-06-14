@@ -5,11 +5,6 @@ import android.content.Context;
 import com.app.idea.R;
 
 
-/**
- * Created by zhpan on 2017/5/26.
- * Description:
- */
-
 public class DialogUtils {
     //  加载进度的dialog
     private CustomProgressDialog mProgressDialog;
@@ -21,13 +16,13 @@ public class DialogUtils {
        /* if (context == null || context.isFinishing()) {
             return;
         }*/
-        if(mProgressDialog==null){
-            mProgressDialog= new CustomProgressDialog.Builder(context)
+        if (mProgressDialog == null) {
+            mProgressDialog = new CustomProgressDialog.Builder(context)
                     .setTheme(R.style.ProgressDialogStyle)
                     .setMessage(msg)
                     .build();
         }
-        if(mProgressDialog!=null&&!mProgressDialog.isShowing()) {
+        if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
@@ -39,12 +34,12 @@ public class DialogUtils {
         /*if (activity == null || activity.isFinishing()) {
             return;
         }*/
-        if(mProgressDialog==null){
-            mProgressDialog= new CustomProgressDialog.Builder(context)
+        if (mProgressDialog == null) {
+            mProgressDialog = new CustomProgressDialog.Builder(context)
                     .setTheme(R.style.ProgressDialogStyle)
                     .build();
         }
-        if(mProgressDialog!=null&&!mProgressDialog.isShowing()) {
+        if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
@@ -53,7 +48,7 @@ public class DialogUtils {
      * 取消ProgressDialog
      */
     public void dismissProgress() {
-        if (mProgressDialog != null&&mProgressDialog.isShowing()) {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
     }

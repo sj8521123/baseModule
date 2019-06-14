@@ -7,9 +7,6 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
 
-/**
- * Created by zhpan on 2018/3/21.
- */
 
 public class SafeHostnameVerifier implements HostnameVerifier {
     @Override

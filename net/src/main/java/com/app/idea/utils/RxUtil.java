@@ -24,7 +24,8 @@ public class RxUtil {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
+                return observable
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .compose(ProgressUtils.<T>applyProgressBar(activity))
                         .compose(activity.<T>bindUntilEvent(ActivityEvent.DESTROY));
@@ -42,14 +43,14 @@ public class RxUtil {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
+                return observable
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .compose(ProgressUtils.<T>applyProgressBar(fragment.getActivity()))
                         .compose(fragment.<T>bindUntilEvent(FragmentEvent.DESTROY_VIEW));
             }
         };
     }
-
 
 
     /**
@@ -62,7 +63,8 @@ public class RxUtil {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {
-                return observable.subscribeOn(Schedulers.io())
+                return observable
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };

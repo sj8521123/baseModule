@@ -17,9 +17,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.http.Url;
 
-/**
- * Created by zhpan on 2018/3/21.
- */
 
 public class DownloadUtils {
     private static final String TAG = "DownloadUtils";

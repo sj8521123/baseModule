@@ -4,7 +4,7 @@ package com.sj.basemodule.model.reponse;
 import com.app.idea.net.common.BasicResponse;
 
 /**
- * Created by zhpan on 2017/10/25.
+ * Created by sj on 2017/10/25.
  * Description:
  */
 

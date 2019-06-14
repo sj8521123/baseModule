@@ -16,9 +16,6 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
 
-/**
- * Created by zhpan on 2018/1/25.
- */
 public class SslContextFactory {
     private static final String CLIENT_AGREEMENT = "TLS";//使用协议
     private static final String CLIENT_TRUST_MANAGER = "X.509";

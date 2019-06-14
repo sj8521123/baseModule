@@ -7,11 +7,6 @@ import java.security.SignatureException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- * Created by zhpan on 2017/10/20.
- * Description:
- */
-
 public class KeyTools {
     private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
     private static final String TAG = "KeyTools";

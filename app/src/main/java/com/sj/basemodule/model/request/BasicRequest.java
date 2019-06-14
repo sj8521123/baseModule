@@ -4,7 +4,7 @@ package com.sj.basemodule.model.request;
 import com.app.idea.utils.Util;
 
 /**
- * Created by zhpan on 2017/10/25.
+ * Created by sj on 2017/10/25.
  * Description:
  */
 

@@ -1,7 +1,7 @@
 package com.sj.basemodule.model.reponse;
 
 /**
- * Created by zhpan on 2017/9/30.
+ * Created by sj on 2017/9/30.
  */
 
 public class MeiZi {

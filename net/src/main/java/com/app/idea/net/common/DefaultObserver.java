@@ -21,10 +21,6 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 
-/**
- * Created by zhpan on 2017/4/18.
- */
-
 public abstract class DefaultObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {

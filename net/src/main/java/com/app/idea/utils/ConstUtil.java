@@ -2,7 +2,6 @@ package com.app.idea.utils;
 
 /**
  * <pre>
- *     author: zhpan
  *     time  : 2016/8/11
  *     desc  : 常量相关工具类
  * </pre>

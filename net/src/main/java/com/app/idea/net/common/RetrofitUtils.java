@@ -17,9 +17,6 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
-/**
- * Created by zhpan on 2018/3/21.
- */
 
 public class RetrofitUtils {
 

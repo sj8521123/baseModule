@@ -8,7 +8,7 @@ import com.app.idea.utils.KeyTools;
 
 
 /**
- * Created by zhpan on 2017/10/25.
+ * Created by sj on 2017/10/25.
  * Description:登录请求实体类
  */
 

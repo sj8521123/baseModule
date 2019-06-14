@@ -2,10 +2,6 @@
 package com.app.idea.net.exception;
 
 import com.app.idea.net.common.ErrorCode;
-
-/**
- * Created by zhpan on 2018/3/27.
- */
 public class RemoteLoginExpiredException extends RuntimeException {
     private int errorCode;
 

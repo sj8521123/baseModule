@@ -24,7 +24,6 @@ import java.util.List;
 
 /**
  * <pre>
- *     author: zhpan
  *     time  : 2016/8/11
  *     desc  : 文件相关工具类
  * </pre>

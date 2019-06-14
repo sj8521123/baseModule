@@ -7,9 +7,6 @@ import com.app.idea.utils.Util;
 
 import androidx.annotation.StringRes;
 
-/**
- * Created by zhpan on 2018/3/27.
- */
 public class ErrorCode {
     /**
      * request success

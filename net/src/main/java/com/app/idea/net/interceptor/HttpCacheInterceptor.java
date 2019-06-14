@@ -11,10 +11,6 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by zhpan on 2018/3/21.
- */
-
 public class HttpCacheInterceptor implements Interceptor{
     //  配置缓存的拦截器
         @Override

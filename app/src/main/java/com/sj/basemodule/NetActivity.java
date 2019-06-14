@@ -33,7 +33,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -103,22 +105,23 @@ public class NetActivity extends BaseActivity {
      * @param view
      */
     public void getData(View view) {
+        LoginRequest loginRequest = new LoginRequest(this);
+        loginRequest.setUserId("123456");
+        loginRequest.setPassword("123123");
         RetrofitHelper.getApiService()
                 .getMezi()
-                .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                .flatMap(new Function<List<MeiZi>, ObservableSource<LoginResponse>>() {
                     @Override
-                    public void onSuccess(List<MeiZi> response) {
-
+                    public ObservableSource<LoginResponse> apply(List<MeiZi> meiZis) throws Exception {
+                        return RetrofitHelper.getApiService()
+                                .login(loginRequest);
                     }
-                });
-        RetrofitHelper.getApiService()
-                .getMezi()
+                })
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                .subscribe(new DefaultObserver<LoginResponse>() {
                     @Override
-                    public void onSuccess(List<MeiZi> response) {
-                        ToastUtil.show("请求成功，妹子个数为" + response.size());
+                    public void onSuccess(LoginResponse response) {
+
                     }
                 });
     }
