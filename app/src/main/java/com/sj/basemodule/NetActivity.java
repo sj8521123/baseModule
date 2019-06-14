@@ -12,9 +12,6 @@ import android.widget.TextView;
 
 import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.model.reponse.LoginResponse;
-import com.sj.basemodule.model.reponse.MeiZi;
-import com.sj.basemodule.model.request.LoginRequest;
 import com.sj.basemodule.net.RetrofitHelper;
 import com.app.idea.net.common.BasicResponse;
 import com.app.idea.net.common.Constants;
@@ -51,7 +48,7 @@ public class NetActivity extends BaseActivity {
     ProgressBar progressBar;
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
-
+    private static final String TAG = "NetActivity";
     @Override
     protected void reConnect() {
 
@@ -111,21 +108,16 @@ public class NetActivity extends BaseActivity {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
+
         RetrofitHelper.getApiService()
                 .getMezi()
-                .flatMap(new Function<List<MeiZi>, ObservableSource<LoginResponse>>() {
-                    @Override
-                    public ObservableSource<LoginResponse> apply(List<MeiZi> meiZis) throws Exception {
-                        return RetrofitHelper.getApiService()
-                                .login(loginRequest);
-                    }
-                })
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<LoginResponse>() {
+                .subscribe(new DefaultObserver<List<MeiZi>>() {
                     @Override
-                    public void onSuccess(LoginResponse response) {
-
+                    public void onSuccess(List<MeiZi> meiZis) {
+                        Log.i(TAG, "onSuccess: " + meiZis.size());
                     }
+
                 });
     }
 

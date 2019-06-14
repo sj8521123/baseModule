@@ -1,7 +1,7 @@
 package com.app.idea.net.exception;
 
 /**
- * 服务器返回的异常
+ * 服务器返回的异常（外部条件正常）
  */
 public class NoDataExceptionException extends RuntimeException {
     public NoDataExceptionException() {

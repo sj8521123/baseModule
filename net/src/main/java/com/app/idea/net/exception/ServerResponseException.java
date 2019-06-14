@@ -3,7 +3,7 @@ package com.app.idea.net.exception;
 import com.app.idea.net.common.ErrorCode;
 
 /**
- * 服务器返回的异常
+ * 服务器内部的异常（外部条件正常）
  */
 public class ServerResponseException extends RuntimeException {
 
