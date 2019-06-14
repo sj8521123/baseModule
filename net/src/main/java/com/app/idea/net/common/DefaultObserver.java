@@ -17,11 +17,18 @@ import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 
+import basemodule.sj.com.basic.base.BaseActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 
 public abstract class DefaultObserver<T> implements Observer<T> {
+    private BaseActivity mActivity;
+
+    public DefaultObserver(BaseActivity activity) {
+        this.mActivity = activity;
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
 
@@ -33,6 +40,12 @@ public abstract class DefaultObserver<T> implements Observer<T> {
         onFinish();
     }
 
+    /**
+     * onError（）
+     * http异常以及服务内部异常均会触发
+     *
+     * @param e
+     */
     @Override
     public void onError(Throwable e) {
         LogUtil.e("Retrofit", e.getMessage());

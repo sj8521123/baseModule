@@ -1,8 +1,9 @@
-package com.sj.basemodule.base;
+package basemodule.sj.com.basic.base;
 
 import java.io.Serializable;
 
 import butterknife.Unbinder;
+
 
 /**
  * content:

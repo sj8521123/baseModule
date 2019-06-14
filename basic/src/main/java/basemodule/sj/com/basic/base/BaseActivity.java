@@ -1,9 +1,8 @@
-package com.sj.basemodule.base;
+package basemodule.sj.com.basic.base;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,16 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.app.idea.utils.NetWorkUtil;
-import com.sj.basemodule.R;
-import com.sj.basemodule.common.NetWorkChangeEvent;
+import com.google.common.eventbus.Subscribe;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import androidx.annotation.Nullable;
+import basemodule.sj.com.basic.R;
+import basemodule.sj.com.basic.util.NetWorkUtil;
 
 /**
  * content:规范Activity统一界面、逻辑处理

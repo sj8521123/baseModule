@@ -1,7 +1,5 @@
 package com.sj.basemodule.model;
 
-import com.sj.basemodule.base.BaseEvent;
-
 public class Student extends BaseEvent {
     String name;
     String age;

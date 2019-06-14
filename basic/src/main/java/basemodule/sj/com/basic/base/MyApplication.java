@@ -1,4 +1,4 @@
-package com.sj.basemodule.base;
+package basemodule.sj.com.basic.base;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -9,10 +9,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.idea.utils.ToastUtil;
+import com.app.idea.utils.Util;
 import com.bumptech.glide.Glide;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sj.basemodule.R;
@@ -32,7 +29,6 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.tmall.wireless.tangram.TangramBuilder;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 import com.zhihu.matisse.ui.MatisseActivity;
-import com.app.idea.utils.Util;
 
 import org.litepal.LitePalApplication;
 
@@ -40,8 +36,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import basemodule.sj.com.basic.base.ActivityBean;
-import basemodule.sj.com.basic.base.BaseActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

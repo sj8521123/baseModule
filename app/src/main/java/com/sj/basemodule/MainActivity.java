@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.app.idea.utils.ToastUtil;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.base.BaseEvent;
 import com.sj.basemodule.common.HomePagerAdapter;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;

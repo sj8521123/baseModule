@@ -90,8 +90,8 @@ dependencies {
     implementation files('libs/nineoldandroids-2.4.0.jar')
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.tencent.bugly:crashreport:3.0.0'
+
+   /* implementation 'com.tencent.bugly:crashreport:3.0.0'
     implementation 'com.tencent.bugly:nativecrashreport:3.6.0.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.bumptech.glide:glide:4.0.0-RC1'
@@ -107,19 +107,12 @@ dependencies {
     implementation 'com.zhihu.android:matisse:0.4.3'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
     implementation 'org.hprose:hprose-java:2.0.38'
-    implementation 'com.jakewharton:butterknife:10.1.0'
+
     implementation 'org.litepal.android:core:2.0.0'
     implementation 'com.hjq:toast:1.5'
     implementation 'com.fyales.android:library:1.0.2'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    implementation 'com.github.donkingliang:LabelsView:1.5.0'
-    implementation 'com.alibaba.android:tangram:3.3.6@aar'
-    implementation('com.alibaba.android:virtualview:1.4.6@aar') {
-        transitive = true
-    }
-    implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
-        transitive = true
-    }
+    implementation 'com.github.donkingliang:LabelsView:1.5.0'*/
     api 'com.just.agentweb:agentweb:4.0.2'
     implementation project(':net')
+    implementation project(':basic')
 }

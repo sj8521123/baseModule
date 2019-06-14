@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--正文文字 - 16px-->
+    <dimen name="dimens16sp">16sp</dimen>
+
+    <dimen name="dimensToolbarHeight45dp">45dp</dimen>
+    <!--dimensMagicIndicator49dp高度 - 45dp-->
+    <dimen name="dimensMagicIndicator49dp">49dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

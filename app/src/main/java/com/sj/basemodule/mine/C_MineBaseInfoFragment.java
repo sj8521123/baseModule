@@ -3,7 +3,6 @@ package com.sj.basemodule.mine;
 import android.os.Bundle;
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.base.BasePageFragment;
 
 public class C_MineBaseInfoFragment extends BasePageFragment {
 

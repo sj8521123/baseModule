@@ -1,4 +1,4 @@
-package com.sj.basemodule.base;
+package basemodule.sj.com.basic.base;
 
 /**
  * Event基类

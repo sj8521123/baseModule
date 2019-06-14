@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.MiddlewareWebClientBase;
 import com.sj.basemodule.base.BaseActivity;
-import com.sj.basemodule.base.BaseEvent;
 import com.sj.basemodule.model.Student;
 
 import org.greenrobot.eventbus.Subscribe;
