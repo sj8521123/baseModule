@@ -8,7 +8,7 @@ import androidx.annotation.StringRes;
 import basemodule.sj.com.basic.util.Util;
 
 /**
- * 内部错误的code码集合
+ * 服务内部错误的code码集合
  */
 public class ErrorCode {
     /**

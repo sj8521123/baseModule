@@ -40,10 +40,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     }
 
     /**
-     * onError（）
      * http异常以及服务内部异常均会触发
-     *
-     * @param e
      */
     @Override
     public void onError(Throwable e) {

@@ -9,7 +9,7 @@ public class KeyAndValueUserPrefs {
     //存放userPreference的key
     public class Key {
         //用户token
-        public static final String ACCESS_TOKEN = "accessToken";
+        public static final String ACCESS_TOKEN = "token";
     }
 
     //存放userPreference的value

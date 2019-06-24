@@ -20,6 +20,7 @@ import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
 import com.sj.basemodule.net.RetrofitHelper;
+import com.sj.basemodule.net.RetrofitHelperWithToken;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
 import com.sj.basemodule.net.request.LoginRequest;
@@ -149,7 +150,7 @@ public class NetActivity extends BaseActivity {
                 .addFormDataPart("password", "123123")
                 .addFormDataPart("uploadFile", file.getName(), fileBody);
         List<MultipartBody.Part> parts = builder.build().parts();
-        RetrofitHelper.getApiService()
+        RetrofitHelperWithToken.getApiService()
                 .uploadFiles(parts)
                 .subscribeOn(Schedulers.io())
                 .compose(this.bindToLifecycle())
