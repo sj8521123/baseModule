@@ -7,8 +7,8 @@ import com.app.idea.net.common.CommonService;
 import com.app.idea.net.common.Constants;
 import com.app.idea.net.common.DefaultObserver;
 import com.app.idea.net.common.RetrofitService;
-import com.app.idea.net.exception.TokenInvalidException;
-import com.app.idea.net.exception.TokenNotExistException;
+import com.app.idea.net.exception.TokenExpiredException;
+import com.app.idea.net.exception.RefreshTokenExpiredException;
 import com.app.idea.net.module.BaseRequest;
 
 import java.lang.annotation.Annotation;
@@ -78,7 +78,7 @@ public class ProxyHandler implements InvocationHandler {
 
                             @Override
                             public void onError(Throwable e) {
-                                super.onError(e);
+                                //super.onError(e);
                                 mRefreshTokenError = e;
                             }
                         });
@@ -165,11 +165,11 @@ public class ProxyHandler implements InvocationHandler {
                             @Override
                             public ObservableSource<?> apply(Throwable throwable) throws Exception {
                                 // token过期
-                                if (throwable instanceof TokenInvalidException) {
+                                if (throwable instanceof TokenExpiredException) {
                                     return refreshTokenWhenTokenInvalid();
                                 }
                                 // RefreshToken过期，执行退出登录的操作。
-                                else if (throwable instanceof TokenNotExistException) {
+                                else if (throwable instanceof RefreshTokenExpiredException) {
                                     // Token 不存在，执行退出登录的操作。（为了防止多个请求，都出现 Token 不存在的问题，
                                     // 这里需要取消当前所有的网络请求）
                                     mGlobalManager.logout();

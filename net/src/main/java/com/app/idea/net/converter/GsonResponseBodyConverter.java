@@ -16,6 +16,8 @@
 
 package com.app.idea.net.converter;
 
+import com.app.idea.net.exception.RefreshTokenExpiredException;
+import com.app.idea.net.exception.TokenExpiredException;
 import com.google.gson.TypeAdapter;
 import com.app.idea.net.common.BasicResponse;
 import com.app.idea.net.common.ErrorCode;
@@ -28,8 +30,6 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import static com.app.idea.net.common.ErrorCode.REMOTE_LOGIN;
-import static com.app.idea.net.common.ErrorCode.SUCCESS;
 
 /**
  * Response响应报文的统一处理
@@ -48,24 +48,26 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
     @Override
     public Object convert(ResponseBody value) throws IOException {
         try {
-
-            // 特定 API 的错误，在相应的 DefaultObserver 的 onError 的方法中进行处理
-
-            //服务器内部错误
-
             BasicResponse response = (BasicResponse) adapter.fromJson(value.charStream());
-           /* if (response.getCode() == ErrorCode.SUCCESS) {
+            if (response.getCode() == ErrorCode.SUCCESS) {
                 if (response.getResults() != null) {
                     return response.getResults();
                 } else {
                     throw new NoDataExceptionException();
                 }
-            } else if (response.getCode() == REMOTE_LOGIN) {
+            }
+            // 特定 API 的错误，在相应的 DefaultObserver 的 onError 的方法中进行处理
+            //服务器内部错误
+            else if (response.getCode() == ErrorCode.REMOTE_LOGIN) {
                 throw new RemoteLoginExpiredException(response.getCode(), response.getMessage());
-            } else if (response.getCode() != SUCCESS) {
+            } else if (response.getCode() == 0) {
+                throw new TokenExpiredException(response.getCode(), response.getMessage());
+            } else if (response.getCode() == 0) {
+                throw new RefreshTokenExpiredException(response.getCode(), response.getMessage());
+            } else if (response.getCode() != ErrorCode.SUCCESS) {
                 throw new ServerResponseException(response.getCode(), response.getMessage());
-            }*/
-
+            }
+/*
             if (response.isError()) {
                 throw new ServerResponseException(response.getCode(), response.getMessage());
             } else if (!response.isError()) {
@@ -73,7 +75,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
                     return response.getResults();
                 else
                     throw new NoDataExceptionException();
-            }
+            }*/
         } finally {
             value.close();
         }

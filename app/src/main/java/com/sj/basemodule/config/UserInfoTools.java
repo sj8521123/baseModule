@@ -55,7 +55,7 @@ public class UserInfoTools {
      * Logout and clear data，post an Event to update UI
      */
     public static void logout() {
-        SPUtils.getInstance(MyApplication.currentUserPrefsName).remove(sUserInfoBean.getClass().getSimpleName());
+        //SPUtils.getInstance(MyApplication.currentUserPrefsName).remove(sUserInfoBean.getClass().getSimpleName());
         sUserInfoBean = null;
         init();
     }

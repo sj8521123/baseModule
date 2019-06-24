@@ -47,8 +47,6 @@ import okhttp3.ResponseBody;
 
 
 public class NetActivity extends BaseActivity {
-    @BindView(R.id.edit)
-    EditText edit;
     private Button btn;
     ProgressBar progressBar;
     TextView mTvPercent;
@@ -77,16 +75,6 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
-        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Log.i(TAG, "onFocusChange: true");
-                } else {
-                    Log.i(TAG, "onFocusChange: false");
-                }
-            }
-        });
     }
 
     private void initView() {
@@ -125,7 +113,7 @@ public class NetActivity extends BaseActivity {
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
 
-        RetrofitHelper.getApiService()
+        RetrofitHelperWithToken.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
                 .subscribe(new DefaultObserver<List<MeiZi>>() {

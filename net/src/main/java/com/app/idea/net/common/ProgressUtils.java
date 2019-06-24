@@ -34,7 +34,11 @@ public class ProgressUtils {
                 return upstream.doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) {
-                        dialogUtils.showProgress(activityWeakReference.get());
+                        Activity context;
+                        if ((context = activityWeakReference.get()) != null
+                                && !context.isFinishing()) {
+                            dialogUtils.showProgress(activityWeakReference.get());
+                        }
                     }
                 })
                         //结束时

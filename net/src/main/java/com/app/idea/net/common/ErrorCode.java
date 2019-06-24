@@ -44,6 +44,15 @@ public class ErrorCode {
      * 异地登录
      */
     public static final int REMOTE_LOGIN = 91011;
+    /**
+     * token失效
+     */
+    public static final int TOKEN_EXPIRED = 1011;
+    /**
+     * refreshToken失效
+     */
+    public static final int REFRESH_TOKEN_EXPIRED = 1012;
+
 
     /**
      * get error message with error code
@@ -77,6 +86,12 @@ public class ErrorCode {
                 break;
             case REMOTE_LOGIN:
                 message = getString(R.string.remote_login);
+                break;
+            case TOKEN_EXPIRED:
+                message = getString(R.string.token_expired);
+                break;
+            case REFRESH_TOKEN_EXPIRED:
+                message = getString(R.string.refresh_token_expired);
                 break;
             default:
                 message = getString(R.string.request_error) + errorCode;
