@@ -3,7 +3,7 @@ package com.sj.basemodule;
 import android.content.Intent;
 import android.graphics.Color;
 
-import androidx.viewpager.widget.ViewPager;
+
 import android.util.Log;
 import android.view.View;
 
@@ -21,12 +21,22 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
 import basemodule.sj.com.basic.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Function;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.viewPager)

@@ -2,7 +2,9 @@ package com.sj.basemodule;
 
 import android.content.Intent;
 import android.os.Build;
+
 import androidx.annotation.RequiresApi;
+
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +12,22 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
+import com.app.idea.net.common.DefaultObserver;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.MiddlewareWebClientBase;
 
+import java.util.concurrent.TimeUnit;
+
 import basemodule.sj.com.basic.base.BaseActivity;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Function;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
@@ -34,7 +47,75 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                emitter.onComplete();
+            }
+        }).doOnComplete(new Action() {
+            @Override
+            public void run() throws Exception {
+                Log.d(TAG, "触发重订阅");
+            }
+        }).retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+            private int n = 0;
 
+            @Override
+            public ObservableSource<?> apply(Observable<Throwable> throwableObservable) throws Exception {
+                return throwableObservable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(Throwable o) throws Exception {
+                        if (n != 3) {
+                            n++;
+                            return Observable.timer(3, TimeUnit.SECONDS);
+                        } else {
+                            return Observable.empty();
+                        }
+                    }
+                });
+
+            }
+        })
+
+                .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
+                    private int n = 0;
+
+                    @Override
+                    public ObservableSource<?> apply(Observable<Object> objectObservable) throws Exception {
+
+                        return objectObservable.flatMap(new Function<Object, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Object o) throws Exception {
+                                if (n != 3) {
+                                    n++;
+                                    return Observable.timer(3, TimeUnit.SECONDS);
+                                } else {
+                                    return Observable.empty();
+                                }
+                            }
+                        });
+                    }
+                }).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "onNext: " + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: " + e);
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete: ");
+            }
+        });
     }
 
     @Override

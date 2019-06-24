@@ -2,15 +2,16 @@ package com.sj.basemodule;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sj.basemodule.net.RetrofitHelper;
 import com.app.idea.net.common.BasicResponse;
 import com.app.idea.net.common.Constants;
 import com.app.idea.net.common.DefaultObserver;
@@ -18,6 +19,7 @@ import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
+import com.sj.basemodule.net.RetrofitHelper;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
 import com.sj.basemodule.net.request.LoginRequest;
@@ -33,6 +35,8 @@ import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.FileUtil;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
@@ -42,6 +46,8 @@ import okhttp3.ResponseBody;
 
 
 public class NetActivity extends BaseActivity {
+    @BindView(R.id.edit)
+    EditText edit;
     private Button btn;
     ProgressBar progressBar;
     TextView mTvPercent;
@@ -70,7 +76,16 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
-
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Log.i(TAG, "onFocusChange: true");
+                } else {
+                    Log.i(TAG, "onFocusChange: false");
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -87,6 +102,7 @@ public class NetActivity extends BaseActivity {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
+
         RetrofitHelper.getApiService()
                 .login(loginRequest)
                 .compose(RxUtil.rxSchedulerHelper(this))
@@ -263,4 +279,10 @@ public class NetActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

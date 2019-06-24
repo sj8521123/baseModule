@@ -2,6 +2,7 @@ package com.app.idea.net.common;
 
 
 import com.app.idea.net.download.DwonloadRequest;
+import com.app.idea.net.token.RefreshTokenResponse;
 
 import java.util.Map;
 
@@ -31,4 +32,7 @@ public interface CommonService {
     @FormUrlEncoded
     @POST("file/download")
     Observable<ResponseBody> downloadFile(@FieldMap Map<String, Object> map);
+
+    @GET("refresh_token")
+    Observable<RefreshTokenResponse> refreshToken();
 }

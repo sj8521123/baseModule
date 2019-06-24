@@ -35,7 +35,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="首页"/>
+            android:label="首页">
+
+        </activity>
         <receiver android:name=".common.NetworkConnectChangedReceiver">
             <intent-filter>
                 <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
@@ -44,15 +46,16 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".OtherActivity" >
-        </activity>
-
-        <activity android:name=".NetActivity">
+        <activity android:name=".OtherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".NetActivity">
+
         </activity>
     </application>
 

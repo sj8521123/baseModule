@@ -98,9 +98,12 @@ public class MyApplication extends LitePalApplication {
         super.onCreate();
         mAppContext = this;
         packageName = this.getPackageName();
-        currentUserPrefsName = SPUtils.getInstance().getString(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME);
+
         Util.init(this);
+        currentUserPrefsName = (String) SPUtils.getInstance().get(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME, "");
         Util.setCurrentUserPrefsName(currentUserPrefsName);
+
+
         //本地配置
         initLocalConfiguration();
         //第三方配置

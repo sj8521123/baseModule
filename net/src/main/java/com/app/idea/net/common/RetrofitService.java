@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
 /**
  * Retrofit的初始化
  */
-public class RetrofitUtils {
+public class RetrofitService {
 
     public static OkHttpClient.Builder getOkHttpClientBuilder() {
         File cacheFile = new File(Util.getContext().getCacheDir(), "cache");

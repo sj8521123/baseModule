@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +22,8 @@ import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.SharedPreferencesCompat;
+import basemodule.sj.com.basic.util.JsonHelper;
 import basemodule.sj.com.basic.util.Util;
 
 
@@ -78,213 +85,161 @@ public class SPUtils {
     }
 
     /**
-     * SP中写入String
+     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
-     * @param key   键
-     * @param value 值
+     * @param key
+     * @param object
      */
-    public void put(@NonNull String key, @NonNull String value) {
-        sp.edit().putString(key, value).apply();
+    public void put(String key, Object object) {
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (object instanceof String) {
+            editor.putString(key, (String) object);
+        } else if (object instanceof Integer) {
+            editor.putInt(key, (Integer) object);
+        } else if (object instanceof Boolean) {
+            editor.putBoolean(key, (Boolean) object);
+        } else if (object instanceof Float) {
+            editor.putFloat(key, (Float) object);
+        } else if (object instanceof Long) {
+            editor.putLong(key, (Long) object);
+        } else {
+            editor.putString(key, object.toString());
+        }
+
+        SharedPreferencesCompat.apply(editor);
     }
 
     /**
-     * SP中读取String
+     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
      *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code ""}
+     * @param key
+     * @param defaultObject
+     * @return
      */
-    public String getString(@NonNull String key) {
-        return getString(key, "");
+    public Object get(String key, Object defaultObject) {
+        if (defaultObject instanceof String) {
+            return sp.getString(key, (String) defaultObject);
+        } else if (defaultObject instanceof Integer) {
+            return sp.getInt(key, (Integer) defaultObject);
+        } else if (defaultObject instanceof Boolean) {
+            return sp.getBoolean(key, (Boolean) defaultObject);
+        } else if (defaultObject instanceof Float) {
+            return sp.getFloat(key, (Float) defaultObject);
+        } else if (defaultObject instanceof Long) {
+            return sp.getLong(key, (Long) defaultObject);
+        }
+
+        return null;
     }
 
     /**
-     * SP中读取String
+     * 保存对象， key为对象SimpleName 值为对象
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回 默认值{@code defaultValue}
+     * @param bean
+     * @param <T>
      */
-    public String getString(@NonNull String key, @NonNull String defaultValue) {
-        return sp.getString(key, defaultValue);
+    public <T> void saveObject(T bean) {
+        if (bean != null) {
+            GsonBuilder gsonb = new GsonBuilder();
+            Gson gson = gsonb.create();
+            String json = gson.toJson(bean);
+            String className = bean.getClass().getSimpleName();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString(className, json);
+            editor.apply();
+        }
     }
 
     /**
-     * SP中写入int
+     * 移除对象
      *
-     * @param key   键
-     * @param value 值
+     * @param bean
+     * @param <T>
      */
-    public void put(@NonNull String key, int value) {
-        sp.edit().putInt(key, value).apply();
+    public <T> void removeObject(Class bean) {
+        String className = bean.getSimpleName();
+        remove(className);
+    }
+
+    public <T> T getObject(Class<T> classOfT) {
+        T user = null;
+        if (classOfT != null) {
+            String json = getObjectJson(classOfT);
+            user = JsonHelper.parserJson2Object(json, classOfT);
+        }
+
+        return user;
+    }
+
+    public <T> String getObjectJson(Class<T> classOfT) {
+        String json = "";
+        if (classOfT != null) {
+            String name = classOfT.getSimpleName();
+            json = sp.getString(name, "");
+        }
+        return json;
     }
 
     /**
-     * SP中读取int
+     * 存入list集合
      *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
+     * @param key
+     * @param datas
      */
-    public int getInt(@NonNull String key) {
-        return getInt(key, -1);
+    public void putList(String key, List<Map<String, String>> datas) {
+        JSONArray mJsonArray = new JSONArray();
+        for (int i = 0; i < datas.size(); i++) {
+            Map<String, String> itemMap = datas.get(i);
+            Iterator<Map.Entry<String, String>> iterator = itemMap.entrySet().iterator();
+
+            JSONObject object = new JSONObject();
+
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> entry = iterator.next();
+                try {
+                    object.put(entry.getKey(), entry.getValue());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            mJsonArray.put(object);
+        }
+        sp.edit().putString(key, mJsonArray.toString()).apply();
     }
 
     /**
-     * SP中读取int
+     * 取出list集合
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
+     * @param key
+     * @return
      */
-    public int getInt(@NonNull String key, int defaultValue) {
-        return sp.getInt(key, defaultValue);
+    public List<Map<String, String>> getList(String key) {
+        List<Map<String, String>> datas = new ArrayList<>();
+        String result = sp.getString(key, "");
+        try {
+            if (!TextUtils.isEmpty(result)) {
+                JSONArray array = new JSONArray(result);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject itemObject = array.getJSONObject(i);
+                    Map<String, String> itemMap = new HashMap<>();
+                    JSONArray names = itemObject.names();
+                    if (names != null) {
+                        for (int j = 0; j < names.length(); j++) {
+                            String name = names.getString(j);
+                            String value = itemObject.getString(name);
+                            itemMap.put(name, value);
+                        }
+                    }
+                    datas.add(itemMap);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return datas;
     }
 
-    /**
-     * SP中写入long
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(@NonNull String key, long value) {
-        sp.edit().putLong(key, value).apply();
-    }
-
-    /**
-     * SP中读取long
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
-     */
-    public long getLong(@NonNull String key) {
-        return getLong(key, -1L);
-    }
-
-    /**
-     * SP中读取long
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public long getLong(@NonNull String key, long defaultValue) {
-        return sp.getLong(key, defaultValue);
-    }
-
-    /**
-     * SP中写入float
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(@NonNull String key, float value) {
-        sp.edit().putFloat(key, value).apply();
-    }
-
-    /**
-     * SP中读取float
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
-     */
-    public float getFloat(@NonNull String key) {
-        return getFloat(key, -1f);
-    }
-
-    /**
-     * SP中读取float
-     *
-     * @param key          键public void saveInfo(Context context, String key, List<Map<String, String>> datas) {
-     *                     JSONArray mJsonArray = new JSONArray();
-     *                     for (int i = 0; i < datas.size(); i++) {
-     *                     Map<String, String> itemMap = datas.get(i);
-     *                     Iterator<Entry<String, String>> iterator = itemMap.entrySet().iterator();
-     *                     <p>
-     *                     JSONObject object = new JSONObject();
-     *                     <p>
-     *                     while (iterator.hasNext()) {
-     *                     Entry<String, String> entry = iterator.next();
-     *                     try {
-     *                     object.put(entry.getKey(), entry.getValue());
-     *                     } catch (JSONException e) {
-     *                     e.printStackTrace();
-     *                     }
-     *                     }
-     *                     mJsonArray.put(object);
-     *                     }
-     *                     <p>
-     *                     SharedPreferences sp = context.getSharedPreferences("finals", Context.MODE_PRIVATE);
-     *                     Editor editor = sp.edit();
-     *                     editor.putString(key, mJsonArray.toString());
-     *                     editor.commit();
-     *                     }
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public float getFloat(@NonNull String key, float defaultValue) {
-        return sp.getFloat(key, defaultValue);
-    }
-
-    /**
-     * SP中写入boolean
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(@NonNull String key, boolean value) {
-        sp.edit().putBoolean(key, value).apply();
-    }
-
-    /**
-     * SP中读取boolean
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code false}
-     */
-    public boolean getBoolean(@NonNull String key) {
-        return getBoolean(key, false);
-    }
-
-    /**
-     * SP中读取boolean
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public boolean getBoolean(@NonNull String key, boolean defaultValue) {
-        return sp.getBoolean(key, defaultValue);
-    }
-
-    /**
-     * SP中写入String集合
-     *
-     * @param key    键
-     * @param values 值
-     */
-    public void put(@NonNull String key, @NonNull Set<String> values) {
-        sp.edit().putStringSet(key, values).apply();
-    }
-
-    /**
-     * SP中读取StringSet
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code Collections.<String>emptySet()}
-     */
-    public Set<String> getStringSet(@NonNull String key) {
-        return getStringSet(key, Collections.<String>emptySet());
-    }
-
-    /**
-     * SP中读取StringSet
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public Set<String> getStringSet(@NonNull String key, @NonNull Set<String> defaultValue) {
-        return sp.getStringSet(key, defaultValue);
-    }
 
     /**
      * SP中获取所有键值对
@@ -310,61 +265,63 @@ public class SPUtils {
      *
      * @param key 键
      */
-    public void remove(@NonNull String key) {
-        sp.edit().remove(key).apply();
+    public void remove(String key) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        SharedPreferencesCompat.apply(editor);
     }
+
 
     /**
      * SP中清除所有数据
      */
     public void clear() {
-        sp.edit().clear().apply();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear().apply();
+        SharedPreferencesCompat.apply(editor);
     }
 
-    public void putList(String key, List<Map<String, String>> datas) {
-        JSONArray mJsonArray = new JSONArray();
-        for (int i = 0; i < datas.size(); i++) {
-            Map<String, String> itemMap = datas.get(i);
-            Iterator<Map.Entry<String, String>> iterator = itemMap.entrySet().iterator();
+    /**
+     * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
+     *
+     * @author zhy
+     */
+    private static class SharedPreferencesCompat {
+        private static final Method sApplyMethod = findApplyMethod();
 
-            JSONObject object = new JSONObject();
+        /**
+         * 反射查找apply的方法
+         *
+         * @return
+         */
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        private static Method findApplyMethod() {
+            try {
+                Class clz = SharedPreferences.Editor.class;
+                return clz.getMethod("apply");
+            } catch (NoSuchMethodException e) {
 
-            while (iterator.hasNext()) {
-                Map.Entry<String, String> entry = iterator.next();
-                try {
-                    object.put(entry.getKey(), entry.getValue());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
-            mJsonArray.put(object);
-        }
-        sp.edit().putString(key, mJsonArray.toString()).apply();
-    }
 
-    public List<Map<String, String>> getList(String key) {
-        List<Map<String, String>> datas = new ArrayList<>();
-        String result = sp.getString(key, "");
-        try {
-            if (!TextUtils.isEmpty(result)) {
-                JSONArray array = new JSONArray(result);
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject itemObject = array.getJSONObject(i);
-                    Map<String, String> itemMap = new HashMap<>();
-                    JSONArray names = itemObject.names();
-                    if (names != null) {
-                        for (int j = 0; j < names.length(); j++) {
-                            String name = names.getString(j);
-                            String value = itemObject.getString(name);
-                            itemMap.put(name, value);
-                        }
-                    }
-                    datas.add(itemMap);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return null;
         }
-        return datas;
+
+        /**
+         * 如果找到则使用apply执行，否则使用commit
+         *
+         * @param editor
+         */
+        public static void apply(SharedPreferences.Editor editor) {
+            try {
+                if (sApplyMethod != null) {
+                    sApplyMethod.invoke(editor);
+                    return;
+                }
+            } catch (IllegalArgumentException e) {
+            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException e) {
+            }
+            editor.commit();
+        }
     }
 }

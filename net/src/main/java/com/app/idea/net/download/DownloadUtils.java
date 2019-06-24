@@ -2,7 +2,7 @@ package com.app.idea.net.download;
 
 
 import com.app.idea.net.common.CommonService;
-import com.app.idea.net.common.RetrofitUtils;
+import com.app.idea.net.common.RetrofitService;
 import com.app.idea.net.common.Constants;
 
 import java.util.Map;
@@ -72,9 +72,9 @@ public class DownloadUtils {
     }
 
     private CommonService getApiService() {
-        OkHttpClient.Builder httpClientBuilder = RetrofitUtils.getOkHttpClientBuilder();
+        OkHttpClient.Builder httpClientBuilder = RetrofitService.getOkHttpClientBuilder();
         ProgressHelper.addProgress(httpClientBuilder);
-        CommonService ideaApiService = RetrofitUtils.getRetrofitBuilder(Constants.API_SERVER_URL)
+        CommonService ideaApiService = RetrofitService.getRetrofitBuilder(Constants.API_SERVER_URL)
                 .client(httpClientBuilder.build())
                 .build()
                 .create(CommonService.class);
