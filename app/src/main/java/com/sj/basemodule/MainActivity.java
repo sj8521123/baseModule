@@ -49,6 +49,8 @@ public class MainActivity extends BaseActivity {
     private List<String> mTitleDataList = Arrays.asList(TITLES);
     private HomePagerAdapter mPagerAdapter;
     private String str = "local";
+    private String he = "hello";
+
     @Override
     protected void reConnect() {
         ToastUtil.show("reConnect");
