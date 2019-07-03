@@ -39,7 +39,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 
 public class MainActivity extends BaseActivity {
-    int a = 10;
+    int c = 10;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     @BindView(R.id.magicIndicator)
