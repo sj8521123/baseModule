@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sj.basemodule"
-    android:versionCode="1"
-    android:versionName="1.0.0">
+    package="com.sj.basemodule">
+    <!--8.0手机安装apk权限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -38,23 +38,17 @@
             android:label="首页">
 
         </activity>
-        <receiver android:name=".common.NetworkConnectChangedReceiver">
-            <intent-filter>
-                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name=".OtherActivity">
-        </activity>
-
-        <activity android:name=".NetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".NetActivity">
+
         </activity>
     </application>
 

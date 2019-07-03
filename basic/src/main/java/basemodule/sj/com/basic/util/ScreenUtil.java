@@ -3,31 +3,43 @@ package basemodule.sj.com.basic.util;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
-
+import android.util.TypedValue;
 
 
 /**
  * 屏幕工具
  */
 public class ScreenUtil {
-    public static int dip2px(float dpValue) {
-        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+    public static int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Util.getContext().getResources().getDisplayMetrics());
     }
 
-    public static int px2dip(float pxValue) {
-        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+    public static int px2dp(float pxValue) {
+        return (int) (pxValue / Util.getContext().getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int px2sp(float pxValue) {
-        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+        return (int) (pxValue / Util.getContext().getResources().getDisplayMetrics().scaledDensity + 0.5f);
+    }
+
+    public static float px2sp(int size) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, size, Util.getContext().getResources().getDisplayMetrics());
+    }
+
+    public static int px2dip(float pxValue) {
+        return (int) (pxValue / Util.getContext().getResources().getDisplayMetrics().density + 0.5f);
+    }
+
+    public static int dip2px(float dipValue) {
+        return (int) (dipValue * Util.getContext().getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int sp2px(float spValue) {
-        final float scale = Util.getContext().getResources().getDisplayMetrics().density;
-        return (int) (spValue * scale + 0.5f);
+        return (int) (spValue * Util.getContext().getResources().getDisplayMetrics().scaledDensity + 0.5f);
+    }
+
+    public static float sp2px(int size) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, size, Util.getContext().getResources().getDisplayMetrics());
     }
 
     /**

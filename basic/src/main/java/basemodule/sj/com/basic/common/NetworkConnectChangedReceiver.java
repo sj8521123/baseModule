@@ -1,10 +1,9 @@
-package com.sj.basemodule.common;
+package basemodule.sj.com.basic.common;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 
 import org.greenrobot.eventbus.EventBus;
 

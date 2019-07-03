@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
+
 import androidx.core.content.FileProvider;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
@@ -308,8 +309,9 @@ public class UpdateAppUtil {
         Intent i = new Intent(Intent.ACTION_VIEW);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
-            Uri contentUri = FileProvider.getUriForFile(context, "com.shundian.smart.fileProvider", apkFile);
+            String sFileProvider = String.format("%s.fileprovider", context.getPackageName());
+            /*Uri contentUri = FileProvider.getUriForFile(context, "com.shundian.smart.fileProvider", apkFile);*/
+            Uri contentUri = FileProvider.getUriForFile(context, sFileProvider, apkFile);
 
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
