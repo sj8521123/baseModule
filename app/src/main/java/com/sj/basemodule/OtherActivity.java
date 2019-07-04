@@ -1,6 +1,7 @@
 package com.sj.basemodule;
 
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -45,23 +46,44 @@ public class OtherActivity extends BaseActivity {
         TextView textView = findViewById(R.id.text);
         textView.setText("123");
         textView.setTextSize(ScreenUtil.px2sp(30));
-
         Observable.create(new ObservableOnSubscribe<Integer>() {
 
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 e.onNext(1);
                 e.onNext(2);
-                e.onError(new NullPointerException());
+                //e.onError(new NullPointerException());
                 e.onNext(3);
+                e.onComplete();
             }
-        }).retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
-            @Override
-            public ObservableSource<?> apply(Observable<Throwable> throwableObservable) throws Exception {
-                return Observable.empty();
-                //  return throwableObservable.delay(1,TimeUnit.SECONDS);
-            }
-        }).subscribe(new Observer<Integer>() {
+        })
+                //3 重新订阅发送的次数
+                .retry(3)
+                .repeat(3)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.i(TAG, "onNext: " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG, "onError: ");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i(TAG, "onComplete: ");
+                    }
+                });
+     /*   //无条件重新订阅
+        Observable.just(1)
+                .repeat(3).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -81,8 +103,7 @@ public class OtherActivity extends BaseActivity {
             public void onComplete() {
                 Log.i(TAG, "onComplete: ");
             }
-        });
-
+        });*/
        /* Observable.just(1, 2, 3)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
