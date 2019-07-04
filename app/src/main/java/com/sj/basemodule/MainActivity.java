@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
     private HomePagerAdapter mPagerAdapter;
     private String str = "local";
     private String he = "hello";
-
+    private int remote =10;
     @Override
     protected void reConnect() {
         ToastUtil.show("reConnect");
