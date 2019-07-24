@@ -1,149 +1,85 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
-import android.graphics.LightingColorFilter;
-import android.util.Log;
-import android.widget.TextView;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.LinearLayout;
 
+import com.just.agentweb.AgentWeb;
+import com.sj.basemodule.proxy.ILogin;
+import com.sj.basemodule.proxy.UserLogin;
+import com.sj.basemodule.proxy.UserLoginProxy;
 
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.ScreenUtil;
-import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
+    @BindView(R.id.webView)
+    LinearLayout webView;
 
     @Override
     protected void reConnect() {
-
     }
 
     @Override
     public int initLayout() {
-        return R.layout.activity_other;
+        return R.layout.fragment_loansign_layout;
     }
+
 
     @Override
     public void initFromData() {
+        Date date = new Date();
+        AgentWeb.with(this)
+                .setAgentWebParent(webView, new LinearLayout.LayoutParams(-1, -1))
+                .useDefaultIndicator()
+                .createAgentWeb()
+                .ready()
+                .go("https://mall.eeext.com/?origin=MjMxNDQ&item_type=iqywz_main");
     }
 
     @Override
     public void initLayoutView() {
-        TextView textView = findViewById(R.id.text);
-        textView.setText("123");
-        textView.setTextSize(ScreenUtil.px2sp(30));
-        Observable.create(new ObservableOnSubscribe<Integer>() {
+      /*  TextView openServiceProtocol = findViewById(R.id.openServiceProtocol);
+        openServiceProtocol.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);*/
+        ILogin iLogin = new UserLoginProxy();
+        iLogin.userLogin();
 
+        try {
+            ILogin iLogin1 = (ILogin) loadProxy(new UserLogin());
+            iLogin1.userLogin();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object loadProxy(Object target) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        //通过接口Class对象创建代理Class对象
+        Class<?> proxyClass = Proxy.getProxyClass(target.getClass().getClassLoader(), target.getClass().getInterfaces());
+        //拿到代理Class对象的有参构造方法
+        Constructor<?> constructors = proxyClass.getConstructor(InvocationHandler.class);
+        //反射创建代理实例
+        Object proxy = constructors.newInstance(new InvocationHandler() {
             @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                e.onNext(1);
-                e.onNext(2);
-                //e.onError(new NullPointerException());
-                e.onNext(3);
-                e.onComplete();
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println("登录前...");
+                Object result = method.invoke(target, args);
+                System.out.println("登录后...");
+                return result;
             }
-        })
-                //3 重新订阅发送的次数
-                .retry(3)
-                .repeat(3)
-                .subscribe(new Observer<Integer>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+        });
+        return proxy;
 
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-                        Log.i(TAG, "onNext: " + integer);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i(TAG, "onError: ");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "onComplete: ");
-                    }
-                });
-     /*   //无条件重新订阅
-        Observable.just(1)
-                .repeat(3).subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Integer integer) {
-                Log.i(TAG, "onNext: " + integer);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.i(TAG, "onError: ");
-            }
-
-            @Override
-            public void onComplete() {
-                Log.i(TAG, "onComplete: ");
-            }
-        });*/
-       /* Observable.just(1, 2, 3)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
-                    @Override
-                    public ObservableSource<?> apply(Observable<Object> objectObservable) throws Exception {
-                        return objectObservable.zipWith(Observable.range(1, 3), new BiFunction<Object, Integer, Object>() {
-                            @Override
-                            public Object apply(Object o, Integer integer) throws Exception {
-                                return o;
-                            }
-                        }).flatMap(new Function<Object, ObservableSource<?>>() {
-                            @Override
-                            public ObservableSource<?> apply(Object o) throws Exception {
-                                return Observable.timer(5,TimeUnit.SECONDS);
-                            }
-                        });
-                    }
-                })
-                .subscribe(new Observer<Integer>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-                        Log.i(TAG, "onNext: " + integer);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i(TAG, "onError ");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "onComplete ");
-                    }
-                });*/
     }
 
     @Override
@@ -151,8 +87,12 @@ public class OtherActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.cancel)
-    public void onViewClicked() {
-        startActivity(new Intent(OtherActivity.this, MainActivity.class));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
+
+
 }

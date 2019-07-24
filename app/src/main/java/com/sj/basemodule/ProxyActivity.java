@@ -3,8 +3,10 @@ package com.sj.basemodule;
 import android.util.Log;
 
 import com.sj.basemodule.proxy.DynamicSubject;
+import com.sj.basemodule.proxy.ILogin;
 import com.sj.basemodule.proxy.RealSubject;
 import com.sj.basemodule.proxy.Subject;
+import com.sj.basemodule.proxy.UserLoginProxy;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -38,6 +40,10 @@ public class ProxyActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
+        ILogin iLogin = new UserLoginProxy();
+        iLogin.userLogin();
+
+
         RealSubject realSubject = new RealSubject();
         //被代理的类
         Subject rs = new RealSubject();

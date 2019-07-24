@@ -7,8 +7,10 @@ import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
+import com.just.agentweb.AgentWeb;
 import com.sj.basemodule.net.RetrofitHelper;
 import com.sj.basemodule.net.RetrofitHelperWithToken;
 import com.sj.basemodule.net.reponse.LoginResponse;
@@ -33,6 +36,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.AssetsUtil;
 import basemodule.sj.com.basic.util.FileUtil;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
@@ -65,6 +69,7 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
+
 
     }
 
