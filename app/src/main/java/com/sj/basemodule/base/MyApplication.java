@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.simple.spiderman.SpiderMan;
 import com.sj.basemodule.R;
 import com.sj.basemodule.util.STGFileUtil;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -67,6 +68,9 @@ public class MyApplication extends LitePalApplication {
             activity.finish();
         }
         mList.clear();
+        //杀掉进程
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
     }
 
     public static void initSystemBar(Activity activity, int colorRes) {
@@ -213,7 +217,12 @@ public class MyApplication extends LitePalApplication {
     private void initExternalConfiguration() {
         //bugly集成
         CrashReport.initCrashReport(getApplicationContext(), "c97fd3e3e2", false);
+        //友盟统计
         /*UMConfigure.init(this, "5d2c44780cafb2a0e20000f3", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");*/
+
+        //崩溃信息界面展示
+        SpiderMan.init(this);
+
         //toast设置
        /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))

@@ -1,10 +1,8 @@
 package com.sj.basemodule;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.widget.LinearLayout;
 
-import com.just.agentweb.AgentWeb;
 import com.sj.basemodule.proxy.ILogin;
 import com.sj.basemodule.proxy.UserLogin;
 import com.sj.basemodule.proxy.UserLoginProxy;
@@ -14,13 +12,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 import basemodule.sj.com.basic.base.BaseActivity;
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
@@ -39,13 +34,15 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
-        Date date = new Date();
+          /*  String text = null;
+            text.toUpperCase();*/
+        /*Date date = new Date();
         AgentWeb.with(this)
                 .setAgentWebParent(webView, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()
                 .createAgentWeb()
                 .ready()
-                .go("https://mall.eeext.com/?origin=MjMxNDQ&item_type=iqywz_main");
+                .go("https://mall.eeext.com/?origin=MjMxNDQ&item_type=iqywz_main");*/
     }
 
     @Override
@@ -87,12 +84,9 @@ public class OtherActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+
+    @OnClick(R.id.btn)
+    public void onViewClicked() {
+        startActivity(new Intent(this,MainActivity.class));
     }
-
-
 }
