@@ -5,7 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trello.rxlifecycle2.components.support.RxFragment;
+
+import com.trello.rxlifecycle2.components.RxFragment;
 
 import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
@@ -36,7 +37,7 @@ public abstract class BasePageFragment extends RxFragment {
     @Override
     public void onStart() {
         super.onStart();
-       /* EventBus.getDefault().register(this);*/
+        /* EventBus.getDefault().register(this);*/
     }
 
     @Override
