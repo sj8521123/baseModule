@@ -4,7 +4,8 @@ package basemodule.sj.com.basic.weight.app;
 import android.os.Bundle;
 import android.view.View;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import basemodule.sj.com.basic.weight.SwipeBackLayout;
 import basemodule.sj.com.basic.weight.Utils;

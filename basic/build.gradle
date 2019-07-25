@@ -3,7 +3,6 @@ apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
-    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
         minSdkVersion config.minSdkVersion
@@ -27,15 +26,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //retrofit2 + rxJave2 + rxLifecycle
-    api 'io.reactivex.rxjava2:rxjava:2.2.3'
+    api 'io.reactivex.rxjava2:rxjava:2.2.8'
     api 'com.squareup.retrofit2:retrofit:2.3.0'
     api 'com.squareup.retrofit2:converter-scalars:2.2.0'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
     api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     //eventBus
@@ -91,7 +90,9 @@ dependencies {
     //有bug就以页面展示出来，开发/测试的小棉袄  （implementation "com.simple:spiderman:$spider_man"两者都有）
     debugApi "com.simple:spiderman:1.1.2"
     releaseApi "com.simple:spiderman-no-op:1.1.2"
+
     //leakcanary内存检测
     debugApi "com.squareup.leakcanary:leakcanary-android:1.6.3"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
+
 }

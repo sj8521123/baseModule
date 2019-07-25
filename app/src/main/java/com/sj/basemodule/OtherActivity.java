@@ -50,6 +50,6 @@ public class OtherActivity extends BaseActivity {
 
     @OnClick(R.id.btn)
     public void onViewClicked() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, NetActivity.class));
     }
 }

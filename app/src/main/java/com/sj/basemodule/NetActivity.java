@@ -51,36 +51,11 @@ import okhttp3.ResponseBody;
 
 
 public class NetActivity extends BaseActivity {
-    @Override
-    protected void reConnect() {
-
-    }
-
-    @Override
-    public int initLayout() {
-        return 0;
-    }
-
-    @Override
-    public void initFromData() {
-
-    }
-
-    @Override
-    public void initLayoutView() {
-
-    }
-
-    @Override
-    public void initLocalData() {
-
-    }
-   /* private Button btn;
+    private Button btn;
     ProgressBar progressBar;
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
     private static final String TAG = "NetActivity";
-
     @Override
     protected void reConnect() {
 
@@ -94,7 +69,6 @@ public class NetActivity extends BaseActivity {
     @Override
     public void initFromData() {
 
-
     }
 
     @Override
@@ -104,6 +78,7 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
+
     }
 
     private void initView() {
@@ -113,14 +88,13 @@ public class NetActivity extends BaseActivity {
         downloadUtils = new DownloadUtils();
     }
 
-    *//**
+    /**
      * Post请求
-     *//*
+     */
     public void login(View view) {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
-
         RetrofitHelper.getApiService()
                 .login(loginRequest)
                 .compose(RxUtil.rxSchedulerHelper(this))
@@ -132,17 +106,17 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    *//**
+    /**
      * Get请求
      *
      * @param view
-     *//*
+     */
     public void getData(View view) {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
 
-        RetrofitHelperWithToken.getApiService()
+        RetrofitHelper.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
@@ -154,9 +128,9 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    *//**
+    /**
      * 单文件上传 方法一
-     *//*
+     */
     public void uploadFile1(View view) {
         //文件路径
         File file = getFile();
@@ -167,7 +141,7 @@ public class NetActivity extends BaseActivity {
                 .addFormDataPart("password", "123123")
                 .addFormDataPart("uploadFile", file.getName(), fileBody);
         List<MultipartBody.Part> parts = builder.build().parts();
-        RetrofitHelperWithToken.getApiService()
+        RetrofitHelper.getApiService()
                 .uploadFiles(parts)
                 .subscribeOn(Schedulers.io())
                 .compose(this.bindToLifecycle())
@@ -181,9 +155,9 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    *//**
+    /**
      * 单文件上传 方法二
-     *//*
+     */
     public void uploadFile2(View view) {
         File file = getFile();
         //  图片参数
@@ -208,11 +182,11 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    *//**
+    /**
      * 下载文件
      *
      * @param view
-     *//*
+     */
     public void download(View view) {
         btn.setClickable(false);
         downloadUtils.download(Constants.DOWNLOAD_URL, new DownloadListener() {
@@ -245,11 +219,11 @@ public class NetActivity extends BaseActivity {
         });
     }
 
-    *//**
+    /**
      * 取消下载
      *
      * @param view
-     *//*
+     */
     public void cancelDownload(View view) {
         if (downloadUtils != null) {
             downloadUtils.cancelDownload();
@@ -296,11 +270,4 @@ public class NetActivity extends BaseActivity {
         return new File(filePath);
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }*/
 }
