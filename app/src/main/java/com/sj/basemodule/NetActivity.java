@@ -51,7 +51,31 @@ import okhttp3.ResponseBody;
 
 
 public class NetActivity extends BaseActivity {
-    private Button btn;
+    @Override
+    protected void reConnect() {
+
+    }
+
+    @Override
+    public int initLayout() {
+        return 0;
+    }
+
+    @Override
+    public void initFromData() {
+
+    }
+
+    @Override
+    public void initLayoutView() {
+
+    }
+
+    @Override
+    public void initLocalData() {
+
+    }
+   /* private Button btn;
     ProgressBar progressBar;
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
@@ -89,9 +113,9 @@ public class NetActivity extends BaseActivity {
         downloadUtils = new DownloadUtils();
     }
 
-    /**
+    *//**
      * Post请求
-     */
+     *//*
     public void login(View view) {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
@@ -108,11 +132,11 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    /**
+    *//**
      * Get请求
      *
      * @param view
-     */
+     *//*
     public void getData(View view) {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
@@ -130,9 +154,9 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    /**
+    *//**
      * 单文件上传 方法一
-     */
+     *//*
     public void uploadFile1(View view) {
         //文件路径
         File file = getFile();
@@ -157,9 +181,9 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    /**
+    *//**
      * 单文件上传 方法二
-     */
+     *//*
     public void uploadFile2(View view) {
         File file = getFile();
         //  图片参数
@@ -184,11 +208,11 @@ public class NetActivity extends BaseActivity {
                 });
     }
 
-    /**
+    *//**
      * 下载文件
      *
      * @param view
-     */
+     *//*
     public void download(View view) {
         btn.setClickable(false);
         downloadUtils.download(Constants.DOWNLOAD_URL, new DownloadListener() {
@@ -221,11 +245,11 @@ public class NetActivity extends BaseActivity {
         });
     }
 
-    /**
+    *//**
      * 取消下载
      *
      * @param view
-     */
+     *//*
     public void cancelDownload(View view) {
         if (downloadUtils != null) {
             downloadUtils.cancelDownload();
@@ -278,5 +302,5 @@ public class NetActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
+    }*/
 }

@@ -130,5 +130,9 @@ dependencies {
     implementation files('libs/nineoldandroids-2.4.0.jar')
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
     implementation project(':net')
 }

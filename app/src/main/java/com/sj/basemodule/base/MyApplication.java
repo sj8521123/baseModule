@@ -22,6 +22,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.simple.spiderman.SpiderMan;
 import com.sj.basemodule.R;
 import com.sj.basemodule.util.STGFileUtil;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhihu.matisse.ui.MatisseActivity;
 
@@ -33,6 +34,7 @@ import java.util.List;
 
 import basemodule.sj.com.basic.base.ActivityBean;
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.common.CrashHandler;
 import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
 import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.ToastUtil;
@@ -220,9 +222,12 @@ public class MyApplication extends LitePalApplication {
         //友盟统计
         /*UMConfigure.init(this, "5d2c44780cafb2a0e20000f3", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");*/
 
-        //崩溃信息界面展示
+       /* //崩溃信息界面展示
         SpiderMan.init(this);
-
+        //LeakCanary内存泄漏分析
+        LeakCanary.install(this);
+        //本地记录crash日志
+        new CrashHandler(this).init();*/
         //toast设置
        /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))
