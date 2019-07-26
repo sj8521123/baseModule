@@ -9,4 +9,8 @@
 
 
     <color name="colorFFFFFF">#ffffff</color>
+
+    <color name="gray_color">#4b4b58</color>
+    <color name="new_text_color">#555771</color>
+    <color name="item_bg">#FFFFFF</color>
 </resources>

@@ -38,17 +38,20 @@
             android:name=".MainActivity"
             android:label="首页" />
         <activity android:name=".OtherActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".NetActivity">
 
         </activity>
         <activity android:name=".ProxyActivity">
 
+        </activity>
+        <activity android:name=".DiffUtilActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
