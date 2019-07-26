@@ -1,6 +1,5 @@
 package basemodule.sj.com.basic.util;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -11,15 +10,14 @@ import android.widget.Toast;
 
 public class ToastUtil {
 
-    private static Context context = Util.getContext();
     private static Toast toast;
 
     public static void show(int resId) {
-        show(context.getResources().getText(resId), Toast.LENGTH_SHORT);
+        show(Util.getContext().getResources().getText(resId), Toast.LENGTH_SHORT);
     }
 
     public static void show(int resId, int duration) {
-        show(context.getResources().getText(resId), duration);
+        show(Util.getContext().getResources().getText(resId), duration);
     }
 
     public static void show(CharSequence text) {
@@ -36,7 +34,7 @@ public class ToastUtil {
         text = TextUtils.isEmpty(text == null ? "" : text.toString()) ? "请检查您的网络！"
                 : text;
         if (toast == null) {
-            toast = Toast.makeText(context, text, duration);
+            toast = Toast.makeText(Util.getContext(), text, duration);
         } else {
             toast.setText(text);
         }
@@ -44,7 +42,7 @@ public class ToastUtil {
     }
 
     public static void show(int resId, Object... args) {
-        show(String.format(context.getResources().getString(resId), args),
+        show(String.format(Util.getContext().getResources().getString(resId), args),
                 Toast.LENGTH_SHORT);
     }
 
@@ -53,7 +51,7 @@ public class ToastUtil {
     }
 
     public static void show(int resId, int duration, Object... args) {
-        show(String.format(context.getResources().getString(resId), args),
+        show(String.format(Util.getContext().getResources().getString(resId), args),
                 duration);
     }
 

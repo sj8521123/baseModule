@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
-def librarys = rootProject.ext.supportDependencies
 android {
     compileSdkVersion config.compileSdkVersion
 

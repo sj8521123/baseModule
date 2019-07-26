@@ -1,12 +1,13 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.hjq.toast.ToastUtils;
 
 import androidx.recyclerview.widget.RecyclerView;
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,8 +16,6 @@ public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
     @BindView(R.id.webView)
     LinearLayout webView;
-    @BindView(R.id.mRecycle)
-    RecyclerView mRecycle;
 
     @Override
     protected void reConnect() {
@@ -48,5 +47,11 @@ public class OtherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn)
+    public void onViewClicked() {
+
+        ToastUtil.show("hello");
     }
 }
