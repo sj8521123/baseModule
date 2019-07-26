@@ -1,11 +1,10 @@
-package com.sj.basemodule.common;
+package com.sj.basemodule;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.sj.basemodule.R;
 import basemodule.sj.com.basic.weight.SuperFileView2;
 
 import java.io.File;

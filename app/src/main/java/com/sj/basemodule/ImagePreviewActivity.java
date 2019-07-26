@@ -1,4 +1,4 @@
-package com.sj.basemodule.common;
+package com.sj.basemodule;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.sj.basemodule.R;
 
 import basemodule.sj.com.basic.adapter.ImagePreviewAdapter;
 import basemodule.sj.com.basic.weight.CommonDoubleButtonDialog;
