@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 
-import com.sj.basemodule.common.HomePagerAdapter;
+import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
@@ -21,7 +21,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.base.BaseActivity;
@@ -29,14 +28,6 @@ import basemodule.sj.com.basic.base.BaseEvent;
 import basemodule.sj.com.basic.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
 
 public class MainActivity extends BaseActivity {
     int c = 10;

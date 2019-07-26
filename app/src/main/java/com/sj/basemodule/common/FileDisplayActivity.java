@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.util.STGFileUtil;
-import com.sj.basemodule.weight.SuperFileView2;
+import basemodule.sj.com.basic.weight.SuperFileView2;
 
 import java.io.File;
 
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.KeyTools;
 import basemodule.sj.com.basic.util.NetWorkUtil;
+import basemodule.sj.com.basic.util.STGFileUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

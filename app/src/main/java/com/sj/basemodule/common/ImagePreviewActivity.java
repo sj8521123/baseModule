@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 
 import com.sj.basemodule.R;
-import com.sj.basemodule.weight.CommonDoubleButtonDialog;
-import com.sj.basemodule.weight.CustomViewPager;
+
+import basemodule.sj.com.basic.adapter.ImagePreviewAdapter;
+import basemodule.sj.com.basic.weight.CommonDoubleButtonDialog;
+import basemodule.sj.com.basic.weight.CustomViewPager;
 
 import java.util.ArrayList;
 
