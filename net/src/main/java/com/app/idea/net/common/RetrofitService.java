@@ -1,6 +1,7 @@
 package com.app.idea.net.common;
 
 import com.app.idea.net.interceptor.LoggingInterceptor;
+import com.app.idea.net.persistentcookiejar.CookieUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -29,7 +30,7 @@ public class RetrofitService {
                 .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 //自动设置cookie
-                //.cookieJar(CookieUtil.getCookieJar())
+                .cookieJar(CookieUtil.getCookieJar())
                 .addInterceptor(new LoggingInterceptor(Constants.LOG_NAME))
                 .addInterceptor(new HttpHeaderInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())

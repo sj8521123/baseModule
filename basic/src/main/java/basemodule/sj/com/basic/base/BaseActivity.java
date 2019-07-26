@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,16 +19,17 @@ import androidx.annotation.Nullable;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.common.NetWorkChangeEvent;
 import basemodule.sj.com.basic.util.NetWorkUtil;
+import basemodule.sj.com.basic.weight.app.SwipeBackActivity;
 
 /**
- * content:规范Activity统一界面、逻辑处理
+ * content:规范Activity统一界面、逻辑处理 SwipeBackActivity为左滑可删除
  * author：sj
  * time: 2017/11/21 15:58
  * email：13658029734@163.com
  * phone:13658029734
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
     protected boolean mCheckNetWork = true; //默认检查网络状态
     WindowManager mWindowManager;
     WindowManager.LayoutParams mLayoutParams;

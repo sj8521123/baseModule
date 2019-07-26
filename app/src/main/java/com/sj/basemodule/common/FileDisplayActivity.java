@@ -71,7 +71,7 @@ public class FileDisplayActivity extends BaseActivity {
     }
 
     public void init() {
-        mSuperFileView = findViewById(R.id.mSuperFileView);
+        mSuperFileView = (SuperFileView2) findViewById(R.id.mSuperFileView);
         mSuperFileView.setOnGetFilePathListener(new SuperFileView2.OnGetFilePathListener() {
             @Override
             public void onGetFilePath(SuperFileView2 mSuperFileView2) {

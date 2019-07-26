@@ -1,11 +1,8 @@
 apply plugin: 'com.android.application'
 def config = rootProject.ext.android
-static def releaseTime() {
-    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
-}
+
 android {
     compileSdkVersion config.compileSdkVersion
-    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
         applicationId "com.sj.basemodule"
@@ -58,10 +55,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->
+                    def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
+
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为KL_v1.0.0_20171205_baidu.apk
-                        def fileName = "APP_${releaseTime()}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        // 输出apk名称为app_年月日时分秒_version_渠道.apk
+                        def fileName = "APP_${date}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
                         outputFileName = fileName
                     }
                 }
@@ -127,7 +126,10 @@ dependencies {
     })
     testImplementation 'junit:junit:4.12'
     implementation files('libs/nineoldandroids-2.4.0.jar')
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
     implementation project(':net')
 }

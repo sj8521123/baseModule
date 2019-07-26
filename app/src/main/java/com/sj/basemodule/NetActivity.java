@@ -7,8 +7,10 @@ import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
+import com.just.agentweb.AgentWeb;
 import com.sj.basemodule.net.RetrofitHelper;
 import com.sj.basemodule.net.RetrofitHelperWithToken;
 import com.sj.basemodule.net.reponse.LoginResponse;
@@ -33,6 +36,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.util.AssetsUtil;
 import basemodule.sj.com.basic.util.FileUtil;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
@@ -52,7 +56,6 @@ public class NetActivity extends BaseActivity {
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
     private static final String TAG = "NetActivity";
-
     @Override
     protected void reConnect() {
 
@@ -75,6 +78,7 @@ public class NetActivity extends BaseActivity {
 
     @Override
     public void initLocalData() {
+
     }
 
     private void initView() {
@@ -91,7 +95,6 @@ public class NetActivity extends BaseActivity {
         LoginRequest loginRequest = new LoginRequest(this);
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
-
         RetrofitHelper.getApiService()
                 .login(loginRequest)
                 .compose(RxUtil.rxSchedulerHelper(this))
@@ -113,7 +116,7 @@ public class NetActivity extends BaseActivity {
         loginRequest.setUserId("123456");
         loginRequest.setPassword("123123");
 
-        RetrofitHelperWithToken.getApiService()
+        RetrofitHelper.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
                 .subscribe(new DefaultObserver<List<MeiZi>>() {
@@ -138,7 +141,7 @@ public class NetActivity extends BaseActivity {
                 .addFormDataPart("password", "123123")
                 .addFormDataPart("uploadFile", file.getName(), fileBody);
         List<MultipartBody.Part> parts = builder.build().parts();
-        RetrofitHelperWithToken.getApiService()
+        RetrofitHelper.getApiService()
                 .uploadFiles(parts)
                 .subscribeOn(Schedulers.io())
                 .compose(this.bindToLifecycle())
@@ -267,11 +270,4 @@ public class NetActivity extends BaseActivity {
         return new File(filePath);
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

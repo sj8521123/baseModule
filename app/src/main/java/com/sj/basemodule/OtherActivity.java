@@ -1,24 +1,31 @@
 package com.sj.basemodule;
 
 import android.content.Intent;
-import android.widget.TextView;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.ScreenUtil;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
+    @BindView(R.id.webView)
+    LinearLayout webView;
+    @BindView(R.id.btn)
+    Button btn;
 
     @Override
     protected void reConnect() {
-
     }
 
     @Override
     public int initLayout() {
-        return R.layout.activity_other;
+        return R.layout.fragment_loansign_layout;
     }
+
 
     @Override
     public void initFromData() {
@@ -26,18 +33,23 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-        TextView textView = findViewById(R.id.text);
-        textView.setText("123");
-        textView.setTextSize(ScreenUtil.px2sp(30));
     }
+
 
     @Override
     public void initLocalData() {
 
     }
 
-    @OnClick(R.id.cancel)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn)
     public void onViewClicked() {
-        startActivity(new Intent(OtherActivity.this, MainActivity.class));
+        startActivity(new Intent(this, NetActivity.class));
     }
 }
