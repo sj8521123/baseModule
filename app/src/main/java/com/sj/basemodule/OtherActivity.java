@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.recyclerview.widget.RecyclerView;
 import basemodule.sj.com.basic.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,8 +15,8 @@ public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
     @BindView(R.id.webView)
     LinearLayout webView;
-    @BindView(R.id.btn)
-    Button btn;
+    @BindView(R.id.mRecycle)
+    RecyclerView mRecycle;
 
     @Override
     protected void reConnect() {
@@ -33,6 +34,7 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
+
     }
 
 
@@ -46,10 +48,5 @@ public class OtherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
-
-    @OnClick(R.id.btn)
-    public void onViewClicked() {
-        startActivity(new Intent(this, NetActivity.class));
     }
 }

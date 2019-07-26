@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 def config = rootProject.ext.android
-
+def librarys = rootProject.ext.supportDependencies
 android {
     compileSdkVersion config.compileSdkVersion
 
@@ -125,11 +125,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-    implementation files('libs/nineoldandroids-2.4.0.jar')
     implementation 'androidx.multidex:multidex:2.0.1'
-
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-
     implementation project(':net')
 }

@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.common.NetWorkChangeEvent;
 import basemodule.sj.com.basic.util.NetWorkUtil;
-import basemodule.sj.com.basic.weight.app.SwipeBackActivity;
+import basemodule.sj.com.basic.weight.swipeback.SwipeBackActivity;
 
 /**
  * content:规范Activity统一界面、逻辑处理 SwipeBackActivity为左滑可删除

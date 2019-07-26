@@ -11,7 +11,7 @@ import com.bumptech.glide.request.target.Target;
 import java.io.File;
 
 import basemodule.sj.com.basic.R;
-import basemodule.sj.com.basic.weight.GlideRoundTransform;
+import basemodule.sj.com.basic.weight.transform.GlideRoundTransform;
 
 /**
  * content:Glide图片加载库

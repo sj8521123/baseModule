@@ -1,9 +1,9 @@
 package com.sj.basemodule.config;
 
 import com.app.idea.net.token.RefreshTokenResponse;
-import com.sj.basemodule.base.MyApplication;
 import com.sj.basemodule.net.reponse.LoginResponse;
 
+import basemodule.sj.com.basic.base.MyApplication;
 import basemodule.sj.com.basic.config.SPUtils;
 
 

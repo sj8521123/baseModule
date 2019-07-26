@@ -7,7 +7,7 @@
 
     <include layout="@layout/layout_common_title_bar"/>
 
-    <com.sj.basemodule.weight.SuperFileView2
+    <basemodule.sj.com.basic.weight.SuperFileView2
         android:id="@+id/mSuperFileView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

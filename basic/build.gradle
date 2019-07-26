@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
+def librarys = rootProject.ext.supportDependencies
 android {
     compileSdkVersion config.compileSdkVersion
 
@@ -24,6 +25,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "androidx.appcompat:appcompat:1.1.0-rc01"
+    api "androidx.cardview:cardview:1.0.0"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api "com.google.android.material:material:1.1.0-alpha08"
+    api "androidx.recyclerview:recyclerview:1.1.0-beta01"
 
     //retrofit2 + rxJave2 + rxLifecycle
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
@@ -66,13 +73,12 @@ dependencies {
     api 'com.github.GrenderG:Toasty:1.4.2'
     api 'com.hjq:toast:1.5'
 
-
     //权限
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //切换导航
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
     //adapter
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47-androidx'
     //图片选择框架
     api 'com.zhihu.android:matisse:0.4.3'
     //刷新控件
@@ -94,5 +100,8 @@ dependencies {
     //leakcanary内存检测
     debugApi "com.squareup.leakcanary:leakcanary-android:1.6.3"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
+
+    api files('libs/nineoldandroids-2.4.0.jar')
+    api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
 }

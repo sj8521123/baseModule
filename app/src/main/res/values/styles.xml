@@ -1,81 +1,26 @@
 <resources>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@color/windowBackgroundColor</item>
-        <item name="android:textColor">@color/textColor</item>
-        <item name="android:textSize">@dimen/dimens16sp</item>
+    <style name="tweetName">
+        <item name="android:textColor">#48495f</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+        <item name="android:shadowColor">#44000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base"/>
-
-    <style name="match_parent">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+    <style name="tweetText">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColorLink">#888888</item>
+        <item name="android:lineSpacingExtra">4dp</item>
     </style>
 
-    <!--分割线统一样式-->
-    <style name="split_haveMargin" parent="match_parent">
-        <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/colorDivider</item>
-        <item name="android:layout_marginLeft">15dp</item>
+    <style name="tweetDate">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#FFCCCCCC</item>
     </style>
 
-    <style name="split_noMargin" parent="match_parent">
-        <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/colorDivider</item>
-    </style>
 
-    <style name="split_vertical" parent="match_parent">
-        <item name="android:layout_width">1px</item>
-        <item name="android:background">@color/colorDivider</item>
-    </style>
-
-    <style name="AnimDown" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_out</item>
-    </style>
-
-    <style name="AnimUp" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
-    </style>
-
-    <style name="AnimLeft" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
-    </style>
-
-    <style name="AnimRight" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_right_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_right_out</item>
-    </style>
-
-    <style name="AnimScale" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_out</item>
-    </style>
-
-    <style name="ProgressDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-    </style>
-    <!--Progress 主题-->
-    <style name="ProgressDialogStyle" parent="@style/ProgressDialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <style name="baseDialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:background">#00000000</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

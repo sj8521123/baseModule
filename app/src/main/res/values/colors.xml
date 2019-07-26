@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--界面背景-->
-    <color name="windowBackgroundColor">#EDEFF2</color>
-    <!--正文颜色-->
-    <color name="textColor">#303134</color>
-    <!--分割线-->
-    <color name="colorDivider">#cfcfcf</color>
-
-
-    <color name="colorFFFFFF">#ffffff</color>
+    <color name="gray_color">#4b4b58</color>
+    <color name="new_text_color">#555771</color>
+    <color name="item_bg">#FFFFFF</color>
 </resources>
