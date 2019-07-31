@@ -1,5 +1,6 @@
 package basemodule.sj.com.basic.util;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -24,12 +25,7 @@ public class ToastUtil {
         show(text, Toast.LENGTH_SHORT);
     }
 
-    /*public static void showDebug(CharSequence text) {
-        if (BuildConfig.DEBUG) {
-            show(text, Toast.LENGTH_SHORT);
-        }
-    }*/
-
+    @SuppressLint("ShowToast")
     public static void show(CharSequence text, int duration) {
         text = TextUtils.isEmpty(text == null ? "" : text.toString()) ? "请检查您的网络！"
                 : text;

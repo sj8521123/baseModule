@@ -1,6 +1,7 @@
 package com.sj.basemodule;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.hjq.toast.ToastUtils;
@@ -16,7 +17,8 @@ public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
     @BindView(R.id.webView)
     LinearLayout webView;
-
+    volatile String a  = "hello" + "World";
+    String b  = "helloWorld";
     @Override
     protected void reConnect() {
     }
@@ -33,7 +35,8 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-
+        String s="怎么 才能  去掉    多个        空格";
+        s = s.replaceAll("\\s{1,}"," ");
     }
 
 

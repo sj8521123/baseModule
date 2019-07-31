@@ -3,6 +3,7 @@ package basemodule.sj.com.basic.base;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -113,6 +114,11 @@ public class MyApplication extends LitePalApplication {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(final Activity activity, Bundle bundle) {
+                //强制竖屏
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                //保持常亮
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
                 if (activity instanceof BaseActivity) {
                     try {
                         activity.setContentView(((BaseActivity) activity).initLayout());
@@ -133,10 +139,10 @@ public class MyApplication extends LitePalApplication {
                     //初始化本地数据
                     ((BaseActivity) activity).initLocalData();
 
-                    //设置xml所有viewGroup的fitsSystemWindows="true" 沉浸式
-                    ViewGroup content = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-                    content.getChildAt(0).setFitsSystemWindows(true);
-
+                    //通过decorView获取到设置contentView所有rootView
+                    ViewGroup decorView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+                    //沉浸式
+                    decorView.getChildAt(0).setFitsSystemWindows(true);
 
                 } else {
                     //统一ButterKnife绑定Activity
@@ -221,7 +227,7 @@ public class MyApplication extends LitePalApplication {
         //LeakCanary内存泄漏分析
         LeakCanary.install(this);
         //本地记录crash日志
-       /* new CrashHandler(this).init();*/
+        /* new CrashHandler(this).init();*/
         //toast设置
        /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))
