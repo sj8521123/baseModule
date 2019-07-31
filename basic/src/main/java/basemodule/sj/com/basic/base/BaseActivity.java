@@ -32,7 +32,8 @@ import basemodule.sj.com.basic.weight.swipeback.SwipeBackActivity;
 public abstract class BaseActivity extends SwipeBackActivity {
     protected boolean mCheckNetWork = true; //默认检查网络状态
     WindowManager mWindowManager;
-    WindowManager.LayoutParams mLayoutParams;
+    WindowManager.LayoutParams mTipViewLayoutParams;
+    WindowManager.LayoutParams mErrorViewLayoutParams;
     View mTipView;
     View mErrorView;
 
@@ -83,23 +84,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
         hasNetWork(event.isConnected);
     }
 
-    private void hasNetWork(boolean has) {
-        if (isCheckNetWork()) {
-            //有网络
-            if (has) {
-                if (mTipView != null && mTipView.getParent() != null) {
-                    mWindowManager.removeView(mTipView);
-                    reConnect();
-                }
-            }
-            //无网络
-            else {
-                if (mTipView.getParent() == null) {
-                    mWindowManager.addView(mTipView, mLayoutParams);
-                }
-            }
-        }
-    }
 
     protected abstract void reConnect();
 
@@ -139,16 +123,46 @@ public abstract class BaseActivity extends SwipeBackActivity {
         LayoutInflater inflater = getLayoutInflater();
         mTipView = inflater.inflate(R.layout.layout_network_tip, null); //提示View布局
         mWindowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        mLayoutParams = new WindowManager.LayoutParams(
+        mTipViewLayoutParams = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                /*  | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,*/
                 PixelFormat.TRANSLUCENT);
         //使用非CENTER时，可以通过设置XY的值来改变View的位置
-        mLayoutParams.gravity = Gravity.TOP;
-        mLayoutParams.x = 0;
-        mLayoutParams.y = 0;
+        mTipViewLayoutParams.gravity = Gravity.TOP;
+        mTipViewLayoutParams.x = 0;
+        mTipViewLayoutParams.y = 0;
+    }
+
+    private void hasNetWork(boolean has) {
+        if (isCheckNetWork()) {
+            //有网络
+            if (has) {
+                if (mTipView != null && mTipView.getParent() != null) {
+                    mWindowManager.removeView(mTipView);
+                    reConnect();
+                }
+            }
+            //无网络
+            else {
+                if (mTipView.getParent() == null) {
+
+                    if (mErrorView != null && mErrorView.getParent() != null) {
+                        mWindowManager.removeView(mErrorView);
+                    }
+
+                    mTipView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mWindowManager.removeView(mTipView);
+                            reConnect();
+                        }
+                    });
+                    mWindowManager.addView(mTipView, mTipViewLayoutParams);
+                }
+            }
+        }
     }
 
     /**
@@ -158,45 +172,47 @@ public abstract class BaseActivity extends SwipeBackActivity {
         LayoutInflater inflater = getLayoutInflater();
         mErrorView = inflater.inflate(R.layout.layout_error_tip, null); //提示View布局
         mWindowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        mLayoutParams = new WindowManager.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
+        mErrorViewLayoutParams = new WindowManager.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                /*     | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,*/
                 PixelFormat.TRANSLUCENT);
         //使用非CENTER时，可以通过设置XY的值来改变View的位置
-        mLayoutParams.gravity = Gravity.CENTER;
-        mLayoutParams.x = 0;
-        mLayoutParams.y = 0;
+        mErrorViewLayoutParams.gravity = Gravity.CENTER;
+        mErrorViewLayoutParams.x = 0;
+        mErrorViewLayoutParams.y = 0;
     }
 
     /***
      * 显示网络状态异常的界面
      *  回调参数 可以自己自定义
-     *       1 服务器繁忙 2 网络错误 3  打开定位服务错误
-     * @param flag
      */
-    public void showErrorView(int flag) {
-        TextView textView = mErrorView.findViewById(R.id.hint);
-        switch (flag) {
-            case 1:
-                textView.setText("服务器繁忙");
-                break;
-            case 2:
-                textView.setText("网络错误");
-                break;
-            case 3:
-                textView.setText("定位服务错误");
-                break;
+    public void showErrorView(String errorStr) {
+        if (mErrorView != null && mErrorView.getParent() == null) {
+            if (mTipView != null && mTipView.getParent() != null) {
+                mWindowManager.removeView(mTipView);
+            }
+            TextView textView = mErrorView.findViewById(R.id.hint);
+            textView.setText(errorStr);
+            mErrorView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mWindowManager.removeView(mErrorView);
+                    reConnect();
+                }
+            });
+            mWindowManager.addView(mErrorView, mErrorViewLayoutParams);
         }
-        mWindowManager.addView(mErrorView, mLayoutParams);
     }
 
     /***
      * 隐藏异常状态界面
      */
     public void hideErrorView() {
-        mWindowManager.removeView(mErrorView);
+        if (mErrorView != null) {
+            mWindowManager.removeView(mErrorView);
+        }
     }
 
 

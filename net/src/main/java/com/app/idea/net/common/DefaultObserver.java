@@ -18,6 +18,7 @@ import java.text.ParseException;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
+import basemodule.sj.com.basic.util.Util;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -26,6 +27,10 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     private BaseActivity mActivity;
 
     public DefaultObserver() {
+    }
+
+    public DefaultObserver(BaseActivity mActivity) {
+        this.mActivity = mActivity;
     }
 
     @Override
@@ -64,11 +69,11 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                 || e instanceof ParseException) {
             onException(ExceptionReason.PARSE_ERROR);
         }
-        //服务产生的异常异常（外部条件正常）
+        //服务产生的异常异常（外部条件正常、内部错误）
         else if (e instanceof ServerResponseException) {
             onFail(e.getMessage());
         }
-        //没有数据错误（外部条件正常）
+        //没有数据错误（外部条件正常，内部正确）
         else if (e instanceof NoDataExceptionException) {
             onSuccess(null);
         }
@@ -91,10 +96,11 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     abstract public void onSuccess(T response);
 
     /**
-     * 服务器返回数据，但响应码不为1000和200
+     * 服务器返回数据，但响应码不为1000和200(内部异常)
      */
     private void onFail(String message) {
-        ToastUtil.show(message);
+        mActivity.showErrorView(message);
+        //ToastUtil.show(message);
     }
 
     /**
@@ -105,33 +111,37 @@ public abstract class DefaultObserver<T> implements Observer<T> {
     }
 
     /**
-     * 请求异常
+     * 请求异常（外部异常）
      *
      * @param reason
      */
     private void onException(ExceptionReason reason) {
+        int errorId;
         switch (reason) {
             case CONNECT_ERROR:
-                ToastUtil.show(R.string.connect_error, Toast.LENGTH_SHORT);
+                errorId = R.string.connect_error;
                 break;
 
             case CONNECT_TIMEOUT:
-                ToastUtil.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
+                errorId = R.string.connect_timeout;
                 break;
 
             case BAD_NETWORK:
-                ToastUtil.show(R.string.bad_network, Toast.LENGTH_SHORT);
+                errorId = R.string.bad_network;
                 break;
 
             case PARSE_ERROR:
-                ToastUtil.show(R.string.parse_error, Toast.LENGTH_SHORT);
+                errorId = R.string.parse_error;
                 break;
 
             case UNKNOWN_ERROR:
             default:
-                ToastUtil.show(R.string.unknown_error, Toast.LENGTH_SHORT);
+                errorId = R.string.unknown_error;
                 break;
         }
+        //ToastUtil.show(errorTxt, Toast.LENGTH_SHORT);
+        String errorStr = Util.getContext().getResources().getText(errorId).toString();
+        mActivity.showErrorView(errorStr);
     }
 
     /**

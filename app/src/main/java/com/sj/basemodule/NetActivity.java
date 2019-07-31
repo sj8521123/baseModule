@@ -56,9 +56,10 @@ public class NetActivity extends BaseActivity {
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
     private static final String TAG = "NetActivity";
+
     @Override
     protected void reConnect() {
-
+        ToastUtil.show("重连");
     }
 
     @Override
@@ -98,7 +99,7 @@ public class NetActivity extends BaseActivity {
         RetrofitHelper.getApiService()
                 .login(loginRequest)
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<LoginResponse>() {
+                .subscribe(new DefaultObserver<LoginResponse>(this) {
                     @Override
                     public void onSuccess(LoginResponse response) {
                         ToastUtil.show("登录成功");
@@ -119,7 +120,7 @@ public class NetActivity extends BaseActivity {
         RetrofitHelper.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                .subscribe(new DefaultObserver<List<MeiZi>>(this) {
                     @Override
                     public void onSuccess(List<MeiZi> meiZis) {
                         Log.i(TAG, "onSuccess: " + meiZis.size());
@@ -147,7 +148,7 @@ public class NetActivity extends BaseActivity {
                 .compose(this.bindToLifecycle())
                 .compose(ProgressUtils.applyProgressBar(this, "上传文件..."))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<BasicResponse>() {
+                .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
                         ToastUtil.show("文件上传成功");
@@ -174,7 +175,7 @@ public class NetActivity extends BaseActivity {
                 .compose(this.<BasicResponse>bindToLifecycle())
                 .compose(ProgressUtils.<BasicResponse>applyProgressBar(this, "上传文件..."))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<BasicResponse>() {
+                .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
                         ToastUtil.show("文件上传成功");

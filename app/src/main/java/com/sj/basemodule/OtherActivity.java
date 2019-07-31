@@ -17,10 +17,12 @@ public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
     @BindView(R.id.webView)
     LinearLayout webView;
-    volatile String a  = "hello" + "World";
-    String b  = "helloWorld";
+    volatile String a = "hello" + "World";
+    String b = "helloWorld";
+
     @Override
     protected void reConnect() {
+        ToastUtil.show("重新刷新");
     }
 
     @Override
@@ -35,8 +37,8 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-        String s="怎么 才能  去掉    多个        空格";
-        s = s.replaceAll("\\s{1,}"," ");
+        String s = "怎么 才能  去掉    多个        空格";
+        s = s.replaceAll("\\s{1,}", " ");
     }
 
 
