@@ -63,7 +63,7 @@ public class OtherActivity extends BaseActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 ToastUtil.show(datas.get(position));
-
+                startActivity(new Intent(OtherActivity.this,NetActivity.class));
             }
         });
 
