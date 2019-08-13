@@ -227,7 +227,7 @@ public class MyApplication extends LitePalApplication {
         //创建目录
         boolean isCreateDirSuccess = STGFileUtil.createAllDirs();
         if (!isCreateDirSuccess) {
-            ToastUtil.show("目录创建失败");
+            ToastUtil.show("项目初始化时目录创建失败！");
         }
     }
 
