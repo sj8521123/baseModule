@@ -225,7 +225,10 @@ public class MyApplication extends LitePalApplication {
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();
         //创建目录
-        STGFileUtil.createAllDirs();
+        boolean isCreateDirSuccess = STGFileUtil.createAllDirs();
+        if (!isCreateDirSuccess) {
+            ToastUtil.show("目录创建失败");
+        }
     }
 
     private void initExternalConfiguration() {
@@ -257,7 +260,7 @@ public class MyApplication extends LitePalApplication {
             public SmartSwipeRefresh.SmartSwipeRefreshHeader createRefreshHeader(Context context) {
                 ArrowHeader arrowHeader = new ArrowHeader(context);
                 int height = SmartSwipe.dp2px(100, context);
-                ViewGroup.LayoutParams layoutParams =  new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
                 arrowHeader.setLayoutParams(layoutParams);
                 arrowHeader.setInitializer(new ArrowHeader.IArrowInitializer() {
                     @Override

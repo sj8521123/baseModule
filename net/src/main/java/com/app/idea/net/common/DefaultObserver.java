@@ -1,6 +1,5 @@
 package com.app.idea.net.common;
 
-import android.widget.Toast;
 
 import com.google.gson.JsonParseException;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
@@ -17,7 +16,6 @@ import java.text.ParseException;
 
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.LogUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.Util;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;

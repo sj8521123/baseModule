@@ -2,7 +2,6 @@ package com.sj.basemodule;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,18 +9,17 @@ import com.billy.android.swipe.SmartSwipeRefresh;
 import com.billy.android.swipe.consumer.SlidingConsumer;
 import com.billy.android.swipe.consumer.StretchConsumer;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.sj.basemodule.adapter.OtherAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.ToastUtil;
+import basemodule.sj.com.basic.weight.ScrawlView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,6 +36,8 @@ public class OtherActivity extends BaseActivity {
     RecyclerView mRecycle;
     OtherAdapter mAdapter;
     List<String> datas;
+    @BindView(R.id.mScrawlView)
+    ScrawlView mScrawlView;
 
     @Override
     protected void reConnect() {
@@ -63,7 +63,7 @@ public class OtherActivity extends BaseActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 ToastUtil.show(datas.get(position));
-                startActivity(new Intent(OtherActivity.this,NetActivity.class));
+                startActivity(new Intent(OtherActivity.this, NetActivity.class));
             }
         });
 
@@ -138,4 +138,12 @@ public class OtherActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.btn)
+    public void onViewClicked() {
+        try {
+            mScrawlView.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

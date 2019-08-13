@@ -142,7 +142,7 @@ public class ScrawlView extends View {
         if (STGFileUtil.fileUtil.isFileExists(file)) {
             STGFileUtil.fileUtil.deleteFile(file);
         }
-        STGFileUtil.fileUtil.createOrExistsFile(file);
+        //STGFileUtil.fileUtil.createOrExistsFile(file);
         FileOutputStream fileOs = new FileOutputStream(file);
         //将内存中的bitmap保存到本地（图片）
         cacheBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOs);
