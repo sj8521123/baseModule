@@ -47,10 +47,10 @@ public class NetWorkUtil {
      * <p>3.0以下打开设置界面</p>
      */
     public static void openWirelessSettings() {
-        if (android.os.Build.VERSION.SDK_INT > 10) {
-            Util.getContext().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        } else {
+        if (android.os.Build.VERSION.SDK_INT > 19) {
             Util.getContext().startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        } else {
+            Util.getContext().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
     }
 
@@ -159,8 +159,8 @@ public class NetWorkUtil {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setWifiEnabled( boolean enabled) {
-        WifiManager wifiManager = (WifiManager)Util.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    public static void setWifiEnabled(boolean enabled) {
+        WifiManager wifiManager = (WifiManager) Util.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
                 wifiManager.setWifiEnabled(true);
@@ -207,9 +207,9 @@ public class NetWorkUtil {
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 
-    private static final int NETWORK_TYPE_GSM      = 16;
+    private static final int NETWORK_TYPE_GSM = 16;
     private static final int NETWORK_TYPE_TD_SCDMA = 17;
-    private static final int NETWORK_TYPE_IWLAN    = 18;
+    private static final int NETWORK_TYPE_IWLAN = 18;
 
     /**
      * 获取当前网络类型
@@ -292,14 +292,16 @@ public class NetWorkUtil {
             for (Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces(); nis.hasMoreElements(); ) {
                 NetworkInterface ni = nis.nextElement();
                 // 防止小米手机返回10.0.2.15
-                if (!ni.isUp()) continue;
+                if (!ni.isUp())
+                    continue;
                 for (Enumeration<InetAddress> addresses = ni.getInetAddresses(); addresses.hasMoreElements(); ) {
                     InetAddress inetAddress = addresses.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         String hostAddress = inetAddress.getHostAddress();
                         boolean isIPv4 = hostAddress.indexOf(':') < 0;
                         if (useIPv4) {
-                            if (isIPv4) return hostAddress;
+                            if (isIPv4)
+                                return hostAddress;
                         } else {
                             if (!isIPv4) {
                                 int index = hostAddress.indexOf('%');

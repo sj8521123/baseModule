@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.billy.android.swipe.SmartSwipeRefresh;
+import com.billy.android.swipe.consumer.SlidingConsumer;
+import com.billy.android.swipe.consumer.StretchConsumer;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
@@ -51,21 +53,6 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
-        Double a = Double.valueOf("7000.0");
-        double b = Double.valueOf("7800.0");
-        if (a > b) {
-            Log.i(TAG, "initFromData: " + "true");
-        } else {
-            Log.i(TAG, "initFromData: " + "false");
-            double c = Double.parseDouble("7000.0");
-            double d = Double.parseDouble("7000.0");
-            if (c == d) {
-                Log.i(TAG, "initFromData: " + "true");
-            } else {
-                Log.i(TAG, "initFromData: " + "false");
-            }
-
-        }
         datas = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             datas.add("name" + (i + 1));
@@ -79,7 +66,26 @@ public class OtherActivity extends BaseActivity {
 
             }
         });
-        SmartSwipeRefresh.drawerMode(findViewById(R.id.mRecycle), false).setDataLoader(loader);
+
+
+        //enable recyclerView top & bottom swipe refersh
+        SmartSwipeRefresh.behindMode(findViewById(R.id.refresh), false)
+                .setDataLoader(loader)
+                //get SwipeConsumer
+                .getSwipeConsumer()
+                .as(SlidingConsumer.class)
+                .setEdgeAffinity(true)
+                //disable nested touch scroll
+                .setDisableNestedScroll(true)
+                //disable nested non-touch scroll
+                .setDisableNestedFly(true)
+                //add StretchConsumer as the secondary SwipeConsumer to handle the nested scroll event
+                .addConsumer(new StretchConsumer())
+                //enable StretchConsumer top & bottom directions
+                .enableVertical();
+
+
+        /*SmartSwipeRefresh.drawerMode(findViewById(R.id.mRecycle), false).setDataLoader(loader);*/
     }
 
     SmartSwipeRefresh.SmartSwipeRefreshDataLoader loader = new SmartSwipeRefresh.SmartSwipeRefreshDataLoader() {
@@ -93,7 +99,7 @@ public class OtherActivity extends BaseActivity {
                         public void accept(Long aLong) throws Exception {
                             ToastUtil.show("加载完成");
                             ssr.setNoMoreData(false);
-                            ssr.finished(false);
+                            ssr.finished(true);
                         }
                     });
         }

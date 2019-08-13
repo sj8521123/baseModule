@@ -1,6 +1,8 @@
 package basemodule.sj.com.basic.base;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -141,6 +143,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (isCheckNetWork()) {
             //有网络
             if (has) {
+                //说明前一步骤是无网络情况，mTipView 被加载到WindowManager上
                 if (mTipView != null && mTipView.getParent() != null) {
                     mWindowManager.removeView(mTipView);
                     reConnect();
@@ -157,8 +160,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                     mTipView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mWindowManager.removeView(mTipView);
-                            reConnect();
+                            // mWindowManager.removeView(mTipView);
+                            NetWorkUtil.openWirelessSettings();
                         }
                     });
                     mWindowManager.addView(mTipView, mTipViewLayoutParams);
@@ -192,9 +195,11 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      */
     public void showErrorView(String errorStr) {
         if (mErrorView != null && mErrorView.getParent() == null) {
+
             if (mTipView != null && mTipView.getParent() != null) {
                 mWindowManager.removeView(mTipView);
             }
+
             TextView textView = mErrorView.findViewById(R.id.hint);
             textView.setText(errorStr);
             mErrorView.findViewById(R.id.retry).setOnClickListener(new View.OnClickListener() {

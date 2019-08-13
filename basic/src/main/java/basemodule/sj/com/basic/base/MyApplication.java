@@ -16,6 +16,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.billy.android.swipe.SmartSwipe;
+import com.billy.android.swipe.SmartSwipeRefresh;
+import com.billy.android.swipe.ext.refresh.ArrowHeader;
+import com.billy.android.swipe.refresh.ClassicFooter;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.simple.spiderman.SpiderMan;
 import com.squareup.leakcanary.LeakCanary;
@@ -246,6 +250,34 @@ public class MyApplication extends LitePalApplication {
         ZXingLibrary.initDisplayOpinion(this);
         //百度地图初始化
         SDKInitializer.initialize(this);*/
+
+        //统一下拉样式
+        SmartSwipeRefresh.setDefaultRefreshViewCreator(new SmartSwipeRefresh.SmartSwipeRefreshViewCreator() {
+            @Override
+            public SmartSwipeRefresh.SmartSwipeRefreshHeader createRefreshHeader(Context context) {
+                ArrowHeader arrowHeader = new ArrowHeader(context);
+                int height = SmartSwipe.dp2px(100, context);
+                ViewGroup.LayoutParams layoutParams =  new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                arrowHeader.setLayoutParams(layoutParams);
+                arrowHeader.setInitializer(new ArrowHeader.IArrowInitializer() {
+                    @Override
+                    public void onArrowInit(ArrowHeader arrowHeader, com.wuyr.arrowdrawable.ArrowDrawable arrowDrawable) {
+                        arrowDrawable.setBowColor(Color.GRAY);
+                        arrowDrawable.setArrowColor(Color.BLACK);
+                        arrowDrawable.setStringColor(Color.GRAY);
+                        arrowDrawable.setLineColor(Color.GRAY);
+                        arrowHeader.setBackgroundColor(Color.LTGRAY);
+                    }
+                });
+                return arrowHeader;
+            }
+
+            @Override
+            public SmartSwipeRefresh.SmartSwipeRefreshFooter createRefreshFooter(Context context) {
+                return new ClassicFooter(context);
+            }
+        });
+
     }
 
     private void initButterKnife(Activity activity) {
