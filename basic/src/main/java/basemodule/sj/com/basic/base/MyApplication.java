@@ -31,7 +31,7 @@ import java.util.List;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
 import basemodule.sj.com.basic.config.SPUtils;
-import basemodule.sj.com.basic.util.STGFileUtil;
+import basemodule.sj.com.basic.util.file.STGFileUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.Util;
 import butterknife.ButterKnife;
@@ -130,6 +130,8 @@ public class MyApplication extends LitePalApplication {
                     initButterKnife(activity);
                     //针对toolBar统一处理
                     initToolBar(activity);
+
+
                     //刷新统一处理
                     /*  initRefreshLayout(activity);*/
                     //初始化来源数据
@@ -141,9 +143,16 @@ public class MyApplication extends LitePalApplication {
 
                     //通过decorView获取到设置contentView所有rootView
                     ViewGroup decorView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+                    View rootView = decorView.getChildAt(0);
                     //沉浸式
-                    decorView.getChildAt(0).setFitsSystemWindows(true);
+                    rootView.setFitsSystemWindows(true);
 
+                 /*   //activity侧滑返回
+                    SmartSwipe.wrap(rootView)
+                            .addConsumer(new StretchConsumer())
+                            .enableVertical()                     //仿MIUI拉伸效果的方向为：上下2个方向
+                            .addConsumer(new SpaceConsumer())
+                            .enableHorizontal();*/
                 } else {
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
@@ -204,16 +213,15 @@ public class MyApplication extends LitePalApplication {
     private void initLocalConfiguration() {
         //数据库操作初始化
         /*LitePal.initialize(this);*/
+        //全局控制界面返回
+        //SmartSwipeBack.activityBezierBack(this,null);
+        /*SmartSwipeBack.activitySlidingBack(this,null);*/
+
 
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();
         //创建目录
-        try {
-            STGFileUtil.createAllDirs();
-        } catch (IOException e) {
-            e.printStackTrace();
-            ToastUtil.show("创建项目目录出错!");
-        }
+        STGFileUtil.createAllDirs();
     }
 
     private void initExternalConfiguration() {

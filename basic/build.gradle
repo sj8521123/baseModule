@@ -28,7 +28,7 @@ dependencies {
     api "androidx.appcompat:appcompat:1.1.0-rc01"
     api "androidx.cardview:cardview:1.0.0"
     api "androidx.legacy:legacy-support-v4:1.0.0"
-    api "com.google.android.material:material:1.1.0-alpha08"
+    api "com.google.android.material:material:1.1.0-alpha09"
     api "androidx.recyclerview:recyclerview:1.1.0-beta01"
 
     //retrofit2 + rxJave2 + rxLifecycle
@@ -99,6 +99,10 @@ dependencies {
     //leakcanary内存检测
     debugApi "com.squareup.leakcanary:leakcanary-android:1.6.3"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
+    //仅仅支持5.0以上
+    api 'com.billy.android:smart-swipe:1.0.4'
+    //android x环境下兼容NestedScrolling支持5.0以下
+    api 'com.billy.android:smart-swipe-x:1.0.0'
 
     api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')

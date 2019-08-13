@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -29,7 +31,7 @@ import basemodule.sj.com.basic.weight.swipeback.SwipeBackActivity;
  * phone:13658029734
  */
 
-public abstract class BaseActivity extends SwipeBackActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
     protected boolean mCheckNetWork = true; //默认检查网络状态
     WindowManager mWindowManager;
     WindowManager.LayoutParams mTipViewLayoutParams;

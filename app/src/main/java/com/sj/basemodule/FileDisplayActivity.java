@@ -12,7 +12,7 @@ import java.io.File;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.KeyTools;
 import basemodule.sj.com.basic.util.NetWorkUtil;
-import basemodule.sj.com.basic.util.STGFileUtil;
+import basemodule.sj.com.basic.util.file.STGFileUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -197,7 +197,7 @@ public class FileDisplayActivity extends BaseActivity {
      * @return
      */
     private String getFileName(String url) {
-        return KeyTools.getMD5(url) + "." + STGFileUtil.fileUtil.getFileType(url);
+        return KeyTools.getMD5(url) + "." + STGFileUtil.storageFileUtil.getFileType(url);
     }
 
 }
