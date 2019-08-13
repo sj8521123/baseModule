@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 def config = rootProject.ext.android
-def librarys = rootProject.ext.supportDependencies
 android {
     compileSdkVersion config.compileSdkVersion
 
@@ -29,15 +28,15 @@ dependencies {
     api "androidx.appcompat:appcompat:1.1.0-rc01"
     api "androidx.cardview:cardview:1.0.0"
     api "androidx.legacy:legacy-support-v4:1.0.0"
-    api "com.google.android.material:material:1.1.0-alpha08"
-    api "androidx.recyclerview:recyclerview:1.1.0-beta01"
+    api "com.google.android.material:material:1.1.0-alpha09"
+    api "androidx.recyclerview:recyclerview:1.1.0-beta02"
 
     //retrofit2 + rxJave2 + rxLifecycle
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
-    api 'com.squareup.retrofit2:converter-scalars:2.2.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
     api 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
     api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
@@ -100,6 +99,13 @@ dependencies {
     //leakcanary内存检测
     debugApi "com.squareup.leakcanary:leakcanary-android:1.6.3"
     releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
+
+    //仅仅支持5.0以上
+    api 'com.billy.android:smart-swipe:1.0.6'
+    //android x环境下兼容NestedScrolling支持5.0以下
+    api 'com.billy.android:smart-swipe-x:1.0.0'
+    //刷新样式的支持
+    api 'com.billy.android:smart-swipe-refresh-ext:1.0.0'
 
     api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')

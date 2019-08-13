@@ -2,15 +2,11 @@ package com.sj.basemodule;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,9 +17,7 @@ import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
-import com.just.agentweb.AgentWeb;
 import com.sj.basemodule.net.RetrofitHelper;
-import com.sj.basemodule.net.RetrofitHelperWithToken;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
 import com.sj.basemodule.net.request.LoginRequest;
@@ -36,12 +30,10 @@ import java.io.InputStream;
 import java.util.List;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.AssetsUtil;
-import basemodule.sj.com.basic.util.FileUtil;
+import basemodule.sj.com.basic.util.file.FileUtil;
 import basemodule.sj.com.basic.util.LogUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import basemodule.sj.com.basic.util.file.STGFileUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
@@ -56,9 +48,10 @@ public class NetActivity extends BaseActivity {
     TextView mTvPercent;
     private DownloadUtils downloadUtils;
     private static final String TAG = "NetActivity";
+
     @Override
     protected void reConnect() {
-
+        ToastUtil.show("重连");
     }
 
     @Override
@@ -98,7 +91,7 @@ public class NetActivity extends BaseActivity {
         RetrofitHelper.getApiService()
                 .login(loginRequest)
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<LoginResponse>() {
+                .subscribe(new DefaultObserver<LoginResponse>(this) {
                     @Override
                     public void onSuccess(LoginResponse response) {
                         ToastUtil.show("登录成功");
@@ -119,7 +112,7 @@ public class NetActivity extends BaseActivity {
         RetrofitHelper.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
-                .subscribe(new DefaultObserver<List<MeiZi>>() {
+                .subscribe(new DefaultObserver<List<MeiZi>>(this) {
                     @Override
                     public void onSuccess(List<MeiZi> meiZis) {
                         Log.i(TAG, "onSuccess: " + meiZis.size());
@@ -147,7 +140,7 @@ public class NetActivity extends BaseActivity {
                 .compose(this.bindToLifecycle())
                 .compose(ProgressUtils.applyProgressBar(this, "上传文件..."))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<BasicResponse>() {
+                .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
                         ToastUtil.show("文件上传成功");
@@ -174,7 +167,7 @@ public class NetActivity extends BaseActivity {
                 .compose(this.<BasicResponse>bindToLifecycle())
                 .compose(ProgressUtils.<BasicResponse>applyProgressBar(this, "上传文件..."))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<BasicResponse>() {
+                .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
                         ToastUtil.show("文件上传成功");
@@ -265,7 +258,7 @@ public class NetActivity extends BaseActivity {
     private File getFile() {
         String fileStoreDir = Environment.getExternalStorageDirectory().getAbsolutePath();
         String filePath = fileStoreDir + "/test/test.txt";
-        FileUtil.createOrExistsFile(filePath);
+        STGFileUtil.fileUtil.createOrExistsFile(filePath);
         //文件路径
         return new File(filePath);
     }

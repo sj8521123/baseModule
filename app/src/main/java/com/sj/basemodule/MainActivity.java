@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void reConnect() {
+
         ToastUtil.show("reConnect");
     }
 
@@ -103,13 +104,10 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                showErrorView(1);
                 break;
             case R.id.btn2:
-                showErrorView(2);
                 break;
             case R.id.btn3:
-                showErrorView(3);
                 break;
             case R.id.btn4:
                 hideErrorView();

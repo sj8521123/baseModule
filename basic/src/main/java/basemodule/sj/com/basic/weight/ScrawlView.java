@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.base.MyApplication;
-import basemodule.sj.com.basic.util.STGFileUtil;
+import basemodule.sj.com.basic.util.file.STGFileUtil;
 
 
 /**
@@ -139,10 +139,10 @@ public class ScrawlView extends View {
 
     private String saveBitmap(String fileName) throws IOException {
         File file = new File(STGFileUtil.getPhotoFullDir(), fileName);
-        if (STGFileUtil.fileUtil.isFileExist(file)) {
+        if (STGFileUtil.fileUtil.isFileExists(file)) {
             STGFileUtil.fileUtil.deleteFile(file);
         }
-        STGFileUtil.fileUtil.createFile(file);
+        //STGFileUtil.fileUtil.createOrExistsFile(file);
         FileOutputStream fileOs = new FileOutputStream(file);
         //将内存中的bitmap保存到本地（图片）
         cacheBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOs);

@@ -3,6 +3,7 @@ package basemodule.sj.com.basic.base;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -15,6 +16,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.billy.android.swipe.SmartSwipe;
+import com.billy.android.swipe.SmartSwipeRefresh;
+import com.billy.android.swipe.ext.refresh.ArrowHeader;
+import com.billy.android.swipe.refresh.ClassicFooter;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.simple.spiderman.SpiderMan;
 import com.squareup.leakcanary.LeakCanary;
@@ -30,7 +35,7 @@ import java.util.List;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
 import basemodule.sj.com.basic.config.SPUtils;
-import basemodule.sj.com.basic.util.STGFileUtil;
+import basemodule.sj.com.basic.util.file.STGFileUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.Util;
 import butterknife.ButterKnife;
@@ -113,6 +118,11 @@ public class MyApplication extends LitePalApplication {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(final Activity activity, Bundle bundle) {
+                //强制竖屏
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                //保持常亮
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
                 if (activity instanceof BaseActivity) {
                     try {
                         activity.setContentView(((BaseActivity) activity).initLayout());
@@ -124,6 +134,8 @@ public class MyApplication extends LitePalApplication {
                     initButterKnife(activity);
                     //针对toolBar统一处理
                     initToolBar(activity);
+
+
                     //刷新统一处理
                     /*  initRefreshLayout(activity);*/
                     //初始化来源数据
@@ -133,11 +145,18 @@ public class MyApplication extends LitePalApplication {
                     //初始化本地数据
                     ((BaseActivity) activity).initLocalData();
 
-                    //设置xml所有viewGroup的fitsSystemWindows="true" 沉浸式
-                    ViewGroup content = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-                    content.getChildAt(0).setFitsSystemWindows(true);
+                    //通过decorView获取到设置contentView所有rootView
+                    ViewGroup decorView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+                    View rootView = decorView.getChildAt(0);
+                    //沉浸式
+                    rootView.setFitsSystemWindows(true);
 
-
+                 /*   //activity侧滑返回
+                    SmartSwipe.wrap(rootView)
+                            .addConsumer(new StretchConsumer())
+                            .enableVertical()                     //仿MIUI拉伸效果的方向为：上下2个方向
+                            .addConsumer(new SpaceConsumer())
+                            .enableHorizontal();*/
                 } else {
                     //统一ButterKnife绑定Activity
                     initButterKnife(activity);
@@ -198,15 +217,17 @@ public class MyApplication extends LitePalApplication {
     private void initLocalConfiguration() {
         //数据库操作初始化
         /*LitePal.initialize(this);*/
+        //全局控制界面返回
+        //SmartSwipeBack.activityBezierBack(this,null);
+        /*SmartSwipeBack.activitySlidingBack(this,null);*/
+
 
         screenWidth = getScreenWidth();
         screenHeight = getScreenHeight();
         //创建目录
-        try {
-            STGFileUtil.createAllDirs();
-        } catch (IOException e) {
-            e.printStackTrace();
-            ToastUtil.show("创建项目目录出错!");
+        boolean isCreateDirSuccess = STGFileUtil.createAllDirs();
+        if (!isCreateDirSuccess) {
+            ToastUtil.show("项目初始化时目录创建失败！");
         }
     }
 
@@ -221,7 +242,7 @@ public class MyApplication extends LitePalApplication {
         //LeakCanary内存泄漏分析
         LeakCanary.install(this);
         //本地记录crash日志
-       /* new CrashHandler(this).init();*/
+        /* new CrashHandler(this).init();*/
         //toast设置
        /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))
@@ -232,6 +253,34 @@ public class MyApplication extends LitePalApplication {
         ZXingLibrary.initDisplayOpinion(this);
         //百度地图初始化
         SDKInitializer.initialize(this);*/
+
+        //统一下拉样式
+        SmartSwipeRefresh.setDefaultRefreshViewCreator(new SmartSwipeRefresh.SmartSwipeRefreshViewCreator() {
+            @Override
+            public SmartSwipeRefresh.SmartSwipeRefreshHeader createRefreshHeader(Context context) {
+                ArrowHeader arrowHeader = new ArrowHeader(context);
+                int height = SmartSwipe.dp2px(100, context);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                arrowHeader.setLayoutParams(layoutParams);
+                arrowHeader.setInitializer(new ArrowHeader.IArrowInitializer() {
+                    @Override
+                    public void onArrowInit(ArrowHeader arrowHeader, com.wuyr.arrowdrawable.ArrowDrawable arrowDrawable) {
+                        arrowDrawable.setBowColor(Color.GRAY);
+                        arrowDrawable.setArrowColor(Color.BLACK);
+                        arrowDrawable.setStringColor(Color.GRAY);
+                        arrowDrawable.setLineColor(Color.GRAY);
+                        arrowHeader.setBackgroundColor(Color.LTGRAY);
+                    }
+                });
+                return arrowHeader;
+            }
+
+            @Override
+            public SmartSwipeRefresh.SmartSwipeRefreshFooter createRefreshFooter(Context context) {
+                return new ClassicFooter(context);
+            }
+        });
+
     }
 
     private void initButterKnife(Activity activity) {
