@@ -24,7 +24,6 @@ public class A_MineBaseInfoFragment extends BasePageFragment {
 
     @Override
     protected void initLayoutView() {
-
     }
 
     @Override

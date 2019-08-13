@@ -197,7 +197,7 @@ public class FileDisplayActivity extends BaseActivity {
      * @return
      */
     private String getFileName(String url) {
-        return KeyTools.getMD5(url) + "." + STGFileUtil.storageFileUtil.getFileType(url);
+        return STGFileUtil.fileUtil.getFileMD5ToString(url) + "." + STGFileUtil.fileUtil.getFileExtension(url);
     }
 
 }

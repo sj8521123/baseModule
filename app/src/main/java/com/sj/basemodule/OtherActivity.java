@@ -40,6 +40,7 @@ public class OtherActivity extends BaseActivity {
     @Override
     protected void reConnect() {
         ToastUtil.show("重新刷新");
+
     }
 
     @Override
@@ -51,7 +52,6 @@ public class OtherActivity extends BaseActivity {
     @Override
     public void initFromData() {
         Double a = Double.valueOf("7000.0");
-        double d = a.doubleValue();
         double b = Double.valueOf("7800.0");
         if (a > b) {
             Log.i(TAG, "initFromData: " + "true");

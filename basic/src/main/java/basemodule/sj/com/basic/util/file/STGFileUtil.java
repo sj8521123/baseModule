@@ -37,17 +37,17 @@ public class STGFileUtil {
     }
 
     //app专属的图片文件
-    private static String getPhotoFullDir() {
+    public static String getPhotoFullDir() {
         return storageFileUtil.getAppExclusiveStorage() + PHOTO_DIR;
     }
 
     //app专属的apk文件
-    private static String getAppDownLoadDir() {
+    public static String getAppDownLoadDir() {
         return storageFileUtil.getAppExclusiveStorage() + APKDOWN_DIR;
     }
 
     //app专属的其他文件（word，ppt）
-    private static String getCacheFileDir() {
+    public static String getCacheFileDir() {
         return storageFileUtil.getAppExclusiveStorage() + CACHE_FILE;
     }
 }
