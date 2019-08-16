@@ -48,6 +48,8 @@
         <activity android:name=".ProxyActivity"></activity>
         <activity android:name=".DiffUtilActivity"></activity>
         <activity android:name=".Main3Activity"></activity>
+
+
     </application>
 
 </manifest>
