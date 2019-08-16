@@ -17,9 +17,9 @@ import basemodule.sj.com.basic.util.file.StorageFileUtil;
 public class STGFileUtil {
     // TODO: 2018/5/23 根据项目变化而变化
     //图片目录
-    private final static String PHOTO_DIR = "Photo";
+    private final static String PHOTO_DIR = "photo";
     //apk下载文件
-    private final static String APKDOWN_DIR = "ApkDown";
+    private final static String APK_DOWNLOAD_DIR = "apkDownLoad";
     //针对网上下载的word ppt的存储
     private final static String CACHE_FILE = "cacheFile";
     //专属、独立
@@ -43,7 +43,7 @@ public class STGFileUtil {
 
     //app专属的apk文件
     public static String getAppDownLoadDir() {
-        return storageFileUtil.getAppExclusiveStorage() + APKDOWN_DIR + File.separator;
+        return storageFileUtil.getAppExclusiveStorage() + APK_DOWNLOAD_DIR + File.separator;
     }
 
     //app专属的其他文件（word，ppt）

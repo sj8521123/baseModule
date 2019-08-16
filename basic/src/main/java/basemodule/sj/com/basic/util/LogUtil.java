@@ -17,18 +17,19 @@ package basemodule.sj.com.basic.util;
 
 import android.util.Log;
 
+import basemodule.sj.com.basic.BuildConfig;
+
 
 /**
  * Log日志打印操作
- *
- * @author Weiss
  */
 public class LogUtil {
 
-    private static final boolean DEBUG = true;
+    private static final boolean IS_DEBUG = BuildConfig.DEBUG;
 
     /**
      * 获取当前类名
+     *
      * @return
      */
     private static String getClassName() {
@@ -42,7 +43,7 @@ public class LogUtil {
 
 
     public static void w(String logString) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.w(getClassName(), logString);
         }
     }
@@ -53,7 +54,7 @@ public class LogUtil {
      * @param msg
      */
     public static void d(String tag, String msg) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.d(tag, msg);
         }
     }
@@ -64,7 +65,7 @@ public class LogUtil {
      * @param msg
      */
     public static void e(String tag, String msg) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.e(tag, msg);
         }
     }
@@ -75,7 +76,7 @@ public class LogUtil {
      * @param msg
      */
     public static void d(String msg) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.d(getClassName(), msg);
         }
     }
@@ -86,31 +87,31 @@ public class LogUtil {
      * @param msg
      */
     public static void i(String msg) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.i(getClassName(), msg);
         }
     }
+
     /**
      * error log
      *
      * @param msg
      */
     public static void e(String msg) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.e(getClassName(), msg);
         }
     }
 
     public static void i(String tag, String logString) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.i(tag, logString);
         }
     }
 
 
-
     public static void w(String tag, String logString) {
-        if (DEBUG) {
+        if (IS_DEBUG) {
             Log.w(tag, logString);
         }
     }

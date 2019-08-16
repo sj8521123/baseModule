@@ -16,18 +16,19 @@ import basemodule.sj.com.basic.util.NetWorkUtil;
 public class NetworkConnectChangedReceiver extends BroadcastReceiver {
     private static final String TAG = "NetworkConnectChangedRe";
     private static int lastNetState;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         boolean isConnected = NetWorkUtil.isConnected();
         int currentState;
-        if(isConnected){
+        if (isConnected) {
             currentState = 1;
-        }else{
+        } else {
             currentState = -1;
         }
 
-        if(lastNetState != currentState){
-            Log.i(TAG, "onReceive: 当前网路"+isConnected );
+        if (lastNetState != currentState) {
+            Log.i(TAG, "onReceive: 当前网路" + isConnected);
             EventBus.getDefault().post(new NetWorkChangeEvent(isConnected));
             lastNetState = currentState;
         }
