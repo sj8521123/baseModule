@@ -31,14 +31,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
-    @BindView(R.id.webView)
-    LinearLayout webView;
     @BindView(R.id.mRecycle)
     RecyclerView mRecycle;
     OtherAdapter mAdapter;
     List<String> datas;
-    @BindView(R.id.mScrawlView)
-    ScrawlView mScrawlView;
 
     @Override
     protected void reConnect() {
@@ -89,37 +85,6 @@ public class OtherActivity extends BaseActivity {
         /*SmartSwipeRefresh.drawerMode(findViewById(R.id.mRecycle), false).setDataLoader(loader);*/
     }
 
-    SmartSwipeRefresh.SmartSwipeRefreshDataLoader loader = new SmartSwipeRefresh.SmartSwipeRefreshDataLoader() {
-        @Override
-        public void onRefresh(final SmartSwipeRefresh ssr) {
-            Observable.timer(5, TimeUnit.SECONDS)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Exception {
-                            ToastUtil.show("加载完成");
-                            ssr.setNoMoreData(false);
-                            ssr.finished(true);
-                        }
-                    });
-        }
-
-        @Override
-        public void onLoadMore(final SmartSwipeRefresh ssr) {
-            Observable.timer(5, TimeUnit.SECONDS)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Exception {
-                            ToastUtil.show("下拉加载完成");
-                            ssr.setNoMoreData(true);
-                            ssr.finished(true);
-                        }
-                    });
-        }
-    };
 
     @Override
     public void initLayoutView() {
@@ -130,56 +95,5 @@ public class OtherActivity extends BaseActivity {
     @Override
     public void initLocalData() {
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
- /*   @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if(hasFocus){
-            Log.i(TAG, "onWindowFocusChanged: true");
-        }else{
-            Log.i(TAG, "onWindowFocusChanged: false");
-        }
-    }
-*/
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick(R.id.btn)
-    public void onViewClicked() {
-        try {
-            mScrawlView.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
