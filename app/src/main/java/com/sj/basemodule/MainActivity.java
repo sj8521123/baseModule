@@ -39,9 +39,6 @@ public class MainActivity extends BaseActivity {
     private static final String[] TITLES = new String[]{"日常", "专项", "工作台", "主体"};
     private List<String> mTitleDataList = Arrays.asList(TITLES);
     private HomePagerAdapter mPagerAdapter;
-    private String str = "local";
-    private String he = "hello";
-    private int remote = 10;
 
     @Override
     protected void reConnect() {

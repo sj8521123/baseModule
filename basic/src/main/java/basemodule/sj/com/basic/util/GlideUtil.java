@@ -32,6 +32,7 @@ public class GlideUtil {
     //默认圆角10
     private int radio = 10;
     private int errorImgSourceId = R.drawable.default_image;
+
     public void setRadio(int radio) {
         this.radio = radio;
     }

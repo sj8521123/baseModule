@@ -8,14 +8,15 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import basemodule.sj.com.basic.util.GlideUtil;
 
-public class OtherAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public OtherAdapter(int layoutResId, @Nullable List<String> data) {
+public class OtherAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
+    public OtherAdapter(int layoutResId, @Nullable List<Integer> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, String item) {
-        helper.setText(R.id.name, item).addOnClickListener(R.id.name);
+    protected void convert(@NonNull BaseViewHolder helper, Integer item) {
+        new GlideUtil().load(mContext,item,helper.getView(R.id.image),GlideUtil.NOT_TRANSFORM);
     }
 }
