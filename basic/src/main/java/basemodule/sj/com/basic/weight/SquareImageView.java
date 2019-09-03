@@ -1,4 +1,4 @@
-package com.sj.basemodule;
+package basemodule.sj.com.basic.weight;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

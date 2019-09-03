@@ -1,11 +1,14 @@
-package com.sj.basemodule;
+package basemodule.sj.com.basic.weight;
 
 import android.content.Context;
 
 import androidx.recyclerview.widget.LinearSmoothScroller;
 
+/**
+ * 针对layoutManager 滑动的处理
+ */
 public class TopSmoothScroller extends LinearSmoothScroller {
-    TopSmoothScroller(Context context) {
+    public TopSmoothScroller(Context context) {
         super(context);
     }
 
