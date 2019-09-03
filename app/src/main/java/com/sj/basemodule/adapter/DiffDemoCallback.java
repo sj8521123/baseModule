@@ -1,5 +1,6 @@
 package com.sj.basemodule.adapter;
 
+
 import com.chad.library.adapter.base.diff.BaseQuickDiffCallback;
 
 import java.util.List;
