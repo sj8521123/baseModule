@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import basemodule.sj.com.basic.R;
-import basemodule.sj.com.basic.weight.sticky.Utils;
 
 /**
  * @author Yrom

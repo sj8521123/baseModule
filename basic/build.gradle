@@ -108,5 +108,5 @@ dependencies {
     api 'com.billy.android:smart-swipe-refresh-ext:1.0.0'
     api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
-
+    api 'com.airbnb.android:lottie:3.0.7'
 }

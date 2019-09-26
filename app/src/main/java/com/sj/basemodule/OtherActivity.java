@@ -1,33 +1,53 @@
 package com.sj.basemodule;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.airbnb.lottie.LottieAnimationView;
 import com.sj.basemodule.adapter.TestAdapter;
 
 import java.util.ArrayList;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.RecyclerView;
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
-import basemodule.sj.com.basic.weight.TopSmoothScroller;
-import basemodule.sj.com.basic.weight.decoration.GridDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
-    @BindView(R.id.mRecycleView)
-    RecyclerView mRecycleView;
+    @BindView(R.id.lottie_likeanim)
+    LottieAnimationView lottieLikeanim;
+    /*  @BindView(R.id.mRecycleView)
+      RecyclerView mRecycleView;*/
+    /*  @BindView(R.id.shc)
+      StickyHeadContainer container;*/
+/*    @BindView(R.id.head)
+    TextView head;*/
     private TestAdapter mAdapter;
-    private ArrayList<String> mDatas;
+    private ArrayList<OtherModel> mDatas;
+    private int mStickyPosition;
+
+    private int test(int... a) {
+        return a[0];
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+        String name = "张三";
+        if(name.equals(null)){
+            Log.i(TAG, "onCreate: ");
+        }else{
+            Log.i(TAG, "onCreate: ");
+        }
+
+        Log.i(TAG, "onCreate: " + "12.345-6.A".split("."));
+        Log.i(TAG, "onCreate: " + test(1, 2, 3, 4, 5));
+    }
 
     @Override
     protected void reConnect() {
@@ -40,9 +60,21 @@ public class OtherActivity extends BaseActivity {
         return R.layout.fragment_loansign_layout;
     }
 
-
     @Override
     public void initFromData() {
+    TestInterface t =    new TestInterface(){
+
+            @Override
+            public void run() {
+
+            }
+
+            @Override
+            public void eat() {
+
+            }
+        };
+        t.test("haha");
     }
 
 
@@ -51,23 +83,31 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-        mDatas = new ArrayList<>();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-        mRecycleView.setLayoutManager(gridLayoutManager);
-        mRecycleView.addItemDecoration(new GridDividerItemDecoration(this, ScreenUtil.dp2px(2), ScreenUtil.dp2px(2), ScreenUtil.dp2px(2), true, true, Color.RED));
-        mAdapter = new TestAdapter(R.layout.test_item, mDatas);
+      /*  mDatas = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.CHINA);
+        String date = format.format(calendar.getTime());
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        //mRecycleView.addItemDecoration(new GridSectionAverageGapItemDecoration(2, 2, 2, 2));
+        mRecycleView.addItemDecoration(new StickyItemDecoration());
+
+
+       *//* mAdapter = new TestAdapter(mDatas);
         mRecycleView.setAdapter(mAdapter);
-
-
+*//*
         LinearSmoothScroller mScroller = new TopSmoothScroller(this);
         for (int i = 0; i < 50; i++) {
-            mAdapter.getData().add(new String("h" + i));
+            if (i % 10 == 0) {
+                OtherModel otherModel = new OtherModel(OtherModel.TEXT_HEAD, "head" + i);
+                mDatas.add(otherModel);
+            }
+            OtherModel otherModel = new OtherModel(OtherModel.TEXT_CONTENT, "content" + i);
+            mDatas.add(otherModel);
         }
-        mAdapter.notifyDataSetChanged();
-
-        mScroller.setTargetPosition(10);
-        mRecycleView.getLayoutManager().startSmoothScroll(mScroller);
-
+        mAdapter = new TestAdapter(mDatas);
+        mRecycleView.setAdapter(mAdapter);
         mRecycleView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -76,8 +116,39 @@ public class OtherActivity extends BaseActivity {
                 mRecycleView.getLayoutManager().startSmoothScroll(mScroller);
 
             }
-        });
+        });*/
+       /* container.setDataCallback(new StickyHeadContainer.DataCallback() {
+            @Override
+            public void onDataChange(int pos) {
+                mStickyPosition = pos;
+                OtherModel otherModel1 = mAdapter.getData().get(pos);
+                head.setText(otherModel1.header);
 
+
+            }
+        });
+        container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.show("点击了粘性头部：" + head.getText().toString());
+                *//* Toast.makeText(MainActivity.this, "点击了粘性头部：" + tvStockName.getText(), Toast.LENGTH_SHORT).show();*//*
+            }
+        });*/
+       /* StickyItemDecoration stickyItemDecoration = new StickyItemDecoration(container, RecyclerViewAdapter.TYPE_STICKY_HEAD);
+        stickyItemDecoration.setOnStickyChangeListener(new OnStickyChangeListener() {
+            @Override
+            public void onScrollable(int offset) {
+                container.scrollChild(offset);
+                container.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onInVisible() {
+                container.reset();
+                container.setVisibility(View.INVISIBLE);
+            }
+        });
+        mRecycleView.addItemDecoration(stickyItemDecoration);*/
 
     }
 
@@ -86,11 +157,9 @@ public class OtherActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick(R.id.btn)
+    public void onViewClicked() {
+        lottieLikeanim.playAnimation();
     }
 }
 

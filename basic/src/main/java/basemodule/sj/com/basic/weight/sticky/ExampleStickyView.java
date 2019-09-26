@@ -15,6 +15,6 @@ public class ExampleStickyView implements StickyView {
 
     @Override
     public int getStickViewType() {
-        return 1;
+        return 11;
     }
 }
