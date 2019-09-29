@@ -6,22 +6,26 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="动画" />
+        android:text="带目录的拍照" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_likeanim"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lottie_fileName="lottie.json"
-        app:lottie_loop="true" />
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不带目录的拍照" />
 
-  <!--  <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRecycleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
+    <ImageView
+        android:id="@+id/iv_CameraImg"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+    <!--  <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/mRecycleView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />-->
 
     <!--<basemodule.sj.com.basic.weight.decoration.stickydecoration.StickyHeadContainer
         android:id="@+id/shc"

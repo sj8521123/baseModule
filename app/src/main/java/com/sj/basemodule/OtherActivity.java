@@ -1,13 +1,15 @@
 package com.sj.basemodule;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.sj.basemodule.adapter.TestAdapter;
-
-import java.util.ArrayList;
+import java.io.File;
 
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.util.ToastUtil;
@@ -17,21 +19,14 @@ import butterknife.OnClick;
 
 public class OtherActivity extends BaseActivity {
     private static final String TAG = "OtherActivity";
-    @BindView(R.id.lottie_likeanim)
-    LottieAnimationView lottieLikeanim;
-    /*  @BindView(R.id.mRecycleView)
-      RecyclerView mRecycleView;*/
-    /*  @BindView(R.id.shc)
-      StickyHeadContainer container;*/
-/*    @BindView(R.id.head)
-    TextView head;*/
-    private TestAdapter mAdapter;
-    private ArrayList<OtherModel> mDatas;
-    private int mStickyPosition;
+    @BindView(R.id.iv_CameraImg)
+    ImageView ivCameraImg;
 
     private int test(int... a) {
         return a[0];
     }
+
+    private static final String FILE_PATH = "/sdcard/syscamera.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +34,9 @@ public class OtherActivity extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         String name = "张三";
-        if(name.equals(null)){
+        if (name.equals(null)) {
             Log.i(TAG, "onCreate: ");
-        }else{
+        } else {
             Log.i(TAG, "onCreate: ");
         }
 
@@ -62,7 +57,7 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
-    TestInterface t =    new TestInterface(){
+        TestInterface t = new TestInterface() {
 
             @Override
             public void run() {
@@ -157,9 +152,15 @@ public class OtherActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.btn)
-    public void onViewClicked() {
-        lottieLikeanim.playAnimation();
+    @OnClick({R.id.btn1, R.id.btn2})
+    public void onViewClicked(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.btn1:
+                break;
+            case R.id.btn2:
+                break;
+        }
     }
 }
 
