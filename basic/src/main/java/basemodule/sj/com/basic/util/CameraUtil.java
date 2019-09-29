@@ -45,9 +45,9 @@ public class CameraUtil {
             if (mediaFile != null && mediaFile.exists()) {
                 //FileProvider方式或者ContentProvider。也可使用VmPolicy方式
                 //与清单文件中android:authorities的值保持一致
-                //content://包名/file_paths_public.xml中name/temp.jpg
+                //content://包名(com.sj.basemodule).fileProvider/file_paths_public.xml中name/temp.jpg
                 return FileProvider.getUriForFile(context,
-                        context.getApplicationContext().getPackageName() + ".provider",
+                        context.getApplicationContext().getPackageName() + ".fileProvider",
                         mediaFile);
             } else {
                 return null;
