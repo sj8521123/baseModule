@@ -32,7 +32,7 @@ public class CameraUtil {
                 }
             }
 
-            //注意这里需要和filepaths.xml中配置的一样
+            //注意这里需要和file_paths_public.xml中配置的一样 Path:Picture
             mediaFile = new File(mediaStorageDir.getPath()
                     + File.separator
                     + "Picture/temp.jpg");
@@ -45,7 +45,7 @@ public class CameraUtil {
             if (mediaFile != null && mediaFile.exists()) {
                 //FileProvider方式或者ContentProvider。也可使用VmPolicy方式
                 //与清单文件中android:authorities的值保持一致
-                //content://com.yooli.android.kliloan.provider/temp/temp.jpg
+                //content://包名/file_paths_public.xml中name/temp.jpg
                 return FileProvider.getUriForFile(context,
                         context.getApplicationContext().getPackageName() + ".provider",
                         mediaFile);
@@ -71,7 +71,6 @@ public class CameraUtil {
      */
     public static Bitmap getBitmapFormUri(Context context, Uri uri) throws FileNotFoundException, IOException {
         InputStream input = context.getContentResolver().openInputStream(uri);
-
         //这一段代码是不加载文件到内存中也得到bitmap的真是宽高，主要是设置inJustDecodeBounds为true
         BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
         onlyBoundsOptions.inJustDecodeBounds = true;//不加载到内存
@@ -121,7 +120,7 @@ public class CameraUtil {
                 break;
         }
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        return bitmap;
+
+        return BitmapFactory.decodeStream(isBm, null, null);  //把ByteArrayInputStream数据生成图片
     }
 }
