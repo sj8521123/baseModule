@@ -52,83 +52,95 @@ android {
             //关闭release apk下的debug调试 可普通调试
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
 
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为app_年月日时分秒_version_渠道.apk
-                        def fileName = "APP_${date}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
-                        outputFileName = fileName
-                    }
+            android.applicationVariants.all { variant ->
+
+                variant.outputs.all {
+                    def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
+                    outputFileName = "App_${date}_${variant.versionName}_${variant.productFlavors[0].name}.apk"
                 }
+
+                /*     applicationVariants.all { variant ->
+                         variant.outputs.all { output ->
+                             def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
+
+                             def outputFile = output.outputFile
+                             if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                                 // 输出apk名称为app_年月日时分秒_version_渠道.apk
+                                 def fileName = "APP_${date}_v${variant.versionName}_${variant.productFlavors[0].name}.apk"
+                                 outputFileName = fileName
+                             }
+                         }
+                     }*/
+
+            }
+
+
+            debug {
+                signingConfig signingConfigs.debug
+                versionNameSuffix "-debug"
+                //打开debug apk下的debug调试 可普通调试调试
+                debuggable true
+                // 不开启混淆
+                minifyEnabled false
+                // 不需要ZIP优化
+                zipAlignEnabled false
+                // 不需要资源压缩
+                shrinkResources false
+
+
             }
         }
 
-        debug {
-            signingConfig signingConfigs.debug
-            versionNameSuffix "-debug"
-            //打开debug apk下的debug调试 可普通调试调试
-            debuggable true
-            // 不开启混淆
-            minifyEnabled false
-            // 不需要ZIP优化
-            zipAlignEnabled false
-            // 不需要资源压缩
-            shrinkResources false
+// 打包渠道List 如果需要一个手机安装多个app 则打开applicationId
+        productFlavors {
+            one {
+                buildConfigField "String", "STG_COMMON_API", "\"http://smart-demo.ybveg.com/api/\""
+                /*applicationId "com.shundian.smart.smartdemo"*/
+                manifestPlaceholders = [
+                        APP_NAME         : "one",
+                        APP_CHANNEL_VALUE: "one"]
+            }
+            two {
+                buildConfigField "String", "STG_COMMON_API", "\"http://tog-dev.ybveg.com/api/\""
+                /*applicationId "com.shundian.smart.dev"*/
+                manifestPlaceholders = [
+                        APP_NAME         : "two",
+                        APP_CHANNEL_VALUE: "two"]
+            }
+            three {
+                buildConfigField "String", "STG_COMMON_API", "\"http://tog-test.ybveg.com/api/\""
+                /*   applicationId "com.shundian.smart.test"*/
+                manifestPlaceholders = [
+                        APP_NAME         : "three",
+                        APP_CHANNEL_VALUE: "three"]
+            }
+            four {
+                buildConfigField "String", "STG_COMMON_API", "\"http://172.16.2.95:8080/\""
+                /*   applicationId "com.shundian.smart.test"*/
+                manifestPlaceholders = [
+                        APP_NAME         : "four",
+                        APP_CHANNEL_VALUE: "four"]
+            }
+        }
 
-
-        }
-    }
-    // 打包渠道List 如果需要一个手机安装多个app 则打开applicationId
-    productFlavors {
-        one {
-            buildConfigField "String", "STG_COMMON_API", "\"http://smart-demo.ybveg.com/api/\""
-            /*applicationId "com.shundian.smart.smartdemo"*/
-            manifestPlaceholders = [
-                    APP_NAME         : "one",
-                    APP_CHANNEL_VALUE: "one"]
-        }
-        two {
-            buildConfigField "String", "STG_COMMON_API", "\"http://tog-dev.ybveg.com/api/\""
-            /*applicationId "com.shundian.smart.dev"*/
-            manifestPlaceholders = [
-                    APP_NAME         : "two",
-                    APP_CHANNEL_VALUE: "two"]
-        }
-        three {
-            buildConfigField "String", "STG_COMMON_API", "\"http://tog-test.ybveg.com/api/\""
-            /*   applicationId "com.shundian.smart.test"*/
-            manifestPlaceholders = [
-                    APP_NAME         : "three",
-                    APP_CHANNEL_VALUE: "three"]
-        }
-        four {
-            buildConfigField "String", "STG_COMMON_API", "\"http://172.16.2.95:8080/\""
-            /*   applicationId "com.shundian.smart.test"*/
-            manifestPlaceholders = [
-                    APP_NAME         : "four",
-                    APP_CHANNEL_VALUE: "four"]
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
         }
     }
 
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+    dependencies {
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        implementation 'androidx.appcompat:appcompat:1.1.0'
+        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+        androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+        testImplementation 'junit:junit:4.12'
+        implementation 'androidx.multidex:multidex:2.0.1'
+        implementation 'com.jakewharton:butterknife:10.1.0'
+        annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+        implementation project(':net')
     }
-}
-
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation 'junit:junit:4.12'
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    implementation project(':net')
 }

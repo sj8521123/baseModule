@@ -25,11 +25,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "androidx.appcompat:appcompat:1.1.0-rc01"
+    api "androidx.appcompat:appcompat:1.1.0"
     api "androidx.cardview:cardview:1.0.0"
     api "androidx.legacy:legacy-support-v4:1.0.0"
-    api "com.google.android.material:material:1.1.0-alpha09"
-    api "androidx.recyclerview:recyclerview:1.1.0-beta02"
+    api "com.google.android.material:material:1.1.0-alpha10"
+    api "androidx.recyclerview:recyclerview:1.1.0-beta04"
 
     //retrofit2 + rxJave2 + rxLifecycle
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
@@ -56,7 +56,7 @@ dependencies {
     //picasso图片加载框架
     api 'com.squareup.picasso:picasso:2.5.2'
     //glide图片加载框架
-    api 'com.github.bumptech.glide:glide:4.0.0-RC1'
+    api 'com.github.bumptech.glide:glide:4.4.0'
 
     //解决泛型擦除问题
     api 'com.github.ikidou:TypeBuilder:1.0'
