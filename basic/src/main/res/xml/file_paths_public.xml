@@ -14,7 +14,6 @@
   limitations under the License.
   -->
 <paths>
-
     <external-path
         name="temp"
         path="Pictures" />

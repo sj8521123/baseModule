@@ -24,16 +24,6 @@
             android:name="APP_CHANNEL"
             android:value="${APP_CHANNEL_VALUE}" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public" />
-        </provider>
-
         <activity
             android:name=".MainActivity"
             android:label="首页" />
@@ -44,12 +34,9 @@
             </intent-filter>
         </activity>
 
-
-
-        <activity android:name=".NetActivity"></activity>
-        <activity android:name=".ProxyActivity"></activity>
-        <activity android:name=".DiffUtilActivity"></activity>
-
+        <activity android:name=".NetActivity" />
+        <activity android:name=".ProxyActivity" />
+        <activity android:name=".DiffUtilActivity" />
 
     </application>
 
