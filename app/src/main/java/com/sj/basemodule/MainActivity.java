@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
         //联系人
         mPagerAdapter.addFragment(D_MineBaseInfoFragment.newInstance());
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setPageMargin(-ScreenUtil.dip2px(105));
+        mViewPager.setPageMargin(-ScreenUtil.dip2px(140));
         mViewPager.setPageTransformer(true, new AlphaAndScalePageTransformer());
 
         mViewPager.setAdapter(mPagerAdapter);
