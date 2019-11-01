@@ -26,6 +26,7 @@ import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
+import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
@@ -87,7 +88,7 @@ public class MainActivity extends BaseActivity {
         //联系人
         mPagerAdapter.addFragment(D_MineBaseInfoFragment.newInstance());
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setPageMargin(40);
+        mViewPager.setPageMargin(-ScreenUtil.dip2px(105));
         mViewPager.setPageTransformer(true, new AlphaAndScalePageTransformer());
 
         mViewPager.setAdapter(mPagerAdapter);
