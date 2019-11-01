@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="带目录的拍照" />
-
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="不带目录的拍照" />
-
-    <ImageView
-        android:id="@+id/iv_CameraImg"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
-
-    <!--  <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/mRecycleView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />-->
-
-    <!--<basemodule.sj.com.basic.weight.decoration.stickydecoration.StickyHeadContainer
-        android:id="@+id/shc"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecycleView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#9cb7dc" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecycleView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9cb7dc" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecycleView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9cb7dc" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecycleView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9cb7dc" />
 
-        <include layout="@layout/item_sticky_head" />
-    </basemodule.sj.com.basic.weight.decoration.stickydecoration.StickyHeadContainer>-->
 </LinearLayout>

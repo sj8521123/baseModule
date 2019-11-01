@@ -64,7 +64,9 @@ public class ImagePreviewActivity extends BaseActivity {
             delete.setVisibility(View.INVISIBLE);
         }
         int startPage = getIntent().getIntExtra(START_PAGE, 0);
-        content.setText((startPage + 1) + " / " + imageUris.size());
+
+        String showPage = (startPage + 1) + " / " + imageUris.size();
+        content.setText(showPage);
 
         mAdapter = new ImagePreviewAdapter(ImagePreviewActivity.this, imageUris);
         viewPager.setAdapter(mAdapter);
@@ -93,7 +95,6 @@ public class ImagePreviewActivity extends BaseActivity {
                                 dialogInterface.dismiss();
                                 int current = viewPager.getCurrentItem();
                                 int size = imageUris.size();
-                                // TODO: 2017/12/26  只剩一张的情况
                                 imageUris.remove(current);
                                 if (size == 1) {
                                     if (isDelete) {

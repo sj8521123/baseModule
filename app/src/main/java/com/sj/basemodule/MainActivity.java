@@ -1,13 +1,13 @@
 package com.sj.basemodule;
 
-import android.content.Intent;
 import android.graphics.Color;
-
-
+import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
-import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
@@ -17,17 +17,19 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import androidx.viewpager.widget.ViewPager;
+import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
 import basemodule.sj.com.basic.util.ToastUtil;
+import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     int c = 10;
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity {
     MagicIndicator magicIndicator;
     private static final String TAG = "MainActivity";
     private static final String[] TITLES = new String[]{"日常", "专项", "工作台", "主体"};
+    @BindView(R.id.switch2)
+    Switch switch2;
     private List<String> mTitleDataList = Arrays.asList(TITLES);
     private HomePagerAdapter mPagerAdapter;
 
@@ -67,6 +71,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private Void test() {
+        return null;
+    }
+
     private void initViewPage() {
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
 
@@ -78,8 +86,58 @@ public class MainActivity extends BaseActivity {
         mPagerAdapter.addFragment(C_MineBaseInfoFragment.newInstance());
         //联系人
         mPagerAdapter.addFragment(D_MineBaseInfoFragment.newInstance());
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setPageMargin(40);
+        mViewPager.setPageTransformer(true, new AlphaAndScalePageTransformer());
 
         mViewPager.setAdapter(mPagerAdapter);
+        new Thread(new FutureTask<>(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return "hello";
+            }
+        })).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ThreadGroup tg = new ThreadGroup("线程组一");
+                for (int i = 0; i < 10; i++) {
+                    new Thread(tg, "子线程" + (i + 1)) {
+                        @Override
+                        public void run() {
+                            while (!Thread.currentThread().isInterrupted()) {
+                                Log.i(TAG, Thread.currentThread().getName() + ":run");
+                            }
+                        }
+                    }.start();
+                }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                tg.interrupt();
+            }
+        }).start();
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    ToastUtil.show("打开");
+                } else {
+                    ToastUtil.show("关闭");
+                }
+            }
+        });
+        switch2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    switch2.setChecked(switch2.isChecked());
+                }
+                return false;
+            }
+        });
     }
 
     private void initMagicIndicator() {
@@ -97,33 +155,17 @@ public class MainActivity extends BaseActivity {
         ViewPagerHelper.bind(magicIndicator, mViewPager);
     }
 
-    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn1:
-                break;
-            case R.id.btn2:
-                break;
-            case R.id.btn3:
-                break;
-            case R.id.btn4:
-                hideErrorView();
-                break;
-            case R.id.btn5:
-                BaseEvent baseEvent = new BaseEvent();
-                baseEvent.setMsg("hello");
-                /*Student student = new Student("张三", "12");*/
-                EventBus.getDefault().post(baseEvent);
-                break;
-            case R.id.btn6:
-                startActivity(new Intent(MainActivity.this, NetActivity.class));
-                break;
-        }
-    }
 
     @Override
     public void onEventMainThread(BaseEvent event) {
         super.onEventMainThread(event);
         Log.i(TAG, "onEventMainThread: " + "A");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
