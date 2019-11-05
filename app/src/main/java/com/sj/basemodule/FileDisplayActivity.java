@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.hjq.toast.ToastUtils;
+
 import basemodule.sj.com.basic.weight.SuperFileView2;
 
 import java.io.File;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.KeyTools;
 import basemodule.sj.com.basic.util.NetWorkUtil;
 import basemodule.sj.com.basic.util.file.STGFileUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -103,10 +103,10 @@ public class FileDisplayActivity extends BaseActivity {
                 if (filePath.contains("http")) {
                     /*downLoadFromNet(filePath, mSuperFileView2);*/
                 } else {
-                    ToastUtil.show("未知的Url");
+                    ToastUtils.show("未知的Url");
                 }
             } else {
-                ToastUtil.show("请先打开网络!");
+                ToastUtils.show("请先打开网络!");
             }
         }
     }
@@ -148,7 +148,7 @@ public class FileDisplayActivity extends BaseActivity {
                     if (!fileN.exists()) {
                         boolean mkFile = fileN.createNewFile();
                         if (!mkFile) {
-                            ToastUtil.fail("创建下载文件出错");
+                            ToastUtils.fail("创建下载文件出错");
                             return;
                         }
                     }

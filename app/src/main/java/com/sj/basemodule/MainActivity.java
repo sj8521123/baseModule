@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
@@ -27,7 +28,6 @@ import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
 import basemodule.sj.com.basic.util.ScreenUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void reConnect() {
 
-        ToastUtil.show("reConnect");
+        ToastUtils.show("reConnect");
     }
 
     @Override
@@ -124,9 +124,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    ToastUtil.show("打开");
+                    ToastUtils.show("打开");
                 } else {
-                    ToastUtil.show("关闭");
+                    ToastUtils.show("关闭");
                 }
             }
         });

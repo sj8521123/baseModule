@@ -17,6 +17,7 @@ import com.app.idea.net.common.ProgressUtils;
 import com.app.idea.net.download.DownloadListener;
 import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
+import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.net.RetrofitHelper;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
@@ -30,9 +31,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.file.FileUtil;
 import basemodule.sj.com.basic.util.LogUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.file.STGFileUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -51,7 +50,7 @@ public class NetActivity extends BaseActivity {
 
     @Override
     protected void reConnect() {
-        ToastUtil.show("重连");
+        ToastUtils.show("重连");
     }
 
     @Override
@@ -94,7 +93,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<LoginResponse>(this) {
                     @Override
                     public void onSuccess(LoginResponse response) {
-                        ToastUtil.show("登录成功");
+                        ToastUtils.show("登录成功");
                     }
                 });
     }
@@ -143,7 +142,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
-                        ToastUtil.show("文件上传成功");
+                        ToastUtils.show("文件上传成功");
                     }
                 });
     }
@@ -170,7 +169,7 @@ public class NetActivity extends BaseActivity {
                 .subscribe(new DefaultObserver<BasicResponse>(this) {
                     @Override
                     public void onSuccess(BasicResponse response) {
-                        ToastUtil.show("文件上传成功");
+                        ToastUtils.show("文件上传成功");
                     }
                 });
     }
@@ -200,13 +199,13 @@ public class NetActivity extends BaseActivity {
             @Override
             public void onFail(String message) {
                 btn.setClickable(true);
-                ToastUtil.show("文件下载失败,失败原因：" + message);
+                ToastUtils.show("文件下载失败,失败原因：" + message);
                 Log.e("onFail", "是否在主线程中运行:" + String.valueOf(Looper.getMainLooper() == Looper.myLooper()));
             }
 
             @Override
             public void onComplete() {  //  运行在主线程中
-                ToastUtil.show("文件下载成功");
+                ToastUtils.show("文件下载成功");
                 btn.setClickable(true);
             }
         });

@@ -33,6 +33,7 @@ public class CameraUtil {
             }
 
             //注意这里需要和file_paths_public.xml中配置的一样 Path:Picture
+            //保证Picture目录也必须存在
             mediaFile = new File(mediaStorageDir.getPath()
                     + File.separator
                     + "Picture/temp.jpg");

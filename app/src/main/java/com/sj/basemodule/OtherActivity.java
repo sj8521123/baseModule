@@ -2,24 +2,16 @@ package com.sj.basemodule;
 
 
 import android.os.Bundle;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.sj.basemodule.adapter.OtherAdapter;
-import com.sj.basemodule.adapter.TestAdapter;
+import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.adapter.TestAdapter2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.util.ToastUtil;
-import basemodule.sj.com.basic.weight.TopSmoothScroller;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,7 +43,7 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     protected void reConnect() {
-        ToastUtil.show("重新刷新");
+        ToastUtils.show("重新刷新");
 
     }
 
