@@ -1,16 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="#a48e8e"
+    tools:context=".MainActivity"
+    tools:menu="@menu/menu_more">
 
-    <include layout="@layout/layout_common_title_bar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="60dp"
         android:layout_weight="1"
         android:background="#00000000"
         android:clipChildren="false"
@@ -42,4 +46,9 @@
         android:layout_marginTop="30dp"
         android:thumb="@drawable/switch_ios_thumb"
         android:track="@drawable/switch_ios_track_selector" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
 </LinearLayout>

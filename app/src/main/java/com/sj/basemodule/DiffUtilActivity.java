@@ -72,6 +72,7 @@ public class DiffUtilActivity extends AppCompatActivity {
         itemChangeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //多个view的局部刷新
                 DiffDemoCallback callback = new DiffDemoCallback(getNewList());
                 mAdapter.setNewDiffData(callback);
                 // use async
@@ -82,7 +83,7 @@ public class DiffUtilActivity extends AppCompatActivity {
         notifyChangeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change item 0
+                // 特定的某个view的局部刷新
                 mAdapter.getData().set(0, new DiffUtilDemoEntity(
                         1,
                         "😊😊Item " + 0,

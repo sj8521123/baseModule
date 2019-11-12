@@ -31,6 +31,10 @@ import basemodule.sj.com.basic.util.NetWorkUtil;
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity {
+    //判断activity是否存在于前台
+
+    private boolean isActive;
+
     protected boolean mCheckNetWork = true; //默认检查网络状态
     WindowManager mWindowManager;
     WindowManager.LayoutParams mTipViewLayoutParams;
@@ -49,13 +53,21 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        isActive = true;
         //在无网络情况下打开APP时，系统不会发送网络状况变更的Intent，需要自己手动检查
         hasNetWork(NetWorkUtil.isConnected());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActive = false;
     }
 
     @Override
@@ -82,7 +94,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNetworkChangeEvent(NetWorkChangeEvent event) {
-        hasNetWork(event.isConnected);
+        // 判断Activity是否在前台，防止非前台的Activity也处理这个事件，造成多次网络判断。
+        if (isActive) {
+            hasNetWork(event.isConnected);
+        }
     }
 
 

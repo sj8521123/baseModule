@@ -2,12 +2,26 @@ package com.sj.basemodule;
 
 
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 
 import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.adapter.TestAdapter2;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +68,12 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
+        char c = '5';
+        int num = Integer.valueOf(c);
+
+        int num2 = c;
+
+        int num1 = Character.getNumericValue(c);
     }
 
 
@@ -78,8 +98,22 @@ public class OtherActivity extends BaseActivity {
         for (int i = 0; i < 4; i++) {
             mDatas4.add(i + "");
         }
+        ReentrantLock reentrantLock = new ReentrantLock();
+
+        reentrantLock.tryLock();
+        reentrantLock.unlock();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Condition condition = reentrantLock.newCondition();
+        ArrayMap<String, String> map = new ArrayMap<>();
+        SparseIntArray intArray = new SparseIntArray();
+        SparseArray<String> stringSparseArray = new SparseArray<>();
+        stringSparseArray.put(1, "hello");
+        stringSparseArray.put(2, "world");
+        stringSparseArray.put(3, "!");
         mRecycleView1.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecycleView2.setLayoutManager(new GridLayoutManager(this, 4));
         mRecycleView3.setLayoutManager(new GridLayoutManager(this, 4));
         mRecycleView4.setLayoutManager(new GridLayoutManager(this, 4));
         testAdapter1 = new TestAdapter2(R.layout.adapter_item_content, mDatas1);

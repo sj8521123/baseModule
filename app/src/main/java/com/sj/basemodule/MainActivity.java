@@ -2,7 +2,12 @@ package com.sj.basemodule;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
+import android.util.LongSparseArray;
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
+import android.util.SparseIntArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -19,7 +24,9 @@ import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -58,7 +65,26 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initFromData() {
+     /*   Map<Integer,String> map = new HashMap<>();
+        SparseArray<String> sa = new SparseArray<>();
+        LongSparseArray<String> saLong = new LongSparseArray<>();
+        saLong.put(132123213,"ccc");
 
+
+        SparseIntArray s2 = new SparseIntArray();
+        s2.put(1,2);
+
+        SparseBooleanArray  sa1 = new SparseBooleanArray();
+        sa1.put(1,true);
+        sa1.append(2,false);
+        sa1.keyAt(0);
+        sa1.valueAt(1);
+
+        sa.put(100,"leavesC");
+
+
+        ArrayMap<Integer,String> map1 = new ArrayMap<>(10);
+        map.put(1,"23");*/
     }
 
     @Override

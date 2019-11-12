@@ -51,7 +51,7 @@ public class DiffDemoCallback extends BaseQuickDiffCallback<DiffUtilDemoEntity> 
      * Optional implementation
      * Implement this method if you need to precisely modify the content of a view.
      * If this method is not implemented, or if null is returned, the entire item will be refreshed.
-     *
+     * <p>
      * 可选实现
      * 如果需要精确修改某一个view中的内容，请实现此方法。
      * 如果不实现此方法，或者返回null，将会直接刷新整个item。
