@@ -10,6 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.base.MyApplication;
 import basemodule.sj.com.basic.util.ImageUtil;
+import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.util.UriUtil;
 import basemodule.sj.com.basic.weight.subscaleview.ImageSource;
 import basemodule.sj.com.basic.weight.subscaleview.ImageViewState;
@@ -83,7 +84,7 @@ public class ImagePreviewAdapter extends PagerAdapter {
                     options.outWidth = options.outHeight;
                     options.outHeight = oldWidth;
                 }
-                float scaleRate = MyApplication.screenWidth * 1.0f / options.outWidth;
+                float scaleRate = ScreenUtil.screenWidth() * 1.0f / options.outWidth;
                 imageView.setImage(ImageSource.uri(resource.getAbsolutePath()), new ImageViewState(scaleRate, new PointF(0, 0), ImageUtil.readPictureDegree(resource.getAbsolutePath())));
                 imageView.setInitScale(scaleRate);
                 imageView.setMinScale(scaleRate / 2);

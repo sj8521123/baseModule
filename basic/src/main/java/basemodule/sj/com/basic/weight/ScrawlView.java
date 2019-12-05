@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.base.MyApplication;
+import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.util.file.STGFileUtil;
 
 
@@ -48,8 +49,8 @@ public class ScrawlView extends View {
         float strokeWidth = a.getDimension(R.styleable.scrawl_strokeWidth, 6);
         int strokeColor = a.getColor(R.styleable.scrawl_strokeColor, 0xff000000);
 
-        int screen_width = MyApplication.screenWidth;
-        int screen_height = MyApplication.screenHeight;
+        int screen_width = ScreenUtil.screenWidth();
+        int screen_height = ScreenUtil.screenHeight();
         //因为是横屏
         cacheBitmap = Bitmap.createBitmap(screen_height, screen_width, Bitmap.Config.ARGB_8888);
         cacheCanvas = new Canvas(cacheBitmap);
