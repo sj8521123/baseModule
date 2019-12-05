@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 
 public class ApplicationContextProvider extends ContentProvider {
     @SuppressLint("StaticFieldLeak")
-    public static Context mContext;
+    static Context mContext;
 
     @Override
     public boolean onCreate() {
         mContext = getContext();
-        return false;
+        return true;
     }
 
     @Nullable

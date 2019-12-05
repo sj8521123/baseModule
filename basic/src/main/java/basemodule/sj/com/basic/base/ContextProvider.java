@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+/**
+ * contextProvider 提供全局上线文
+ */
 public class ContextProvider {
     @SuppressLint("StaticFieldLeak")
     private static volatile ContextProvider instance;

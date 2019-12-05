@@ -48,21 +48,21 @@ import butterknife.Unbinder;
 public class MyApplication extends LitePalApplication {
     //创建的activity容器
     public static List<Activity> mList = new LinkedList<>();
-    //全局上下文
-    public static MyApplication mAppContext;
+    /*    //全局上下文
+        public static MyApplication mAppContext;*/
     //包名
     public static String packageName;
     //屏幕宽 与 屏幕高
-    public static int screenWidth;
-    public static int screenHeight;
+ /*   public static int screenWidth;
+    public static int screenHeight;*/
 
     //当前用户配置文件
     public static String currentUserPrefsName;
 
     // 获取ApplicationContext
-    public static Context getContext() {
+  /*  public static Context getContext() {
         return mAppContext;
-    }
+    }*/
 
     //退出所有Activity
     public static void exit() {
@@ -102,10 +102,10 @@ public class MyApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppContext = this;
+        /*mAppContext = this;*/
         packageName = this.getPackageName();
-
         Util.init(this);
+
         currentUserPrefsName = (String) SPUtils.getInstance().get(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME, "");
         Util.setCurrentUserPrefsName(currentUserPrefsName);
 
@@ -222,9 +222,9 @@ public class MyApplication extends LitePalApplication {
         //SmartSwipeBack.activityBezierBack(this,null);
         /*SmartSwipeBack.activitySlidingBack(this,null);*/
 
-
+/*
         screenWidth = getScreenWidth();
-        screenHeight = getScreenHeight();
+        screenHeight = getScreenHeight();*/
         //创建目录
         boolean isCreateDirSuccess = STGFileUtil.createAllDirs();
         if (!isCreateDirSuccess) {
@@ -319,7 +319,7 @@ public class MyApplication extends LitePalApplication {
      * @return
      */
     private int getScreenWidth() {
-        WindowManager wm = (WindowManager) mAppContext
+        WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
@@ -332,7 +332,7 @@ public class MyApplication extends LitePalApplication {
      * @return
      */
     private int getScreenHeight() {
-        WindowManager wm = (WindowManager) mAppContext
+        WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
