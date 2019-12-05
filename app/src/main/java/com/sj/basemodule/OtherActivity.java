@@ -3,11 +3,14 @@ package com.sj.basemodule;
 
 import android.os.Bundle;
 import android.util.ArrayMap;
+import android.util.Log;
+import android.util.LruCache;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 
 import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.adapter.TestAdapter2;
+import com.sj.basemodule.net.request.LoginRequest;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
@@ -18,7 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -30,7 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OtherActivity extends BaseActivity {
-
+    private static final String TAG = "OtherActivity";
+/*
     @BindView(R.id.mRecycleView1)
     RecyclerView mRecycleView1;
     @BindView(R.id.mRecycleView2)
@@ -46,7 +52,7 @@ public class OtherActivity extends BaseActivity {
     private TestAdapter2 testAdapter1;
     private TestAdapter2 testAdapter2;
     private TestAdapter2 testAdapter3;
-    private TestAdapter2 testAdapter4;
+    private TestAdapter2 testAdapter4;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +69,11 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public int initLayout() {
-        return R.layout.fragment_loansign_layout;
+        return R.layout.fragment_huaxia_introduce;
     }
 
     @Override
     public void initFromData() {
-        char c = '5';
-        int num = Integer.valueOf(c);
-
-        int num2 = c;
-
-        int num1 = Character.getNumericValue(c);
     }
 
 
@@ -82,48 +82,34 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
-        mDatas1 = new ArrayList<>();
-        mDatas2 = new ArrayList<>();
-        mDatas3 = new ArrayList<>();
-        mDatas4 = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
-            mDatas1.add(i + "");
-        }
-        for (int i = 0; i < 2; i++) {
-            mDatas2.add(i + "");
-        }
-        for (int i = 0; i < 3; i++) {
-            mDatas3.add(i + "");
-        }
-        for (int i = 0; i < 4; i++) {
-            mDatas4.add(i + "");
-        }
-        ReentrantLock reentrantLock = new ReentrantLock();
+        Map<String, String> map = new HashMap<>();
+        map.put(null, "22");
+        map.put(null, "23");
+        map.put(null, "24");
 
-        reentrantLock.tryLock();
-        reentrantLock.unlock();
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        Condition condition = reentrantLock.newCondition();
-        ArrayMap<String, String> map = new ArrayMap<>();
-        SparseIntArray intArray = new SparseIntArray();
+        map.put("1", "25");
+        map.put("1", "26");
+        map.put("1", "27");
+        map.get(null);
+        map.get("1");
         SparseArray<String> stringSparseArray = new SparseArray<>();
-        stringSparseArray.put(1, "hello");
-        stringSparseArray.put(2, "world");
-        stringSparseArray.put(3, "!");
-        mRecycleView1.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecycleView3.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecycleView4.setLayoutManager(new GridLayoutManager(this, 4));
-        testAdapter1 = new TestAdapter2(R.layout.adapter_item_content, mDatas1);
-        testAdapter2 = new TestAdapter2(R.layout.adapter_item_content, mDatas2);
-        testAdapter3 = new TestAdapter2(R.layout.adapter_item_content, mDatas3);
-        testAdapter4 = new TestAdapter2(R.layout.adapter_item_content, mDatas4);
-        mRecycleView1.setAdapter(testAdapter1);
-        mRecycleView2.setAdapter(testAdapter2);
-        mRecycleView3.setAdapter(testAdapter3);
-        mRecycleView4.setAdapter(testAdapter4);
+        stringSparseArray.put(1,"21");
+        LruCache<Integer, Integer> lruCache = new LruCache<>(5);
+        lruCache.put(1, 1);
+        lruCache.put(2, 2);
+        lruCache.put(3, 3);
+        lruCache.put(4, 4);
+        lruCache.put(5, 5);
+        for (Map.Entry<Integer, Integer> entry : lruCache.snapshot().entrySet()) {
+            Log.i(TAG, "key = " + entry.getKey() + "  value = " + entry.getValue());
+        }
+        int i = lruCache.get(1);
+        Log.i(TAG, "使用1");
+        Log.i(TAG, "超出存储设定容量后");
+        lruCache.put(6, 6);
+        for (Map.Entry<Integer, Integer> entry : lruCache.snapshot().entrySet()) {
+            Log.i(TAG, "key = " + entry.getKey() + "  value = " + entry.getValue());
+        }
     }
 
     @Override
