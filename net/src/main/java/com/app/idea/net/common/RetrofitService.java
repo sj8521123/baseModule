@@ -29,7 +29,7 @@ public class RetrofitService {
         return new OkHttpClient.Builder()
                 .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                //自动设置cookie
+                //自动获取并设置cookie
                 .cookieJar(CookieUtil.getCookieJar())
                 .addInterceptor(new LoggingInterceptor(Constants.LOG_NAME))
                 .addInterceptor(new HttpHeaderInterceptor())

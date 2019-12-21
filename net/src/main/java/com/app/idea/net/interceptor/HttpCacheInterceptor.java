@@ -10,8 +10,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * 配置缓存拦截器
+ */
 public class HttpCacheInterceptor implements Interceptor{
-    //  配置缓存的拦截器
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
