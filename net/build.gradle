@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+def config = rootProject.ext.android
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        multiDexEnabled true
+        versionCode config.versionCode
+        versionName config.versionName
+        flavorDimensions "default"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0-alpha02', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    api project(':basic')
+}
