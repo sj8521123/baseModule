@@ -8,7 +8,7 @@ import com.app.idea.net.token.RefreshTokenResponse;
 import com.sj.basemodule.config.UserInfoTools;
 
 /**
- * Created by zhpan on 2018/3/22.
+ * Created by sj on 2018/3/22.
  */
 
 public class RetrofitHelperWithToken {
