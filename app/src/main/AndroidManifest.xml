@@ -13,43 +13,41 @@
 
     <application
         android:name="basemodule.sj.com.basic.base.MyApplication"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${APP_NAME}"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:label">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:label"
+        tools:targetApi="n">
+        <!--屏幕适配方案之设计稿的尺寸-->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
+
         <meta-data
             android:name="APP_CHANNEL"
             android:value="${APP_CHANNEL_VALUE}" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public" />
-        </provider>
-
         <activity
             android:name=".MainActivity"
-            android:label="首页" />
-        <activity android:name=".OtherActivity">
+            android:label="首页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OtherActivity">
 
+        </activity>
 
-
-        <activity android:name=".NetActivity"></activity>
-        <activity android:name=".ProxyActivity"></activity>
-        <activity android:name=".DiffUtilActivity"></activity>
-
+        <activity android:name=".NetActivity" />
+        <activity android:name=".ProxyActivity" />
+        <activity android:name=".DiffUtilActivity" />
 
     </application>
 

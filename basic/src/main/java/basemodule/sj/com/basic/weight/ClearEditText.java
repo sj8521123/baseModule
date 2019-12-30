@@ -49,8 +49,8 @@ public class ClearEditText extends EditText implements
             mClearDrawable = getResources()
                     .getDrawable(R.drawable.edit_clean);
         }
-        int width = ScreenUtil.dip2px(12);
-        mClearDrawable.setBounds(-ScreenUtil.dip2px(10), 0, width - ScreenUtil.dip2px(10), width);
+        int width = ScreenUtil.dp2px(12);
+        mClearDrawable.setBounds(-ScreenUtil.dp2px(10), 0, width - ScreenUtil.dp2px(10), width);
         leftDrawable = getCompoundDrawables()[0];
         if (leftDrawable != null) {
             leftDrawable.setBounds(0, 0, width, width);

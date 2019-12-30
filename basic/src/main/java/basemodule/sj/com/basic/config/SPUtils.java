@@ -2,6 +2,7 @@ package basemodule.sj.com.basic.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;

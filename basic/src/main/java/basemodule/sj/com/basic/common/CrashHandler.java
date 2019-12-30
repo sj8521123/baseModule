@@ -5,12 +5,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 
+import com.hjq.toast.ToastUtils;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
 import basemodule.sj.com.basic.util.LogUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 
 /**
  * Created by Twan on 2016/8/3.
@@ -43,7 +44,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         LogUtil.e(TAG, getCrashInfo(ex));
         // 调用系统错误机制
         defaultHandler.uncaughtException(thread, ex);
-        ToastUtil.show("抱歉,程序发生异常即将退出");
+        ToastUtils.show("抱歉,程序发生异常即将退出");
         //App.getInstance().exitApp();
     }
 

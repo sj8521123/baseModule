@@ -98,7 +98,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
      */
     private void onFail(String message) {
         mActivity.showErrorView(message);
-        //ToastUtil.show(message);
+        //ToastUtils.show(message);
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                 errorId = R.string.unknown_error;
                 break;
         }
-        //ToastUtil.show(errorTxt, Toast.LENGTH_SHORT);
+        //ToastUtils.show(errorTxt, Toast.LENGTH_SHORT);
         String errorStr = Util.getContext().getResources().getText(errorId).toString();
         mActivity.showErrorView(errorStr);
     }

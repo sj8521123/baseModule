@@ -70,14 +70,14 @@ dependencies {
     api 'com.youth.banner:banner:1.4.10'
     //toast样式
     api 'com.github.GrenderG:Toasty:1.4.2'
-    api 'com.hjq:toast:1.5'
+    api 'com.hjq:toast:8.0'
 
     //权限
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //切换导航
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
     //adapter
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47-androidx'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
     //图片选择框架
     api 'com.zhihu.android:matisse:0.4.3'
     //刷新控件
@@ -106,8 +106,20 @@ dependencies {
     api 'com.billy.android:smart-swipe-x:1.0.0'
     //刷新样式的支持
     api 'com.billy.android:smart-swipe-refresh-ext:1.0.0'
+    //lottie动画库
+    api 'com.airbnb.android:lottie:3.0.7'
+    /* //snaphelper
+     implementation 'com.github.rubensousa:gravitysnaphelper:2.2.0'*/
+    api 'com.github.OCNYang:PageTransformerHelp:v1.0.1'
+    //PickerView选择器
+    api 'com.contrarywind:Android-PickerView:4.1.9'
+
+    //属性动画兼容3.0以下
     api files('libs/nineoldandroids-2.4.0.jar')
-    api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
-    //autosize屏幕适配
+
+    //AndroidAutoSize 仿今日头条适配适配
     api 'me.jessyan:autosize:1.1.2'
+
+    //腾讯的pdf、word阅读器
+    api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 }

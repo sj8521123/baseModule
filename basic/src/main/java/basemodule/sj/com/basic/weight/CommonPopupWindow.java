@@ -5,11 +5,17 @@ import android.view.View;
 import android.widget.PopupWindow;
 
 /**
- * content:共有popWindow
- * author：sj
- * time: 2017/6/28 20:31
- * email：13658029734@163.com
- * phone:13658029734
+ @Override
+ public boolean dispatchTouchEvent(MotionEvent event){
+ if(mPopupWindow!=null&&mPopupWindow.isShowing()){
+ return false;
+ }
+ return super.dispatchTouchEvent(event);
+ }
+
+ setOutsideTouchable true 点击popwindow可外消失
+ setOutsideTouchable false 点击popwindow可外不可消失
+ 都可以结合上边的dispatchTouchEvent事间分发
  */
 
 public class CommonPopupWindow extends PopupWindow {

@@ -1,5 +1,5 @@
 
-package basemodule.sj.com.basic.weight.sticky;
+package basemodule.sj.com.basic.weight.swipeback;
 
 import android.app.Activity;
 import android.app.ActivityOptions;

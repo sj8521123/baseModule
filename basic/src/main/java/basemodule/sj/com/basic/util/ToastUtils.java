@@ -1,3 +1,4 @@
+/*
 package basemodule.sj.com.basic.util;
 
 import android.annotation.SuppressLint;
@@ -5,11 +6,13 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 
+*/
 /**
- * ToastUtil
- */
+ * ToastUtils
+ *//*
 
-public class ToastUtil {
+
+public class ToastUtils {
 
     private static Toast toast;
 
@@ -55,3 +58,4 @@ public class ToastUtil {
         show(String.format(format, args), duration);
     }
 }
+*/

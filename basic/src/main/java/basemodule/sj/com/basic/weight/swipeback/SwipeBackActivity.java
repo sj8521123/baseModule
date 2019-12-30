@@ -7,8 +7,6 @@ import android.view.View;
 
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
-import basemodule.sj.com.basic.weight.sticky.Utils;
-
 public class SwipeBackActivity extends RxAppCompatActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
 

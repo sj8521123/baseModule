@@ -20,6 +20,9 @@ import com.billy.android.swipe.SmartSwipe;
 import com.billy.android.swipe.SmartSwipeRefresh;
 import com.billy.android.swipe.ext.refresh.ArrowHeader;
 import com.billy.android.swipe.refresh.ClassicFooter;
+import com.hjq.toast.IToastStyle;
+import com.hjq.toast.ToastUtils;
+import com.hjq.toast.style.ToastQQStyle;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.simple.spiderman.SpiderMan;
 import com.squareup.leakcanary.LeakCanary;
@@ -28,7 +31,6 @@ import com.zhihu.matisse.ui.MatisseActivity;
 
 import org.litepal.LitePalApplication;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,7 +38,6 @@ import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
 import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.file.STGFileUtil;
-import basemodule.sj.com.basic.util.ToastUtil;
 import basemodule.sj.com.basic.util.Util;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -47,21 +48,21 @@ import butterknife.Unbinder;
 public class MyApplication extends LitePalApplication {
     //创建的activity容器
     public static List<Activity> mList = new LinkedList<>();
-    //全局上下文
-    public static MyApplication mAppContext;
+    /*    //全局上下文
+        public static MyApplication mAppContext;*/
     //包名
     public static String packageName;
     //屏幕宽 与 屏幕高
-    public static int screenWidth;
-    public static int screenHeight;
+ /*   public static int screenWidth;
+    public static int screenHeight;*/
 
     //当前用户配置文件
     public static String currentUserPrefsName;
 
     // 获取ApplicationContext
-    public static Context getContext() {
+  /*  public static Context getContext() {
         return mAppContext;
-    }
+    }*/
 
     //退出所有Activity
     public static void exit() {
@@ -101,10 +102,10 @@ public class MyApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppContext = this;
+        /*mAppContext = this;*/
         packageName = this.getPackageName();
-
         Util.init(this);
+
         currentUserPrefsName = (String) SPUtils.getInstance().get(KeyAndValueAppPrefs.Key.CURRENT_USER_PREF_NAME, "");
         Util.setCurrentUserPrefsName(currentUserPrefsName);
 
@@ -127,7 +128,7 @@ public class MyApplication extends LitePalApplication {
                     try {
                         activity.setContentView(((BaseActivity) activity).initLayout());
                     } catch (Exception e) {
-                        ToastUtil.show("activity的layout为空，请在activity中先添加布局");
+                        ToastUtils.show("activity的layout为空，请在activity中先添加布局");
                     }
 
                     //统一ButterKnife绑定Activity
@@ -221,13 +222,13 @@ public class MyApplication extends LitePalApplication {
         //SmartSwipeBack.activityBezierBack(this,null);
         /*SmartSwipeBack.activitySlidingBack(this,null);*/
 
-
+/*
         screenWidth = getScreenWidth();
-        screenHeight = getScreenHeight();
+        screenHeight = getScreenHeight();*/
         //创建目录
         boolean isCreateDirSuccess = STGFileUtil.createAllDirs();
         if (!isCreateDirSuccess) {
-            ToastUtil.show("项目初始化时目录创建失败！");
+            ToastUtils.show("项目初始化时目录创建失败！");
         }
     }
 
@@ -243,8 +244,11 @@ public class MyApplication extends LitePalApplication {
         LeakCanary.install(this);
         //本地记录crash日志
         /* new CrashHandler(this).init();*/
+
         //toast设置
-       /* Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
+        ToastUtils.init(this, new ToastQQStyle(this));
+
+      /*  Toasty.Config.getInstance().setSuccessColor(Color.parseColor("#c832C25E"))
                 .setErrorColor(Color.parseColor("#c8F95557"))
                 .setInfoColor(Color.parseColor("#c84C5460"))
                 .apply();*/
@@ -315,7 +319,7 @@ public class MyApplication extends LitePalApplication {
      * @return
      */
     private int getScreenWidth() {
-        WindowManager wm = (WindowManager) mAppContext
+        WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
@@ -328,7 +332,7 @@ public class MyApplication extends LitePalApplication {
      * @return
      */
     private int getScreenHeight() {
-        WindowManager wm = (WindowManager) mAppContext
+        WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
