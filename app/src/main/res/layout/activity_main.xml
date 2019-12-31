@@ -1,54 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:background="#a48e8e"
     tools:context=".MainActivity"
     tools:menu="@menu/menu_more">
 
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:layout_weight="1"
-        android:background="#00000000"
-        android:clipChildren="false"
-        android:overScrollMode="never"
-
-        />
-
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/magicIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Switch
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:thumb="@drawable/switch_custom_thumb_selector"
-        android:track="@drawable/switch_custom_track_selector" />
+        android:text="helloWorld" />
 
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:thumb="@drawable/switch_ios_thumb"
-        android:track="@drawable/switch_ios_track_selector" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
 </LinearLayout>

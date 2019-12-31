@@ -41,13 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OtherActivity">
-
-        </activity>
 
         <activity android:name=".NetActivity" />
-        <activity android:name=".ProxyActivity" />
-        <activity android:name=".DiffUtilActivity" />
 
     </application>
 
