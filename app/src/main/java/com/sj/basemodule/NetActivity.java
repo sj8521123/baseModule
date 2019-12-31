@@ -19,6 +19,7 @@ import com.app.idea.net.download.DownloadUtils;
 import com.app.idea.utils.RxUtil;
 import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.net.RetrofitHelper;
+import com.sj.basemodule.net.RetrofitHelperWithToken;
 import com.sj.basemodule.net.reponse.LoginResponse;
 import com.sj.basemodule.net.reponse.MeiZi;
 import com.sj.basemodule.net.request.LoginRequest;
@@ -116,7 +117,15 @@ public class NetActivity extends BaseActivity {
                     public void onSuccess(List<MeiZi> meiZis) {
                         Log.i(TAG, "onSuccess: " + meiZis.size());
                     }
-
+                });
+        RetrofitHelperWithToken.getApiService()
+                .getMezi()
+                .compose(RxUtil.rxSchedulerHelper(this))
+                .subscribe(new DefaultObserver<List<MeiZi>>(this) {
+                    @Override
+                    public void onSuccess(List<MeiZi> meiZis) {
+                        Log.i(TAG, "onSuccess: " + meiZis.size());
+                    }
                 });
     }
 

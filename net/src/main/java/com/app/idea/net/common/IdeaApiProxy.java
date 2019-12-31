@@ -9,7 +9,9 @@ import java.lang.reflect.Proxy;
 
 
 /**
- * Created by zhpan on 2017/4/1.
+ * 创建代理后的实例对象 Proxy.newProxyInstance
+ * 被代理对象 IdeaApiService
+ * Created by sj on 2017/4/1.
  */
 
 public class IdeaApiProxy {

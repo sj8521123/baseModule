@@ -21,13 +21,14 @@ public class RetrofitHelperWithToken {
                     Constants.API_SERVER_URL, new IGlobalManager() {
                         @Override
                         public void logout() {
+                            //重新登录
                             UserInfoTools.logout();
                         }
 
                         @Override
                         public void tokenRefresh(RefreshTokenResponse response) {
+                            //本地保存token
                             UserInfoTools.updateToken(response);
-                            //UserInfoTools.updateToken(Utils.getContext(), response);
                         }
                     });
         return mIdeaApiService;
