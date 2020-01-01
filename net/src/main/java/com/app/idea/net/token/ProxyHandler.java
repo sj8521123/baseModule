@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.Util;
@@ -64,6 +65,8 @@ public class ProxyHandler implements InvocationHandler {
             }
             //服务端发送token过期 本地检测token未在有效时长内，重新获取token
             else {
+                //CountDownLatch 控制执行顺序
+                final CountDownLatch latch= new CountDownLatch(1);
                 RetrofitService
                         .getRetrofitBuilder(Constants.API_SERVER_URL)
                         .build()
@@ -79,26 +82,35 @@ public class ProxyHandler implements InvocationHandler {
                                     mIsTokenNeedRefresh = true;
                                     //本地记录token刷新时间
                                     tokenChangedTime = new Date().getTime();
-
                                 }
+                                latch.countDown();
                             }
                             @Override
                             public void onError(Throwable e) {
                                 //super.onError(e);
                                 mRefreshTokenError = e;
+                                latch.countDown();
                             }
                         });
+                try {
+                    //阻塞
+                    latch.await();
+                    if (mRefreshTokenError != null) {
+                        Observable<Object> error = Observable.error(mRefreshTokenError);
+                        mRefreshTokenError = null;
+                        //获取服务端token异常 不重订阅 并抛出onError()错误
+                        return error;
+                    }
+                    else {
+                        //触发重订阅
+                        return Observable.just(true);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //不重订阅 并抛出onError()错误
+                    return Observable.error(e);
+                }
 
-                if (mRefreshTokenError != null) {
-                    Observable<Object> error = Observable.error(mRefreshTokenError);
-                    mRefreshTokenError = null;
-                    //获取服务端token异常 不重订阅 并抛出onError()错误
-                    return error;
-                }
-                else {
-                    //触发重订阅
-                    return Observable.just(true);
-                }
             }
         }
     }
