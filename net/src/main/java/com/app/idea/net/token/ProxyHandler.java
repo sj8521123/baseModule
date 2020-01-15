@@ -2,6 +2,7 @@
 package com.app.idea.net.token;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.app.idea.net.common.CommonService;
 import com.app.idea.net.common.Constants;
@@ -10,7 +11,9 @@ import com.app.idea.net.common.RetrofitService;
 import com.app.idea.net.exception.TokenExpiredException;
 import com.app.idea.net.exception.RefreshTokenExpiredException;
 import com.app.idea.net.module.BaseRequest;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
+import java.io.InterruptedIOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -18,12 +21,15 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.Util;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -186,11 +192,20 @@ public class ProxyHandler implements InvocationHandler {
                         }
                         return null;
                     }
-                }).retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+                })
+
+                .retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Observable<Throwable> observable) throws Exception {
-
-                        return observable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                        //原子类:保证多线程数据同步的问题
+                        final AtomicInteger counter = new AtomicInteger(0);
+                        //重连机制设置成3次
+                        return observable.takeWhile(new Predicate<Throwable>() {
+                            @Override
+                            public boolean test(Throwable throwable) throws Exception {
+                                return counter.getAndIncrement() < 3;
+                            }
+                        }).flatMap(new Function<Throwable, ObservableSource<?>>() {
                             @Override
                             public ObservableSource<?> apply(Throwable throwable) throws Exception {
                                 // token过期
@@ -205,8 +220,23 @@ public class ProxyHandler implements InvocationHandler {
                                     //不重订阅，并抛出onError()错误
                                     return Observable.error(throwable);
                                 }
+                                //服务端异常
+                                else if(throwable instanceof HttpException){
+                                    //发起重订阅
+                                    return Observable.just(true);
+                                }
+                                //连接超时
+                                else if(throwable instanceof InterruptedIOException){
+                                    //发起重订阅
+                                    return Observable.just(true);
+                                }
                                 //不重订阅，并抛出onError()错误
                                 return Observable.error(throwable);
+                            }
+                        }).doOnComplete(new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                Log.i("retryWhen", "run: complete");
                             }
                         });
                     }
