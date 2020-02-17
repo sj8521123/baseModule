@@ -25,7 +25,6 @@ public class DiffUtilActivity extends AppCompatActivity {
     private Button itemChangeBtn;
     private Button notifyChangeBtn;
 
-    
     private DiffUtilAdapter mAdapter;
 
 
