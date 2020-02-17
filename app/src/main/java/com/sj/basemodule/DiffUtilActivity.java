@@ -31,9 +31,6 @@ public class DiffUtilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diffutil);
-        /*     setBackBtn();*/
-        /*setTitle("DiffUtil Use");*/
-
         findView();
         initRv();
         initClick();
