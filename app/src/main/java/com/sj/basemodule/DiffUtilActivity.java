@@ -24,7 +24,6 @@ public class DiffUtilActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Button itemChangeBtn;
     private Button notifyChangeBtn;
-
     private DiffUtilAdapter mAdapter;
 
 
