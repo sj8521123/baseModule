@@ -152,6 +152,7 @@ public class MyApplication extends LitePalApplication {
                     //沉浸式
                     rootView.setFitsSystemWindows(true);
 
+                    
                  /*   //activity侧滑返回
                     SmartSwipe.wrap(rootView)
                             .addConsumer(new StretchConsumer())
