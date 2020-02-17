@@ -1,7 +1,7 @@
 package com.sj.basemodule.config;
 
 /**
- * create by zhpan on 2018/7/4 17:26
+ * create by sj on 2018/7/4 17:26
  * Describe:
  */
 public class UserBean {

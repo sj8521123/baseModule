@@ -75,8 +75,7 @@ public class SslContextFactory {
             kmf.init(keyStore, SELF_CERT_PWD.toCharArray());
 
             try {
-                if (certificate != null)
-                    certificate.close();
+                certificate.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

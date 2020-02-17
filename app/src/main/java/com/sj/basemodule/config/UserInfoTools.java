@@ -8,7 +8,7 @@ import basemodule.sj.com.basic.config.SPUtils;
 
 
 /**
- * Created by zhpan on 2018/4/14.
+ * Created by sj on 2018/4/14.
  */
 public class UserInfoTools {
     private static UserInfoBean sUserInfoBean;

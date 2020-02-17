@@ -22,6 +22,7 @@ import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigat
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.adapter.HomePagerAdapter;
@@ -31,6 +32,14 @@ import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 public class MainActivity extends BaseActivity {
     int c = 10;
@@ -65,6 +74,7 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     public void initFromData() {
+
     }
 
     @Override
@@ -77,13 +87,9 @@ public class MainActivity extends BaseActivity {
     public void initLocalData() {
     }
 
-    private Void test() {
-        return null;
-    }
-
     private void initViewPage() {
         ArrayMap<String, String> arrayMap = new ArrayMap<>();
-        Toast.makeText(this,"he",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "he", Toast.LENGTH_LONG).show();
         initPager();
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

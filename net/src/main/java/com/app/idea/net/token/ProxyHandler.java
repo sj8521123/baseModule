@@ -2,6 +2,7 @@
 package com.app.idea.net.token;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.app.idea.net.common.CommonService;
 import com.app.idea.net.common.Constants;
@@ -10,19 +11,25 @@ import com.app.idea.net.common.RetrofitService;
 import com.app.idea.net.exception.TokenExpiredException;
 import com.app.idea.net.exception.RefreshTokenExpiredException;
 import com.app.idea.net.module.BaseRequest;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
+import java.io.InterruptedIOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.Util;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -56,11 +63,16 @@ public class ProxyHandler implements InvocationHandler {
      */
     private Observable<?> refreshTokenWhenTokenInvalid() {
         synchronized (ProxyHandler.class) {
-            // Have refreshed the token successfully in the valid time.
+            //服务端发送token过期 但本地检测token还在有效时长内，直接本地缓存中获取
             if (new Date().getTime() - tokenChangedTime < REFRESH_TOKEN_VALID_TIME) {
                 mIsTokenNeedRefresh = true;
+                //触发重订阅
                 return Observable.just(true);
-            } else {
+            }
+            //服务端发送token过期 本地检测token未在有效时长内，重新获取token
+            else {
+                //CountDownLatch 控制执行顺序
+                final CountDownLatch latch= new CountDownLatch(1);
                 RetrofitService
                         .getRetrofitBuilder(Constants.API_SERVER_URL)
                         .build()
@@ -70,34 +82,49 @@ public class ProxyHandler implements InvocationHandler {
                             @Override
                             public void onSuccess(RefreshTokenResponse response) {
                                 if (response != null) {
+                                    //讲新token写入到本地
                                     mGlobalManager.tokenRefresh(response);
+                                    //请求方法参数中更新token
                                     mIsTokenNeedRefresh = true;
+                                    //本地记录token刷新时间
                                     tokenChangedTime = new Date().getTime();
                                 }
+                                latch.countDown();
                             }
-
                             @Override
                             public void onError(Throwable e) {
                                 //super.onError(e);
                                 mRefreshTokenError = e;
+                                latch.countDown();
                             }
                         });
-                if (mRefreshTokenError != null) {
-                    Observable<Object> error = Observable.error(mRefreshTokenError);
-                    mRefreshTokenError = null;
-                    return error;
-                } else {
-                    return Observable.just(true);
+                try {
+                    //阻塞
+                    latch.await();
+                    if (mRefreshTokenError != null) {
+                        Observable<Object> error = Observable.error(mRefreshTokenError);
+                        mRefreshTokenError = null;
+                        //获取服务端token异常 不重订阅 并抛出onError()错误
+                        return error;
+                    }
+                    else {
+                        //触发重订阅
+                        return Observable.just(true);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //不重订阅 并抛出onError()错误
+                    return Observable.error(e);
                 }
+
             }
         }
     }
 
     /**
      * Update the token of the args in the method.
-     * <p>
-     * PS： 因为这里使用的是 GET 请求，所以这里就需要对 Query 的参数名称为 token 的方法。
-     * 若是 POST 请求，或者使用 Body ，自行替换。因为 参数数组已经知道，进行遍历找到相应的值，进行替换即可（更新为新的 token 值）。
+     * 适合以表单格式提交,替换表单中为“token”的旧值
+     * 如果是post请求且提交格式为json可以自行添加,不适用于token放在请求头的方式。
      */
     @SuppressWarnings("unchecked")
     private void updateMethodToken(Method method, Object[] args) {
@@ -113,17 +140,22 @@ public class ProxyHandler implements InvocationHandler {
                             if (args[i] instanceof Map)
                                 ((Map<String, Object>) args[i]).put(TOKEN, token);
                         } else if (annotation instanceof Query) {
+                            //匹配到token
                             if (TOKEN.equals(((Query) annotation).value()))
                                 args[i] = token;
                         } else if (annotation instanceof Field) {
+                            //匹配到token
                             if (TOKEN.equals(((Field) annotation).value()))
                                 args[i] = token;
                         } else if (annotation instanceof Part) {
+                            //匹配到token
                             if (TOKEN.equals(((Part) annotation).value())) {
                                 RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"), token);
                                 args[i] = tokenBody;
                             }
-                        } else if (annotation instanceof Body) {
+                        }
+                        //body
+                        else if (annotation instanceof Body) {
                             if (args[i] instanceof BaseRequest) {
                                 BaseRequest requestData = (BaseRequest) args[i];
                                 requestData.setToken(token);
@@ -143,11 +175,14 @@ public class ProxyHandler implements InvocationHandler {
                 .flatMap(new Function<Object, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Object o) throws Exception {
+                        //进行aop编程
                         try {
                             try {
                                 if (mIsTokenNeedRefresh) {
+                                    //更新token操作
                                     updateMethodToken(method, args);
                                 }
+                                //继续请求的执行  mProxyObject被代理对象,不能使用proxy 代理对象实例， 否则会一直触发invoke调用
                                 return (Observable<?>) method.invoke(mProxyObject, args);
                             } catch (InvocationTargetException e) {
                                 e.printStackTrace();
@@ -157,11 +192,20 @@ public class ProxyHandler implements InvocationHandler {
                         }
                         return null;
                     }
-                }).retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+                })
+
+                .retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Observable<Throwable> observable) throws Exception {
-
-                        return observable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                        //原子类:保证多线程数据同步的问题
+                        final AtomicInteger counter = new AtomicInteger(0);
+                        //重连机制设置成3次
+                        return observable.takeWhile(new Predicate<Throwable>() {
+                            @Override
+                            public boolean test(Throwable throwable) throws Exception {
+                                return counter.getAndIncrement() < 3;
+                            }
+                        }).flatMap(new Function<Throwable, ObservableSource<?>>() {
                             @Override
                             public ObservableSource<?> apply(Throwable throwable) throws Exception {
                                 // token过期
@@ -173,9 +217,26 @@ public class ProxyHandler implements InvocationHandler {
                                     // Token 不存在，执行退出登录的操作。（为了防止多个请求，都出现 Token 不存在的问题，
                                     // 这里需要取消当前所有的网络请求）
                                     mGlobalManager.logout();
+                                    //不重订阅，并抛出onError()错误
                                     return Observable.error(throwable);
                                 }
+                                //服务端异常
+                                else if(throwable instanceof HttpException){
+                                    //发起重订阅
+                                    return Observable.just(true);
+                                }
+                                //连接超时
+                                else if(throwable instanceof InterruptedIOException){
+                                    //发起重订阅
+                                    return Observable.just(true);
+                                }
+                                //不重订阅，并抛出onError()错误
                                 return Observable.error(throwable);
+                            }
+                        }).doOnComplete(new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                Log.i("retryWhen", "run: complete");
                             }
                         });
                     }

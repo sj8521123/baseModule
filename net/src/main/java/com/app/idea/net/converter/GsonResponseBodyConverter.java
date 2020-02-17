@@ -60,9 +60,9 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
             //服务器内部错误
             else if (response.getCode() == ErrorCode.REMOTE_LOGIN) {
                 throw new RemoteLoginExpiredException(response.getCode(), response.getMessage());
-            } else if (response.getCode() == 0) {
+            } else if (response.getCode() == ErrorCode.TOKEN_EXPIRED) {
                 throw new TokenExpiredException(response.getCode(), response.getMessage());
-            } else if (response.getCode() == 0) {
+            } else if (response.getCode() == ErrorCode.REFRESH_TOKEN_EXPIRED) {
                 throw new RefreshTokenExpiredException(response.getCode(), response.getMessage());
             } else if (response.getCode() != ErrorCode.SUCCESS) {
                 throw new ServerResponseException(response.getCode(), response.getMessage());

@@ -1,5 +1,7 @@
 package com.app.idea.net.common;
 
+import com.app.idea.net.https.SafeHostnameVerifier;
+import com.app.idea.net.https.SslContextFactory;
 import com.app.idea.net.interceptor.LoggingInterceptor;
 import com.app.idea.net.persistentcookiejar.CookieUtil;
 import com.google.gson.Gson;
@@ -15,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import basemodule.sj.com.basic.util.Util;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 
 /**
@@ -23,20 +26,23 @@ import retrofit2.Retrofit;
 public class RetrofitService {
 
     public static OkHttpClient.Builder getOkHttpClientBuilder() {
+        //设置缓存response的文件目录路径
         File cacheFile = new File(Util.getContext().getCacheDir(), "cache");
+        //设置缓存目录以及文件大小，采用DiskLruCache算法存储
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
 
         return new OkHttpClient.Builder()
                 .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(Constants.DEFAULT_TIMEOUT,TimeUnit.MILLISECONDS)
                 //自动获取并设置cookie
                 .cookieJar(CookieUtil.getCookieJar())
                 .addInterceptor(new LoggingInterceptor(Constants.LOG_NAME))
                 .addInterceptor(new HttpHeaderInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 // https认证 如果要使用https且为自定义证书 可以去掉这两行注释，并自行配制证书。
-                // .sslSocketFactory(SslContextFactory.getSSLSocketFactoryForTwoWay())
-                // .hostnameVerifier(new SafeHostnameVerifier())
+               /*  .sslSocketFactory(SslContextFactory.getSSLSocketFactoryForTwoWay())
+                 .hostnameVerifier(new SafeHostnameVerifier())*/
                 .cache(cache);
     }
 
