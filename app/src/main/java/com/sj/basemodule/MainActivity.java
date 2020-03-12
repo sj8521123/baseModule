@@ -1,6 +1,7 @@
 package com.sj.basemodule;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -14,9 +15,13 @@ import android.widget.Toast;
 import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavCallback;
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.hjq.toast.ToastUtils;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.just.agentweb.LogUtils;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
@@ -176,15 +181,50 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        ARouter.getInstance().inject(this);
     }
 
     @OnClick(R.id.text)
     public void onViewClicked() {
+        Log.i(TAG, "onViewClicked: "+ARouter.getInstance().navigation(TestProvider.class).test());
         ToastUtils.show("haha");
+        /*Uri testUriMix = Uri.parse("arouter://m.aliyun.com/app/proxy");*/
         ARouter.getInstance().build("/app/proxy")
                 .withLong("key1",22)
                 .withString("key2","haha")
+                .withObject("key4",new People(22,"shijun"))
                 .withParcelable("key3",new Student(21,"zhangsan"))
-                .navigation();
+                .navigation(this,new LoginNavigationCallbackImpl());
     }
+    // 拦截的回调
+    public class LoginNavigationCallbackImpl  implements NavigationCallback {
+        @Override //找到了
+        public void onFound(Postcard postcard) {
+
+        }
+
+        @Override //找不到了
+        public void onLost(Postcard postcard) {
+
+        }
+
+        @Override    //跳转成功了
+        public void onArrival(Postcard postcard) {
+
+        }
+
+        @Override
+        public void onInterrupt(Postcard postcard) {
+            String path = postcard.getPath();
+            Log.i(TAG, "onInterrupt: " +path);
+         /*   Bundle bundle = postcard.getExtras();
+            // 被登录拦截了下来了
+            // 需要调转到登录页面，把参数跟被登录拦截下来的路径传递给登录页面，登录成功后再进行跳转被拦截的页面
+            ARouter.getInstance().build(ConfigConstants.LOGIN_PATH)
+                    .with(bundle)
+                    .withString(ConfigConstants.PATH, path)
+                    .navigation();*/
+        }
+    }
+
 }

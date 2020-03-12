@@ -56,7 +56,7 @@ android {
             //关闭release apk下的debug调试 可普通调试
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
+           /* applicationVariants.all { variant ->
                 variant.outputs.all { output ->
                     def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
 
@@ -67,7 +67,7 @@ android {
                         outputFileName = fileName
                     }
                 }
-            }
+            }*/
         }
 
         debug {
@@ -135,4 +135,5 @@ dependencies {
     implementation project(':net')
     implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
 }
