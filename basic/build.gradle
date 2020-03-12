@@ -12,6 +12,12 @@ android {
         versionName config.versionName
         flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                //注解处理器需要的模块名，作为路径映射的前缀
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -90,7 +96,7 @@ dependencies {
     api 'com.github.donkingliang:LabelsView:1.5.0'
 
     //webView封装版
-    api 'com.just.agentweb:agentweb:4.0.2'
+    api 'com.just.agentweb:agentweb:4.1.2'
 
     //有bug就以页面展示出来，开发/测试的小棉袄  （implementation "com.simple:spiderman:$spider_man"两者都有）
     debugApi "com.simple:spiderman:1.1.2"
@@ -122,4 +128,15 @@ dependencies {
 
     //腾讯的pdf、word阅读器
     api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+    //注解
+    api 'org.glassfish:javax.annotation:10.0-b28'
+    //dagger start
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.23.2'
+    //dagger end
+    api 'com.google.dagger:dagger:2.23.2'
+    api 'com.jeremyliao:live-event-bus-x:1.5.7'
+
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
 }

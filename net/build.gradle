@@ -7,7 +7,7 @@ android {
         minSdkVersion config.minSdkVersion
         targetSdkVersion config.targetSdkVersion
         multiDexEnabled true
-        versionCode config.versionCode
+        versionCode config.versionCodeX
         versionName config.versionName
         flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

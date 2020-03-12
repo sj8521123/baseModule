@@ -4,13 +4,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.lifecycle.Observer;
+import androidx.viewpager.widget.ViewPager;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.hjq.toast.ToastUtils;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
@@ -22,9 +28,7 @@ import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigat
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
@@ -32,14 +36,7 @@ import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     int c = 10;
@@ -66,15 +63,34 @@ public class MainActivity extends BaseActivity {
 
     private static void p(Object o) {
         System.out.println(o);
-    }
-    //
 
-    /**
-     *
-     */
+    }
+
+    //
     @Override
     public void initFromData() {
 
+        LiveEventBus.get("hello").postDelay("hello World！", 5000);
+        LiveEventBus.get("haha", Boolean.class).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.i(TAG, "onChanged: true");
+                } else {
+                    Log.i(TAG, "onChanged: false");
+                }
+            }
+        });
+        LiveEventBus.get("haha", Boolean.class).observeSticky(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.i(TAG, "onChanged: true1");
+                } else {
+                    Log.i(TAG, "onChanged: false1");
+                }
+            }
+        });
     }
 
     @Override
@@ -88,7 +104,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViewPage() {
+
         ArrayMap<String, String> arrayMap = new ArrayMap<>();
+        SparseArray<String> array = new SparseArray<>();
+
         Toast.makeText(this, "he", Toast.LENGTH_LONG).show();
         initPager();
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -157,5 +176,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.text)
+    public void onViewClicked() {
+        ToastUtils.show("haha");
+        ARouter.getInstance().build("/app/proxy")
+                .withLong("key1",22)
+                .withString("key2","haha")
+                .withParcelable("key3",new Student(21,"zhangsan"))
+                .navigation();
     }
 }

@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.billy.android.swipe.SmartSwipe;
 import com.billy.android.swipe.SmartSwipeRefresh;
 import com.billy.android.swipe.ext.refresh.ArrowHeader;
@@ -139,6 +140,7 @@ public class MyApplication extends LitePalApplication {
 
                     //刷新统一处理
                     /*  initRefreshLayout(activity);*/
+
                     //初始化来源数据
                     ((BaseActivity) activity).initFromData();
                     //在初始化布局
@@ -245,7 +247,9 @@ public class MyApplication extends LitePalApplication {
         LeakCanary.install(this);
         //本地记录crash日志
         /* new CrashHandler(this).init();*/
-
+        // ARouter
+       // ARouter.openDebug();
+        ARouter.init(this);
         //toast设置
         ToastUtils.init(this, new ToastQQStyle(this));
 
