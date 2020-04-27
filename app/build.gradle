@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
-
     defaultConfig {
         applicationId "com.sj.basemodule"
         minSdkVersion config.minSdkVersion
@@ -12,6 +11,11 @@ android {
         versionName config.versionName
         flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME : project.getName()]
+            }
+        }
         //X5兼容64位手机
         /* ndk {
              abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
@@ -52,7 +56,7 @@ android {
             //关闭release apk下的debug调试 可普通调试
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
+           /* applicationVariants.all { variant ->
                 variant.outputs.all { output ->
                     def date = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08"))
 
@@ -63,7 +67,7 @@ android {
                         outputFileName = fileName
                     }
                 }
-            }
+            }*/
         }
 
         debug {
@@ -129,4 +133,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation project(':net')
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
 }

@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -45,6 +46,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initTipView();//初始化提示View
         initErrorView();//初始化错误信息的View
         EventBus.getDefault().register(this); //注册eventBus

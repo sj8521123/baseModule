@@ -12,6 +12,12 @@ android {
         versionName config.versionName
         flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                //注解处理器需要的模块名，作为路径映射的前缀
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -30,7 +36,7 @@ dependencies {
     api "androidx.legacy:legacy-support-v4:1.0.0"
     api "com.google.android.material:material:1.1.0-alpha09"
     api "androidx.recyclerview:recyclerview:1.1.0-beta02"
-
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
     //retrofit2 + rxJave2 + rxLifecycle
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
     api 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -80,8 +86,6 @@ dependencies {
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
     //图片选择框架
     api 'com.zhihu.android:matisse:0.4.3'
-    //刷新控件
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
 
     //litePal数据库
     api 'org.litepal.android:core:2.0.0'
@@ -90,7 +94,7 @@ dependencies {
     api 'com.github.donkingliang:LabelsView:1.5.0'
 
     //webView封装版
-    api 'com.just.agentweb:agentweb:4.0.2'
+    api 'com.just.agentweb:agentweb:4.1.2'
 
     //有bug就以页面展示出来，开发/测试的小棉袄  （implementation "com.simple:spiderman:$spider_man"两者都有）
     debugApi "com.simple:spiderman:1.1.2"
@@ -107,7 +111,7 @@ dependencies {
     //刷新样式的支持
     api 'com.billy.android:smart-swipe-refresh-ext:1.0.0'
     //lottie动画库
-    api 'com.airbnb.android:lottie:3.0.7'
+    api 'com.airbnb.android:lottie:3.4.0'
     /* //snaphelper
      implementation 'com.github.rubensousa:gravitysnaphelper:2.2.0'*/
     api 'com.github.OCNYang:PageTransformerHelp:v1.0.1'
@@ -122,4 +126,19 @@ dependencies {
 
     //腾讯的pdf、word阅读器
     api files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+    //注解
+    api 'org.glassfish:javax.annotation:10.0-b28'
+    //dagger start
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.23.2'
+    //dagger end
+    api 'com.google.dagger:dagger:2.23.2'
+    api 'com.jeremyliao:live-event-bus-x:1.5.7'
+
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    api 'com.github.yalantis:ucrop:2.2.4'
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+
 }

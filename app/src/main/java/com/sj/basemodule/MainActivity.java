@@ -1,45 +1,53 @@
 package com.sj.basemodule;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.lifecycle.Observer;
+import androidx.viewpager.widget.ViewPager;
+
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavCallback;
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.hjq.toast.ToastUtils;
+import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.just.agentweb.LogUtils;
+import com.sj.basemodule.intecepter.LoginNavigationCallbackImpl;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
 import com.sj.basemodule.mine.D_MineBaseInfoFragment;
+import com.yalantis.ucrop.UCrop;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Locale;
+import java.util.Random;
 
-import androidx.viewpager.widget.ViewPager;
 import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
+import basemodule.sj.com.basic.base.BasePageFragment;
 import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     int c = 10;
@@ -66,15 +74,35 @@ public class MainActivity extends BaseActivity {
 
     private static void p(Object o) {
         System.out.println(o);
-    }
-    //
 
-    /**
-     *
-     */
+    }
+
+    //
     @Override
     public void initFromData() {
-
+        String str = "#123456";
+        Log.i(TAG, "initFromData: " + str.substring(1));
+        LiveEventBus.get("hello").postDelay("hello World！", 5000);
+        LiveEventBus.get("haha", Boolean.class).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.i(TAG, "onChanged: true");
+                } else {
+                    Log.i(TAG, "onChanged: false");
+                }
+            }
+        });
+        LiveEventBus.get("haha", Boolean.class).observeSticky(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.i(TAG, "onChanged: true1");
+                } else {
+                    Log.i(TAG, "onChanged: false1");
+                }
+            }
+        });
     }
 
     @Override
@@ -88,7 +116,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViewPage() {
+
         ArrayMap<String, String> arrayMap = new ArrayMap<>();
+        SparseArray<String> array = new SparseArray<>();
+
         Toast.makeText(this, "he", Toast.LENGTH_LONG).show();
         initPager();
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -157,5 +188,24 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        ARouter.getInstance().inject(this);
     }
+
+    @OnClick(R.id.text)
+    public void onViewClicked() {
+        Random random = new Random();
+        int minSizePixels = 800;
+        int maxSizePixels = 2400;
+        Uri uri = Uri.parse(String.format(Locale.getDefault(), "https://unsplash.it/%d/%d/?random",
+                minSizePixels + random.nextInt(maxSizePixels - minSizePixels),
+                minSizePixels + random.nextInt(maxSizePixels - minSizePixels)));
+
+        UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), "test.jpg")))
+                .withAspectRatio(16, 9)
+                .withMaxResultSize(1000, 1000)
+                .start(this);
+
+    }
+
+
 }

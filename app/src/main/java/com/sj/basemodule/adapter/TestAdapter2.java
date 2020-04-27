@@ -27,18 +27,5 @@ public class TestAdapter2 extends BaseQuickAdapter<String, BaseViewHolder> {
         helper.setText(R.id.name, item);
         int pos = helper.getAdapterPosition();
         TextView textView = helper.getView(R.id.name);
-        LinearLayout linearLayout = helper.getView(R.id.linear);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
-        if (pos == 0) {
-            linearLayout.setGravity(Gravity.LEFT);
-            //layoutParams.gravity = Gravity.LEFT;
-        } else if (pos == datas.size() - 1) {
-            //layoutParams.gravity = Gravity.RIGHT;
-            linearLayout.setGravity(Gravity.RIGHT);
-        } else {
-            linearLayout.setGravity(Gravity.CENTER);
-            //layoutParams.gravity = Gravity.CENTER;
-        }
-        textView.setLayoutParams(layoutParams);
     }
 }
