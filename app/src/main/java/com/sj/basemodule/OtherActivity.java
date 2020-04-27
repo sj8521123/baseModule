@@ -2,73 +2,67 @@ package com.sj.basemodule;
 
 
 import android.os.Bundle;
-import android.util.Log;
-import android.util.LruCache;
-import android.util.SparseArray;
 
-import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.hjq.toast.ToastUtils;
-import com.jeremyliao.liveeventbus.LiveEventBus;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import basemodule.sj.com.basic.base.BaseActivity;
+import basemodule.sj.com.basic.base.ClassicsHead3;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-@Route(path="/app/OtherActivity")
 public class OtherActivity extends BaseActivity {
-    private static final String TAG = "OtherActivity";
-    @Autowired
-    Long key1;
-    @Autowired
-    String key2;
-    @Autowired
-    Student key3;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
+
     @Override
     protected void reConnect() {
-        ToastUtils.show("重新刷新");
 
     }
 
     @Override
     public int initLayout() {
-        ARouter.getInstance().inject(this);
         return R.layout.fragment_huaxia_introduce;
     }
 
     @Override
     public void initFromData() {
-
     }
+
     @Override
     public void initLayoutView() {
+        refreshLayout.setRefreshHeader(new ClassicsHead3(this));
+        /*refreshLayout.setHeaderMaxDragRate(2);*/
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
     }
 
     @Override
     public void initLocalData() {
 
-        LiveEventBus.get("hello", String.class).observe(this, new Observer<String>() {
-
-            @Override
-            public void onChanged(String s) {
-
-                ToastUtils.show(s + "未采用sti");
-            }
-        });
     }
 
-    @OnClick(R.id.know)
-    public void onViewClicked() {
-        Log.i(TAG, "a:" + key1+"   key2："+key2 +"student :"+key3.getName());
-        LiveEventBus.get("haha").post(true);
-
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
-

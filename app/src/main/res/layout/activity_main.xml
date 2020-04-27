@@ -34,9 +34,11 @@
         android:background="#00000000"
         android:clipChildren="false"
         android:overScrollMode="never"
-
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magicIndicator"
         android:layout_width="wrap_content"
@@ -66,6 +68,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher" />
-
 
 </LinearLayout>

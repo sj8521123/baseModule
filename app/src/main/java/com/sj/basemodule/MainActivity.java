@@ -22,21 +22,27 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.hjq.toast.ToastUtils;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.just.agentweb.LogUtils;
+import com.sj.basemodule.intecepter.LoginNavigationCallbackImpl;
 import com.sj.basemodule.mine.A_MineBaseInfoFragment;
 import com.sj.basemodule.mine.B_MineBaseInfoFragment;
 import com.sj.basemodule.mine.C_MineBaseInfoFragment;
 import com.sj.basemodule.mine.D_MineBaseInfoFragment;
+import com.yalantis.ucrop.UCrop;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import basemodule.sj.com.basic.adapter.HomePagerAdapter;
 import basemodule.sj.com.basic.base.BaseActivity;
 import basemodule.sj.com.basic.base.BaseEvent;
+import basemodule.sj.com.basic.base.BasePageFragment;
 import basemodule.sj.com.basic.util.ScreenUtil;
 import basemodule.sj.com.basic.weight.transform.AlphaAndScalePageTransformer;
 import butterknife.BindView;
@@ -74,7 +80,8 @@ public class MainActivity extends BaseActivity {
     //
     @Override
     public void initFromData() {
-
+        String str = "#123456";
+        Log.i(TAG, "initFromData: " + str.substring(1));
         LiveEventBus.get("hello").postDelay("hello World！", 5000);
         LiveEventBus.get("haha", Boolean.class).observe(this, new Observer<Boolean>() {
             @Override
@@ -186,45 +193,19 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.text)
     public void onViewClicked() {
-        Log.i(TAG, "onViewClicked: "+ARouter.getInstance().navigation(TestProvider.class).test());
-        ToastUtils.show("haha");
-        /*Uri testUriMix = Uri.parse("arouter://m.aliyun.com/app/proxy");*/
-        ARouter.getInstance().build("/app/proxy")
-                .withLong("key1",22)
-                .withString("key2","haha")
-                .withObject("key4",new People(22,"shijun"))
-                .withParcelable("key3",new Student(21,"zhangsan"))
-                .navigation(this,new LoginNavigationCallbackImpl());
+        Random random = new Random();
+        int minSizePixels = 800;
+        int maxSizePixels = 2400;
+        Uri uri = Uri.parse(String.format(Locale.getDefault(), "https://unsplash.it/%d/%d/?random",
+                minSizePixels + random.nextInt(maxSizePixels - minSizePixels),
+                minSizePixels + random.nextInt(maxSizePixels - minSizePixels)));
+
+        UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), "test.jpg")))
+                .withAspectRatio(16, 9)
+                .withMaxResultSize(1000, 1000)
+                .start(this);
+
     }
-    // 拦截的回调
-    public class LoginNavigationCallbackImpl  implements NavigationCallback {
-        @Override //找到了
-        public void onFound(Postcard postcard) {
 
-        }
-
-        @Override //找不到了
-        public void onLost(Postcard postcard) {
-
-        }
-
-        @Override    //跳转成功了
-        public void onArrival(Postcard postcard) {
-
-        }
-
-        @Override
-        public void onInterrupt(Postcard postcard) {
-            String path = postcard.getPath();
-            Log.i(TAG, "onInterrupt: " +path);
-         /*   Bundle bundle = postcard.getExtras();
-            // 被登录拦截了下来了
-            // 需要调转到登录页面，把参数跟被登录拦截下来的路径传递给登录页面，登录成功后再进行跳转被拦截的页面
-            ARouter.getInstance().build(ConfigConstants.LOGIN_PATH)
-                    .with(bundle)
-                    .withString(ConfigConstants.PATH, path)
-                    .navigation();*/
-        }
-    }
 
 }
