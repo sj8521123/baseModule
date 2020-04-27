@@ -86,7 +86,6 @@ public class ClassicsHead3 extends LinearLayout implements RefreshHeader {
 
     @Override
     public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
-
         int frame = (int) (((1 / startAnimalPercent) * (percent - startAnimalPercent)) * 33);
         if (percent >= startAnimalPercent && percent < 1.0 && frame != lastFrame) {
             Log.i(TAG, "Frame: " + frame + " lastFrame" + lastFrame);
