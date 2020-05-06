@@ -1,65 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:gravity="center"
-    android:orientation="vertical">
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:gravity="right|center_vertical"
-        android:text="用户名"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        tools:layout_editor_absoluteY="36dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="63dp"
-        android:layout_height="80dp"
-        android:gravity="right|center_vertical"
-        android:text="密码"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="158dp" />
-
-    <EditText
-        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.6"
-        tools:layout_editor_absoluteX="123dp" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="169dp" />
-
-    <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="editText2,textView">
-
-    </androidx.constraintlayout.widget.Group>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="hello"
+        />
+</LinearLayout>

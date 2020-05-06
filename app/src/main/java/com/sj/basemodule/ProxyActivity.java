@@ -26,11 +26,23 @@ import basemodule.sj.com.basic.base.BaseActivity;
 public class ProxyActivity extends AppCompatActivity {
     private static final String TAG = "ProxyActivity";
     @Autowired
+    long key1;
+    @Autowired
     String key2;
+    @Autowired(name = "key3")
+    Student stu;
+    @Autowired
+    People key4;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proxy);
+        Student student = getIntent().getExtras().getParcelable("key3");
+        SerializationService serializationService = ARouter.getInstance().navigation(SerializationService.class);
+        serializationService.init(this);
+        Student obj = serializationService.parseObject(getIntent().getStringExtra("key4"), Student.class);
+        ARouter.getInstance().inject(this);
+        Log.i(TAG, "a:" + key1+"   key2："+key2 +"student :"+stu.getName() +key4);
     }
 
 }

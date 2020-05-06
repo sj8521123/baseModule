@@ -27,6 +27,7 @@ public class TestAdapter extends BaseMultiItemQuickAdapter<OtherModel, BaseViewH
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, OtherModel item) {
+
         switch (helper.getItemViewType()) {
             case OtherModel.TEXT_HEAD:
                 helper.itemView.setTag(true);

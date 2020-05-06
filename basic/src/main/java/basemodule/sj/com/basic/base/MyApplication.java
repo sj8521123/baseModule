@@ -25,13 +25,6 @@ import com.hjq.toast.IToastStyle;
 import com.hjq.toast.ToastUtils;
 import com.hjq.toast.style.ToastQQStyle;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.simple.spiderman.SpiderMan;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -42,7 +35,6 @@ import org.litepal.LitePalApplication;
 import java.util.LinkedList;
 import java.util.List;
 
-import basemodule.sj.com.basic.BuildConfig;
 import basemodule.sj.com.basic.R;
 import basemodule.sj.com.basic.config.KeyAndValueAppPrefs;
 import basemodule.sj.com.basic.config.SPUtils;
@@ -67,26 +59,6 @@ public class MyApplication extends LitePalApplication {
 
     //当前用户配置文件
     public static String currentUserPrefsName;
-
-
-    static {
-        //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
-            @Override
-            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                //layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
-                return new ClassicsHead3(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
-            }
-        });
-          /*  //设置全局的Footer构建器
-            SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-                @Override
-                public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                    //指定为经典Footer，默认是 BallPulseFooter
-                    return new ClassicsFooter(context).setDrawableSize(20);
-                }
-            });*/
-    }
 
     // 获取ApplicationContext
   /*  public static Context getContext() {
@@ -264,7 +236,6 @@ public class MyApplication extends LitePalApplication {
     }
 
     private void initExternalConfiguration() {
-        //
         //bugly集成
         CrashReport.initCrashReport(getApplicationContext(), "c97fd3e3e2", false);
         //友盟统计
@@ -277,12 +248,7 @@ public class MyApplication extends LitePalApplication {
         //本地记录crash日志
         /* new CrashHandler(this).init();*/
         // ARouter
-        // ARouter.openDebug();
-        // 初始化阿里巴巴路由框架
-        if (BuildConfig.DEBUG) {     // 这两行必须写在init之前，否则这些配置在init过程中将无效
-            ARouter.openLog();     // 打印日志
-            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-        }
+       // ARouter.openDebug();
         ARouter.init(this);
         //toast设置
         ToastUtils.init(this, new ToastQQStyle(this));
