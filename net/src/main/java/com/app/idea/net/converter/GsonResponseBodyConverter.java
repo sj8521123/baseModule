@@ -58,6 +58,9 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
             }
             // 特定 API 的错误，在相应的 DefaultObserver 的 onError 的方法中进行处理
             //服务器内部错误
+            else if(response.getCode() == 0){
+                throw new TokenExpiredException(response.getCode(), response.getMessage());
+            }
             else if (response.getCode() == ErrorCode.REMOTE_LOGIN) {
                 throw new RemoteLoginExpiredException(response.getCode(), response.getMessage());
             } else if (response.getCode() == ErrorCode.TOKEN_EXPIRED) {

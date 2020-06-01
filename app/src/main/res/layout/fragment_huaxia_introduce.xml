@@ -1,32 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFD9C7F"
-    tools:ignore="MissingDefaultResource">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="13dp"
-        android:scaleType="centerInside"
-        android:src="@mipmap/beijing" />
-
-    <TextView
-        android:id="@+id/know"
-        android:layout_width="114dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="21dp"
-        android:background="#ffff754b"
-        android:gravity="center"
-        android:text="知道了"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-</FrameLayout>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -118,7 +118,7 @@ public class NetActivity extends BaseActivity {
                         Log.i(TAG, "onSuccess: " + meiZis.size());
                     }
                 });
-        RetrofitHelperWithToken.getApiService()
+       /* RetrofitHelperWithToken.getApiService()
                 .getMezi()
                 .compose(RxUtil.rxSchedulerHelper(this))
                 .subscribe(new DefaultObserver<List<MeiZi>>(this) {
@@ -126,7 +126,7 @@ public class NetActivity extends BaseActivity {
                     public void onSuccess(List<MeiZi> meiZis) {
                         Log.i(TAG, "onSuccess: " + meiZis.size());
                     }
-                });
+                });*/
     }
 
     /**

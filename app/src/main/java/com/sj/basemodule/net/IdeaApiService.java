@@ -34,6 +34,10 @@ public interface IdeaApiService {
     @GET("福利/10/1")
     Observable<List<MeiZi>> getMezi();
 
+    @Headers("Cache-Control: public, max-age=100")
+    @GET("福利/10/1")
+    Observable<List<MeiZi>> getMezi2();
+
     /**
      * 登录 appId secret
      * 使用实体类作为参数
