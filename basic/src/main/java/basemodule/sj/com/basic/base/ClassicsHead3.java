@@ -1,6 +1,5 @@
 package basemodule.sj.com.basic.base;
 
-import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.hjq.toast.ToastUtils;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -23,8 +21,6 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 
 import basemodule.sj.com.basic.R;
-
-import static com.tencent.bugly.crashreport.crash.c.c;
 
 /**
  * @author shijun
@@ -37,6 +33,7 @@ public class ClassicsHead3 extends LinearLayout implements RefreshHeader {
     private LottieAnimationView mLottieAnimationView;
     private float startAnimalPercent = 0.5f;
     private int lastFrame;
+
     public ClassicsHead3(Context context) {
         super(context);
         initView(context);
@@ -88,7 +85,6 @@ public class ClassicsHead3 extends LinearLayout implements RefreshHeader {
     public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
         int frame = (int) (((1 / startAnimalPercent) * (percent - startAnimalPercent)) * 33);
         if (percent >= startAnimalPercent && percent < 1.0 && frame != lastFrame) {
-            Log.i(TAG, "Frame: " + frame + " lastFrame" + lastFrame);
             mLottieAnimationView.setFrame(frame);
             lastFrame = frame;
         }
@@ -124,18 +120,18 @@ public class ClassicsHead3 extends LinearLayout implements RefreshHeader {
         switch (newState) {
             //down
             case None:
+                mLottieAnimationView.cancelAnimation();
                 mLottieAnimationView.setMinAndMaxFrame(0, 33);
                 mLottieAnimationView.setFrame(0);
                 break;
             //move的距离<触发刷新距离
             case PullDownToRefresh:
+                mLottieAnimationView.cancelAnimation();
                 mLottieAnimationView.setMinAndMaxFrame(0, 33);
-                ToastUtils.show("下拉开始刷新");
                 mHintText.setText("下拉开始刷新");
                 break;
             //move的距离>=触发刷新距离
             case ReleaseToRefresh:
-                ToastUtils.show("释放立即刷新");
                 mHintText.setText("释放立即刷新");
                 mLottieAnimationView.setMinAndMaxFrame(13, 34);
                 mLottieAnimationView.setRepeatCount(ValueAnimator.INFINITE);
@@ -143,7 +139,6 @@ public class ClassicsHead3 extends LinearLayout implements RefreshHeader {
                 break;
             //触发了刷新 up
             case Refreshing:
-                ToastUtils.show("正在刷新");
                 mHintText.setText("正在刷新");
                 mLottieAnimationView.setMinAndMaxFrame(35, 56);
                 mLottieAnimationView.setRepeatCount(ValueAnimator.INFINITE);
