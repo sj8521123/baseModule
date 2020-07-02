@@ -9,9 +9,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.squareup.haha.perflib.Main;
-
-import basemodule.sj.com.basic.config.SPUtils;
 import basemodule.sj.com.basic.util.ScreenUtil;
 
 /**
