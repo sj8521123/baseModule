@@ -26,7 +26,9 @@ android {
         abortOnError false
         disable 'GoogleAppIndexingWarning'
     }
-
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    
     signingConfigs {
         debug {
             storeFile file(KEY_PATH)
