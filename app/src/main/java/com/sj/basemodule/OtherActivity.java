@@ -2,16 +2,11 @@ package com.sj.basemodule;
 
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 import com.hjq.toast.ToastUtils;
 import com.sj.basemodule.adapter.OtherAdapter;
 
@@ -88,17 +83,16 @@ public class OtherActivity extends BaseActivity {
         mDatas2.add(R.drawable.bleach_15);
         mDatas2.add(R.drawable.cat_18);
         mDatas2.add(R.drawable.cat_19);
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
-        layoutManager.setFlexDirection(FlexDirection.COLUMN);
-        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
-        recycle.setLayoutManager(layoutManager);
         mAdater = new OtherAdapter(R.layout.flexbox_item,mDatas2);
         recycle.setAdapter(mAdater);
     }
 
     @Override
     public void initLocalData() {
-
+        Log.i("====", "branch: develop buildType:"+ BuildConfig.BUILD_TYPE
+                + "    flavor:"+ BuildConfig.FLAVOR
+                + "    version_name:"+ BuildConfig.VERSION_NAME
+        );
     }
 
     @Override
