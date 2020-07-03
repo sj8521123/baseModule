@@ -43,21 +43,21 @@ public class OtherActivity extends BaseActivity {
                 +"  flavor："+BuildConfig.FLAVOR
                 +"  flavor："+BuildConfig.VERSION_NAME
         );
-        refreshLayout.setRefreshHeader(new ClassicsHead3(this));
-        /*refreshLayout.setHeaderMaxDragRate(2);*/
-
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-            }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-            }
-        });
+//        refreshLayout.setRefreshHeader(new ClassicsHead3(this));
+//        /*refreshLayout.setHeaderMaxDragRate(2);*/
+//
+//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//            }
+//        });
+//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(RefreshLayout refreshlayout) {
+//                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+//            }
+//        });
     }
 
     @Override
