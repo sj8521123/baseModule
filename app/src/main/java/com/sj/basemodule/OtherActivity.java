@@ -7,12 +7,8 @@ import android.util.Log;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import basemodule.sj.com.basic.base.BaseActivity;
-import basemodule.sj.com.basic.base.ClassicsHead3;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,23 +37,10 @@ public class OtherActivity extends BaseActivity {
     public void initLayoutView() {
         Log.i("====", "branch:master BuildType："+BuildConfig.BUILD_TYPE
                 +"  flavor："+BuildConfig.FLAVOR
-                +"  flavor："+BuildConfig.VERSION_NAME
+                +"  VERSION_NAME："+BuildConfig.VERSION_NAME
+                +"  VERSION_CODE："+BuildConfig.VERSION_CODE
+
         );
-//        refreshLayout.setRefreshHeader(new ClassicsHead3(this));
-//        /*refreshLayout.setHeaderMaxDragRate(2);*/
-//
-//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
-//                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-//            }
-//        });
-//        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//            @Override
-//            public void onLoadMore(RefreshLayout refreshlayout) {
-//                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-//            }
-//        });
     }
 
     @Override

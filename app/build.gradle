@@ -55,7 +55,7 @@ android {
             //Zipalign优化
             zipAlignEnabled true
             //关闭release apk下的debug调试 可普通调试
-            debuggable false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
            /* applicationVariants.all { variant ->
                 variant.outputs.all { output ->
