@@ -2,6 +2,7 @@ package com.sj.basemodule;
 
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OtherActivity extends BaseActivity {
+    private static final String TAG = "OtherActivity";
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
@@ -37,6 +39,10 @@ public class OtherActivity extends BaseActivity {
 
     @Override
     public void initLayoutView() {
+        Log.i("====", "branch:master BuildType："+BuildConfig.BUILD_TYPE
+                +"  flavor："+BuildConfig.FLAVOR
+                +"  flavor："+BuildConfig.VERSION_NAME
+        );
         refreshLayout.setRefreshHeader(new ClassicsHead3(this));
         /*refreshLayout.setHeaderMaxDragRate(2);*/
 
